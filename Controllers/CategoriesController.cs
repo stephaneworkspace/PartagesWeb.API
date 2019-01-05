@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Data;
 
 namespace PartagesWeb.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -20,17 +23,17 @@ namespace PartagesWeb.API.Controllers
 
         // GET api/categories
         [HttpGet]
-        public IActionResult GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            var categories = _context.Categories.ToList();
+            var categories = await _context.Categories.ToListAsync();
             return Ok(categories);
         }
 
         // GET api/categories/5
         [HttpGet("{id}")]
-        public IActionResult GetCategorie(int id)
+        public async Task<IActionResult> GetCategorie(int id)
         {
-            var categorie = _context.Categories.FirstOrDefault(x => x.Id == id);
+            var categorie = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(categorie);
         }
 
