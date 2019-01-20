@@ -18,7 +18,7 @@ namespace PartagesWeb.API.Data
 
         public async Task<User> Login(string name, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == name);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == name);
             if (user == null)
             {
                 return null;
@@ -68,7 +68,7 @@ namespace PartagesWeb.API.Data
 
         public async Task<bool> UserExists(string name)
         {
-            if (await _context.Users.AnyAsync(x => x.Name == name))
+            if (await _context.Users.AnyAsync(x => x.Username == name))
                 return true;
 
             return false;

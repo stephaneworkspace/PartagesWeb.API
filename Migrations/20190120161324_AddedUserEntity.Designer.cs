@@ -10,7 +10,7 @@ using PartagesWeb.API.Data;
 namespace PartagesWeb.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190104191633_AddedUserEntity")]
+    [Migration("20190120161324_AddedUserEntity")]
     partial class AddedUserEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,11 +40,11 @@ namespace PartagesWeb.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
-
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 

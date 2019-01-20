@@ -12,8 +12,7 @@ namespace PartagesWeb.API.Migrations
                 name: "Id",
                 table: "Categories",
                 nullable: false,
-                oldClrType: typeof(int))
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                oldClrType: typeof(int));
 
             migrationBuilder.CreateTable(
                 name: "Users",
@@ -21,7 +20,7 @@ namespace PartagesWeb.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
                     PasswordSalt = table.Column<byte[]>(nullable: true)
                 },
@@ -40,8 +39,7 @@ namespace PartagesWeb.API.Migrations
                 name: "Id",
                 table: "Categories",
                 nullable: false,
-                oldClrType: typeof(int))
-                .OldAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                oldClrType: typeof(int));
         }
     }
 }
