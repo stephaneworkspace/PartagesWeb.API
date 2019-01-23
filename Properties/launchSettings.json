@@ -26,7 +26,7 @@
       },
       "applicationUrl": "https://51.77.201.204:5001;http://51.77.201.204:5000"
     },
-    "PartagesWeb.API-localhost": {
+    "PartagesWeb.API-Windows10": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
