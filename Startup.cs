@@ -82,7 +82,8 @@ namespace PartagesWeb.API
 
             // app.UseHttpsRedirection();
             // Seed plus dans les param
-            seeder.SeedUsers();
+            // Desactivé
+            // seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();
