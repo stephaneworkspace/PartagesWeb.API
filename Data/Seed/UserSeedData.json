@@ -1,0 +1,17 @@
+[
+    {
+      "Username": "Lola",
+      "Password": "password",
+      "Created": "2017-08-02"
+    },
+    {
+      "Username": "Dorothy",
+      "Password": "password",
+      "Created": "2017-01-21"
+    },
+    {
+      "Username": "Reba",
+      "Password": "password",
+      "Created": "2017-06-24"
+    }
+ ]
