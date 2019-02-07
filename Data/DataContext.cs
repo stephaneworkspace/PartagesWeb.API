@@ -9,5 +9,7 @@ namespace PartagesWeb.API.Data
 
         public DbSet<Categorie> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<TitreMenu> TitreMenus { get; set; }
     }
 }

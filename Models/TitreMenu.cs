@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +9,11 @@ namespace PartagesWeb.API.Models
     public class TitreMenu
     {
         public int Id { get; set; }
-        // S'inspirer de vega et voir si c'est possible ? la possibilité que ça soit vide
+        // https://stackoverflow.com/questions/5668801/entity-framework-code-first-null-foreign-key
+        public int? SectionId { get; set; }
+        [ForeignKey("CountryId")]
         public Section Section { get; set; }
-        public int SectionId { get; set; }
+        
         public string Nom { get; set; }
         public int Position { get; set; }
     }
