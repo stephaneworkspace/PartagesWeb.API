@@ -45,5 +45,20 @@ namespace PartagesWeb.API.Data
 
             return false;
         }
+
+        public async Task<Section> CreateSection(Section section)
+        {
+            await _context.Sections.AddAsync(section);
+            await _context.SaveChangesAsync();
+
+            return section;
+        }
+
+        public async Task<int> LastPositionSection()
+        {
+            // https://stackoverflow.com/questions/7542021/how-to-get-max-value-of-a-column-using-entity-framework
+            int lastPositon = _context.Sections.Select(p => p.Position).DefaultIfEmpty(0).Max();
+            return lastPositon;
+        }
     }
 }

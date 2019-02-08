@@ -16,5 +16,7 @@ namespace PartagesWeb.API.Data
         Task<List<Section>> GetSections();
         // Task<Section> Login(string username, string password);
         Task<bool> SectionExists(string nom);
+        Task<Section> CreateSection(Section section);
+        Task<int> LastPositionSection();
     }
 }
