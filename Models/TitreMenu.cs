@@ -11,8 +11,8 @@ namespace PartagesWeb.API.Models
         public int Id { get; set; }
         // https://stackoverflow.com/questions/5668801/entity-framework-code-first-null-foreign-key
         public int? SectionId { get; set; }
-        [ForeignKey("CountryId")]
-        public Section Section { get; set; }
+        [ForeignKey("SectionId")]
+        public virtual Section Section { get; set; }
         
         public string Nom { get; set; }
         public int Position { get; set; }
