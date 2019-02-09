@@ -18,7 +18,6 @@ namespace PartagesWeb.API.Data
     {
         private readonly DataContext _context;
 
-
         /// <summary>  
         /// Cette méthode est le constructeur 
         /// </summary>  

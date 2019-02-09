@@ -1,7 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
-// <author>Stéphane</author>
-//-----------------------------------------------------------------------
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +43,14 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
+        /// Cette méthode permet de sauvegarder tout dans le DataContext
+        /// </summary> 
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        /// <summary>  
         /// Cette méthode permet d'obtenir une section bien précise
         /// </summary>  
         /// <param name="id"> Clé principale du model Section</param>
@@ -66,13 +71,7 @@ namespace PartagesWeb.API.Data
             return sections;
         }
 
-        /// <summary>  
-        /// Cette méthode permet de sauvegarder tout dans le DataContext
-        /// </summary> 
-        public async Task<bool> SaveAll()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+
 
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà

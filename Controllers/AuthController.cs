@@ -25,6 +25,7 @@ namespace PartagesWeb.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerTag("Auth", Description = "Controller pour authentification")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
@@ -34,7 +35,7 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode est le constructeur 
         /// </summary> 
         /// <param name="repo"> Repository Auth</param>
-        /// <param name="config"> Configuration</param>/// 
+        /// <param name="config"> Configuration</param>
         public AuthController(IAuthRepository repo, IConfiguration config)
         {
             _config = config;

@@ -24,6 +24,7 @@ namespace PartagesWeb.API.Controllers
     // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerTag("Sections", Description = "Controller pour model Section")]
     public class SectionsController : ControllerBase
     {
         private readonly IGestionPagesRepository _repo;

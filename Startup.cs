@@ -1,4 +1,8 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
+// <author>Stéphane</author>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,16 +27,29 @@ using PartagesWeb.API.Helpers;
 
 namespace PartagesWeb.API
 {
+    /// <summary>
+    /// Class Startup pour le démarage de l'application asp.net core
+    /// </summary>
     public class Startup
     {
+        /// <summary>  
+        /// Cette méthode est le constructeur 
+        /// </summary> 
+        /// <param name="configuration"> Configuration</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>  
+        /// Variable de configuration
+        /// </summary> 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>  
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary> 
+        /// <param name="services"> IServiceCollection services</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -56,7 +73,12 @@ namespace PartagesWeb.API
                 });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>  
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary> 
+        /// <param name="app"> IApplicationBuilder app</param>
+        /// <param name="env"> IHostingEnvironment env</param>
+        /// <param name="seeder"> Seed seeder</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
