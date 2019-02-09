@@ -1,6 +1,11 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
+// <author>Stéphane</author>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,14 +26,7 @@ namespace PartagesWeb.API.Controllers
     [ApiController]
     public class SectionsController : ControllerBase
     {
-        /// <summary>
-        /// Repository GestionPages
-        /// </summary>
         private readonly IGestionPagesRepository _repo;
-
-        /// <summary>
-        /// Configuration
-        /// </summary>
         private readonly IConfiguration _config;
 
         /// <summary>  
@@ -36,7 +34,6 @@ namespace PartagesWeb.API.Controllers
         /// </summary>  
         /// <param name="repo"> Repository GestionPages</param>
         /// <param name="config"> Configuration</param>
-        /// <returns></returns>
         public SectionsController(IGestionPagesRepository repo, IConfiguration config)
         {
             _config = config;
@@ -51,9 +48,8 @@ namespace PartagesWeb.API.Controllers
         /// 8 Février : 
         /// A faire automap avec l'arbre entier, pour le moment il y a seulement "section"
         /// </remarks>
-        /// <returns>Liste des <see cref="Section">Sections</see>.</returns>
         [HttpGet("gestion-pages-avec-arbre-complet")]
-        [SwaggerResponse("200", typeof(Section))]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section), Description = "Liste des Sections")]
         public async Task<IActionResult> GetArbreCompletSections()
         {
             var sections = await _repo.GetSections();
@@ -67,9 +63,8 @@ namespace PartagesWeb.API.Controllers
         /// 8 Février : 
         /// Non utilisé pour le moment. Il faudra peut être l'améliorer avec un choix, aucune section (pour le mode hors ligne)
         /// </remarks>
-        /// <returns>Liste des <see cref="Section">Sections</see>.</returns>
         [HttpGet]
-        [SwaggerResponse("200", typeof(Section))]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section), Description = "Liste des Sections")]
         public async Task<IActionResult> GetSections()
         {
             var sections = await _repo.GetSections();
@@ -80,17 +75,15 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de créer une section
         /// </summary> 
         /// <param name="sectionForCreateDto"> DTO de ce qui est envoyé depuis le frontend</param>
-        /// <returns>Ok</returns>
-        /// <exception cref="BadRequestResult">Le nom de la section est déjà utilisé ou Impossible d'ajouter la section</exception>
         [HttpPost]
-        [SwaggerResponse("400", typeof(string))]
-        [SwaggerResponse("200", null)]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description="Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'ajouter la section")]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Create(SectionForCreateDto sectionForCreateDto)
         {
-            // Déterminer si le nom de la section existe déjà
             if (await _repo.SectionExists(sectionForCreateDto.Nom.ToLower()))
-                return BadRequest("Le nom de la section est déjà utilisé !");
+                return BadRequest("Le nom de la section est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
             var position = await _repo.LastPositionSection(sectionForCreateDto.SwHorsLigne); // a faire sw boolean si en ligne ou hors ligne... 
@@ -124,9 +117,9 @@ namespace PartagesWeb.API.Controllers
         /// </remarks>/// 
         /// <param name="id"> Id de la section à effacer</param>
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        [ProducesDefaultResponseType]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer la section")]
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repo.GetSection(id);

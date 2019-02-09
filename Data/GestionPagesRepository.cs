@@ -49,7 +49,6 @@ namespace PartagesWeb.API.Data
         {
             if (await _context.Sections.AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
                 return true;
-
             return false;
         }
 
