@@ -40,7 +40,7 @@ namespace PartagesWeb.API.Data
 
         public async Task<bool> SectionExists(string nom)
         {
-            if (await _context.Sections.AnyAsync(x => x.Nom == nom))
+            if (await _context.Sections.AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
                 return true;
 
             return false;

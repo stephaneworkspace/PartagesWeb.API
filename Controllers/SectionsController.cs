@@ -15,11 +15,11 @@ namespace PartagesWeb.API.Controllers
     // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SectionController : ControllerBase
+    public class SectionsController : ControllerBase
     {
         private readonly IGestionPagesRepository _repo;
         private readonly IConfiguration _config;
-        public SectionController(IGestionPagesRepository repo, IConfiguration config)
+        public SectionsController(IGestionPagesRepository repo, IConfiguration config)
         {
             _config = config;
             _repo = repo;
@@ -33,12 +33,12 @@ namespace PartagesWeb.API.Controllers
             return Ok(sections);
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create(SectionForCreateDto sectionForCreateDto)
         {
-            sectionForCreateDto.Nom = sectionForCreateDto.Nom.ToLower();
+            // sectionForCreateDto.Nom = sectionForCreateDto.Nom.ToLower();
 
-            if (await _repo.SectionExists(sectionForCreateDto.Nom))
+            if (await _repo.SectionExists(sectionForCreateDto.Nom.ToLower()))
                 return BadRequest("Le nom de la section est déjà utilisé !");
 
             // Déterminer la dernière position en ligne ou hors ligne
