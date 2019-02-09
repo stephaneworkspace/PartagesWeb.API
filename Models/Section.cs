@@ -13,5 +13,6 @@ namespace PartagesWeb.API.Models
         public string Type { get; set; }
         public int Position { get; set; }
         public bool SwHorsLigne { get; set; }
+        // 8 février - Collection of TitreMenu à faire comme les photos 
     }
 }

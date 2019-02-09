@@ -26,6 +26,13 @@ namespace PartagesWeb.API.Data
             _context.Remove(entity);
         }
 
+        public async Task<Section> GetSection(int id)
+        {
+            var section = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
+
+            return section;
+        }
+
         public async Task<List<Section>> GetSections()
         {
             var sections = await _context.Sections.ToListAsync();//.Include(p => p.Photos).ToListAsync();

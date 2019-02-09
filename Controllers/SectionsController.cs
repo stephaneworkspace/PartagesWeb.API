@@ -25,7 +25,14 @@ namespace PartagesWeb.API.Controllers
             _repo = repo;
         }
 
-        // GET api/categories
+        [HttpGet("gestion-pages-avec-arbre-complet")]
+        public async Task<IActionResult> GetArbreCompletSections()
+        {
+            // 8 février - à faire automap
+            var sections = await _repo.GetSections();
+            return Ok(sections);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetSections()
         {
@@ -59,6 +66,22 @@ namespace PartagesWeb.API.Controllers
             var createdSection = await _repo.CreateSection(sectionToCreate);
 
             return StatusCode(201);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _repo.GetSection(id);
+
+            if (item != null)
+            {
+                _repo.Delete(item);
+            }
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Impossible d'effacer la section");
         }
     }
 }

@@ -11,6 +11,7 @@ namespace PartagesWeb.API.Data
         void Add<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveAll();
+        Task<Section> GetSection(int id);
         // serait plus propre avec un helper (pour le filtrage, mais pour le panneau admin pas de filtrage)
         // avec PagedList
         Task<List<Section>> GetSections();
