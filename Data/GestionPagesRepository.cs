@@ -58,6 +58,7 @@ namespace PartagesWeb.API.Data
         {
             // https://stackoverflow.com/questions/7542021/how-to-get-max-value-of-a-column-using-entity-framework
             int lastPositon = _context.Sections.Select(p => p.Position).DefaultIfEmpty(0).Max();
+            await Task.FromResult(lastPositon);
             return lastPositon;
         }
     }
