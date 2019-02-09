@@ -1,4 +1,8 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
+// <author>Stéphane</author>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,25 +11,44 @@ using PartagesWeb.API.Models;
 
 namespace PartagesWeb.API.Data
 {
+    /// <summary>
+    /// Repository pour la gestion des pages
+    /// </summary>
     public class GestionPagesRepository : IGestionPagesRepository
     {
         private readonly DataContext _context;
 
+        /// <summary>  
+        /// Cette méthode est le constructeur 
+        /// </summary>  
+        /// <param name="context"> DataContext</param>
         public GestionPagesRepository(DataContext context)
         {
             _context = context;
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'ajouter une entité dans le DataContext
+        /// </summary>  
+        /// <param name="entity"> Entité (par exemple Section)</param>
         public void Add<T>(T entity) where T : class
         {
             _context.Add(entity);
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'effacer une entité dans le DataContext
+        /// </summary>  
+        /// <param name="entity"> Entité (par exemple Section)</param>
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir une section bien précise
+        /// </summary>  
+        /// <param name="id"> Clé principale du model Section</param>
         public async Task<Section> GetSection(int id)
         {
             var section = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
@@ -33,6 +56,9 @@ namespace PartagesWeb.API.Data
             return section;
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les sections
+        /// </summary> 
         public async Task<List<Section>> GetSections()
         {
             var sections = await _context.Sections.ToListAsync();//.Include(p => p.Photos).ToListAsync();
@@ -40,11 +66,18 @@ namespace PartagesWeb.API.Data
             return sections;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de sauvegarder tout dans le DataContext
+        /// </summary> 
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de section existe déjà
+        /// </summary>  
+        /// <param name="nom"> Nom de section</param>
         public async Task<bool> SectionExists(string nom)
         {
             if (await _context.Sections.AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
@@ -61,11 +94,10 @@ namespace PartagesWeb.API.Data
             return section;
         }*/
 
-        /*
-         * Détermine la dernière position
-         * J'ai trouvé le DefaultIfEmpty(0) avec Max ici : (pour info 8 février)
-         * https://stackoverflow.com/questions/7542021/how-to-get-max-value-of-a-column-using-entity-framework
-         */
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
         public async Task<int> LastPositionSection(bool swHorsLigne)
         {
             int lastPositon = _context.Sections
