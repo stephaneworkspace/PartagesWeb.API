@@ -49,7 +49,7 @@ namespace PartagesWeb.API.Controllers
                 return BadRequest("Le nom de la section est déjà utilisé !");
 
             // Déterminer la dernière position en ligne ou hors ligne
-            var position = await _repo.LastPositionSection(); // a faire sw boolean si en ligne ou hors ligne... 
+            var position = await _repo.LastPositionSection(sectionForCreateDto.SwHorsLigne); // a faire sw boolean si en ligne ou hors ligne... 
             // une fois que create, read fonctionne migration dans entity framework
 
             position++;
@@ -63,9 +63,12 @@ namespace PartagesWeb.API.Controllers
                 SwHorsLigne = sectionForCreateDto.SwHorsLigne
             };
 
-            var createdSection = await _repo.CreateSection(sectionToCreate);
+            _repo.Add(sectionToCreate);
 
-            return StatusCode(201);
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Impossible d'ajouter la section");
         }
 
         [HttpDelete("{id}")]

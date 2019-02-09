@@ -53,18 +53,27 @@ namespace PartagesWeb.API.Data
             return false;
         }
 
+        /* 8 février - désactivé, utilisation de public void Add<T>(T entity)
         public async Task<Section> CreateSection(Section section)
         {
             await _context.Sections.AddAsync(section);
             await _context.SaveChangesAsync();
 
             return section;
-        }
+        }*/
 
-        public async Task<int> LastPositionSection()
+        /*
+         * Détermine la dernière position
+         * J'ai trouvé le DefaultIfEmpty(0) avec Max ici : (pour info 8 février)
+         * https://stackoverflow.com/questions/7542021/how-to-get-max-value-of-a-column-using-entity-framework
+         */
+        public async Task<int> LastPositionSection(bool swHorsLigne)
         {
-            // https://stackoverflow.com/questions/7542021/how-to-get-max-value-of-a-column-using-entity-framework
-            int lastPositon = _context.Sections.Select(p => p.Position).DefaultIfEmpty(0).Max();
+            int lastPositon = _context.Sections
+                .Where(x => swHorsLigne == x.SwHorsLigne)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
             await Task.FromResult(lastPositon);
             return lastPositon;
         }

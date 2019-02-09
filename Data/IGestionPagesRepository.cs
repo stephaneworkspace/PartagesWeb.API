@@ -17,7 +17,8 @@ namespace PartagesWeb.API.Data
         Task<List<Section>> GetSections();
         // Task<Section> Login(string username, string password);
         Task<bool> SectionExists(string nom);
-        Task<Section> CreateSection(Section section);
-        Task<int> LastPositionSection();
+        // 8 févier - desactivé - utilisation de public void Add<T>(T entity)
+        // Task<Section> CreateSection(Section section);
+        Task<int> LastPositionSection(bool swHorsLigne);
     }
 }
