@@ -5,6 +5,13 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PartagesWeb.API", "PartagesWeb.API.csproj", "{268A1EB7-2EF3-4B20-9815-B1B3999423B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blob", "blob", "{5B4D6C80-FBAF-4CC3-ADB9-48444180C4F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "master", "master", "{36D3950B-C7C2-4B27-BE3C-5F2C9BC41396}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +25,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36D3950B-C7C2-4B27-BE3C-5F2C9BC41396} = {5B4D6C80-FBAF-4CC3-ADB9-48444180C4F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08CA6FAE-4221-469A-9DAC-CC6A4981527E}
