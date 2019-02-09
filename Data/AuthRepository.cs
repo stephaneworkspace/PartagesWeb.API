@@ -1,4 +1,8 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
+// <author>Stéphane</author>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,29 +11,48 @@ using PartagesWeb.API.Models;
 
 namespace PartagesWeb.API.Data
 {
+    /// <summary>
+    /// Repository pour l'authentification
+    /// </summary>
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
 
+
+        /// <summary>  
+        /// Cette méthode est le constructeur 
+        /// </summary>  
+        /// <param name="context"> DataContext</param>
         public AuthRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task<User> Login(string name, string password)
+        /// <summary>  
+        /// Cette méthode permet le login
+        /// </summary>  
+        /// <param name="nom"> Nom d'utilisateur</param>
+        /// <param name="motDePasse"> Mot de passe</param>
+        public async Task<User> Login(string nom, string motDePasse)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == name);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == nom);
             if (user == null)
             {
                 return null;
             }
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(motDePasse, user.PasswordHash, user.PasswordSalt))
             {
                 return null;
             }
             return user;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de vérifier le mot de passe
+        /// </summary>  
+        /// <param name="password"> Mot de passe</param>
+        /// <param name="passwordHash"> Hash</param>
+        /// <param name="passwordSalt"> Salt</param>
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
@@ -43,6 +66,15 @@ namespace PartagesWeb.API.Data
             return true;
         }
 
+        /// <summary>  
+        /// Cette méthode permet l'inscription
+        /// </summary>  
+        /// <remarks>
+        /// 8 Février : 
+        /// Pour le moment [Authorize] est un utilisateur administrateur
+        /// </remarks>
+        /// <param name="user"> Model user</param>
+        /// <param name="password"> Mot de passe</param>
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -57,6 +89,12 @@ namespace PartagesWeb.API.Data
             return user;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de créer mot de passe "Hash"
+        /// </summary>  
+        /// <param name="password"> Mot de passe</param>
+        /// <param name="passwordHash"> (Out) Hash</param>
+        /// <param name="passwordSalt"> (Out) Salt</param>
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -66,9 +104,13 @@ namespace PartagesWeb.API.Data
             }
         }
 
-        public async Task<bool> UserExists(string name)
+        /// <summary>  
+        /// Cette méthode permet de savoir si l'utilisateur existe
+        /// </summary>  
+        /// <param name="nom"> Mot de passe</param>
+        public async Task<bool> UserExists(string nom)
         {
-            if (await _context.Users.AnyAsync(x => x.Username == name))
+            if (await _context.Users.AnyAsync(x => x.Username == nom))
                 return true;
 
             return false;

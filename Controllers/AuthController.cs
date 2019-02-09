@@ -47,7 +47,7 @@ namespace PartagesWeb.API.Controllers
         /// <remarks>
         /// 8 Février : 
         /// Pour le moment [Authorize] est un utilisateur administrateur
-        /// </remarks>/// 
+        /// </remarks>
         /// <param name="userForRegisterDto"> DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost("register")]
         [SwaggerResponse(HttpStatusCode.Created, typeof(void), Description = "Ok")]
@@ -75,7 +75,7 @@ namespace PartagesWeb.API.Controllers
         /// <remarks>
         /// 8 Février : 
         /// Pour le moment [Authorize] est un utilisateur administrateur
-        /// </remarks>/// 
+        /// </remarks>
         /// <param name="userForLoginDto"> DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost("login")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Token")]
