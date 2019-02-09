@@ -79,7 +79,6 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description="Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'ajouter la section")]
-        [ProducesDefaultResponseType]
         public async Task<IActionResult> Create(SectionForCreateDto sectionForCreateDto)
         {
             if (await _repo.SectionExists(sectionForCreateDto.Nom.ToLower()))
