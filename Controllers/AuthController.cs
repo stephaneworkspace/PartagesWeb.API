@@ -27,6 +27,7 @@ namespace PartagesWeb.API.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
