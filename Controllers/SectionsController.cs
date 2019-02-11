@@ -129,6 +129,8 @@ namespace PartagesWeb.API.Controllers
                 _repo.Delete(item);
             }
 
+            await _repo.SortPositionSections();
+
             if (await _repo.SaveAll())
                 return Ok();
 

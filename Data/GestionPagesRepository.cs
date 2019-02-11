@@ -96,16 +96,58 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  
+        /// <remarks>
+        /// 9 février, je n'ai pas testé le OrderByDescending que j'ai rajouté
+        /// </remarks>
         /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
         public async Task<int> LastPositionSection(bool swHorsLigne)
         {
             int lastPositon = _context.Sections
                 .Where(x => swHorsLigne == x.SwHorsLigne)
-                .Select(p => p.Position)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)                
                 .DefaultIfEmpty(0)
                 .Max();
             await Task.FromResult(lastPositon);
             return lastPositon;
+        }
+
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les sections
+        /// </summary>
+        /// <remarks>
+        /// 9 février, je n'ai pas testé la section
+        /// Vérifier que la clé principale ne change pas
+        /// </remarks>
+        public async Task<bool> SortPositionSections()
+        {
+            // 1ère étape les position en ligne
+            var sectionsEnLigne = await _context.Sections
+                .Where(x => false == x.SwHorsLigne)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            var i = 0;
+            foreach(var unite in sectionsEnLigne)
+            {
+                // _context.Sections.Remove(unite);
+                i++;
+                unite.Position = i;
+                // await _context.Sections.AddAsync(unite);
+            }
+            // 1ère étape les position en ligne
+            var sectionsHorsLigne = await _context.Sections
+                .Where(x => true == x.SwHorsLigne)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            i = 0;
+            foreach (var unite in sectionsHorsLigne)
+            {
+                // _context.Sections.Remove(unite);
+                i++;
+                unite.Position = i;
+                // await _context.Sections.AddAsync(unite);
+            }
+            return true;
         }
     }
 }

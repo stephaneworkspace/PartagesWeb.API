@@ -2,6 +2,28 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "GST.Fake.Authentication.JwtBearer/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "2.0.0",
+          "Microsoft.AspNetCore.Session": "2.0.0",
+          "Microsoft.Extensions.Options": "2.0.0",
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/netcoreapp2.0/Properties/launchSettings.json": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4834,6 +4856,21 @@
     }
   },
   "libraries": {
+    "GST.Fake.Authentication.JwtBearer/2.0.0": {
+      "sha512": "SgP6tAmNGu0aqytEs1CWKXUHWLlLMpHzJ5timxVUudSpYkmhrYwX+b0fYYDPUGiNUKkH8EwZhREFx/IDyX+FHQ==",
+      "type": "package",
+      "path": "gst.fake.authentication.jwtbearer/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Properties/launchSettings.json",
+        "contentFiles/any/netcoreapp2.0/Properties/launchSettings.json",
+        "gst.fake.authentication.jwtbearer.2.0.0.nupkg.sha512",
+        "gst.fake.authentication.jwtbearer.nuspec",
+        "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll",
+        "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.xml"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "AIgEc1up4pvH8kXy+eG1x4Qfqd6piAq3yk11pveCQXWNkkYoiKdflSmcJZuWcerdMcAaoF0xC/mWGoTW4vF4Dg==",
       "type": "package",
@@ -13210,6 +13247,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "GST.Fake.Authentication.JwtBearer >= 2.0.0",
       "Microsoft.AspNetCore >= 2.2.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
@@ -13263,6 +13301,10 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "GST.Fake.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Microsoft.AspNetCore": {
             "target": "Package",
             "version": "[2.2.0, )"

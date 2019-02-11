@@ -48,5 +48,9 @@ namespace PartagesWeb.API.Data
         /// </summary>  
         /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
         Task<int> LastPositionSection(bool swHorsLigne);
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les sections
+        /// </summary>
+        Task<bool> SortPositionSections();
     }
 }

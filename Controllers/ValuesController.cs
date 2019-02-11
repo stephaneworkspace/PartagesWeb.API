@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PartagesWeb.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
