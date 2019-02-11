@@ -115,37 +115,27 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
-        /// <remarks>
-        /// 9 février, je n'ai pas testé la section
-        /// Vérifier que la clé principale ne change pas
-        /// </remarks>
         public async Task<bool> SortPositionSections()
         {
-            // 1ère étape les position en ligne
             var sectionsEnLigne = await _context.Sections
-                .Where(x => false == x.SwHorsLigne)
                 .OrderBy(x => x.Position)
                 .ToListAsync();
             var i = 0;
+            var j = 0;
             foreach(var unite in sectionsEnLigne)
             {
-                // _context.Sections.Remove(unite);
-                i++;
-                unite.Position = i;
-                // await _context.Sections.AddAsync(unite);
-            }
-            // 1ère étape les position en ligne
-            var sectionsHorsLigne = await _context.Sections
-                .Where(x => true == x.SwHorsLigne)
-                .OrderBy(x => x.Position)
-                .ToListAsync();
-            i = 0;
-            foreach (var unite in sectionsHorsLigne)
-            {
-                // _context.Sections.Remove(unite);
-                i++;
-                unite.Position = i;
-                // await _context.Sections.AddAsync(unite);
+                var record = await _context.Sections.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                if (unite.SwHorsLigne == true)
+                {
+                    i++;
+                    record.Position = i;
+                }
+                else
+                {
+                    j++;
+                    record.Position = j;
+                }
+                _context.Sections.Update(record);
             }
             return true;
         }

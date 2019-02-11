@@ -75,6 +75,9 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode permet de créer une section
         /// </summary> 
+        /// <remarks>
+        /// 9 février : Status Created comme dans Auth à faire
+        /// </remarks>
         /// <param name="sectionForCreateDto"> DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description="Ok")]
@@ -110,7 +113,7 @@ namespace PartagesWeb.API.Controllers
         }
 
         /// <summary>  
-        /// Cette méthode permet d'effacer une section
+        /// Cette méthode permet d'effacer une section et de remettre dans l'ordre les position en ligne et hors ligne
         /// </summary> 
         /// <remarks>
         /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
