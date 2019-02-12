@@ -140,12 +140,9 @@ namespace PartagesWeb.API.Controllers
         }
 
         /// <summary>  
-        /// Cette méthode permet d'effacer une section et de remettre dans l'ordre les position en ligne et hors ligne
+        /// Cette méthode permet de monter une section
         /// </summary> 
-        /// <remarks>
-        /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
-        /// </remarks>/// 
-        /// <param name="id"> Id de la section à effacer</param>
+        /// <param name="id"> Id de la section à monter</param>
         [HttpPost("monter/{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de monter la section")]
@@ -161,6 +158,28 @@ namespace PartagesWeb.API.Controllers
                 if (await _repo.SaveAll())
                     return Ok();
                 return BadRequest("Impossible de monter la section");
+            }
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de descendre une section
+        /// </summary> 
+        /// <param name="id"> Id de la section à descendre</param>
+        [HttpPost("descendre/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de descendre la section")]
+        public async Task<IActionResult> Descendre(int id)
+        {
+            var status = await _repo.DownSection(id);
+            if (!status)
+            {
+                return BadRequest("Impossible de descendre la section");
+            }
+            else
+            {
+                if (await _repo.SaveAll())
+                    return Ok();
+                return BadRequest("Impossible de descendre la section");
             }
         }
     }
