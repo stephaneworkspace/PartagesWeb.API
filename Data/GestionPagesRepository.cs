@@ -119,7 +119,8 @@ namespace PartagesWeb.API.Data
         public async Task<bool> SortPositionSections()
         {
             var sections = await _context.Sections
-                .OrderBy(x => x.Position)
+                .OrderBy(x => x.SwHorsLigne)
+                .ThenBy(x => x.Position)
                 .ToListAsync();
             var i = 0;
             var j = 0;
