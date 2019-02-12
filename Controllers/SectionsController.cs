@@ -89,7 +89,7 @@ namespace PartagesWeb.API.Controllers
                 return BadRequest("Le nom de la section est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
-            var position = await _repo.LastPositionSection(sectionForCreateDto.SwHorsLigne); // a faire sw boolean si en ligne ou hors ligne... 
+            var position = await _repo.LastPositionSection(sectionForCreateDto.SwHorsLigne);
             
             // Prochaine position
             position++;
