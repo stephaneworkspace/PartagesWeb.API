@@ -107,7 +107,7 @@ namespace PartagesWeb.API.Controllers
             _repo.Add(sectionToCreate);
 
             if (await _repo.SaveAll())
-                return Ok();
+                return Ok(sectionToCreate);
 
             return BadRequest("Impossible d'ajouter la section");
         }

@@ -33,7 +33,7 @@ namespace PartagesWeb.API.Data
             _context.Add(entity);
         }
 
-        /// <summary>  
+         /// <summary>  
         /// Cette méthode permet d'effacer une entité dans le DataContext
         /// </summary>  
         /// <param name="entity"> Entité (par exemple Section)</param>
@@ -68,7 +68,7 @@ namespace PartagesWeb.API.Data
         {
             var sections = await _context.Sections
                 .OrderBy(x => x.SwHorsLigne)
-                .OrderBy(y => y.Position)
+                .ThenBy(y => y.Position)
                 .ToListAsync();//.Include(p => p.Photos).ToListAsync();
 
             return sections;
