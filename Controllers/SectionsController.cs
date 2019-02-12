@@ -121,7 +121,6 @@ namespace PartagesWeb.API.Controllers
         /// <param name="id"> Id de la section à effacer</param>
         [HttpDelete("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer la section")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -138,6 +137,31 @@ namespace PartagesWeb.API.Controllers
                 return Ok();
 
             return BadRequest("Impossible d'effacer la section");
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'effacer une section et de remettre dans l'ordre les position en ligne et hors ligne
+        /// </summary> 
+        /// <remarks>
+        /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
+        /// </remarks>/// 
+        /// <param name="id"> Id de la section à effacer</param>
+        [HttpPost("monter/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de monter la section")]
+        public async Task<IActionResult> Monter(int id)
+        {
+            var status = await _repo.UpSection(id);
+            if (!status)
+            {
+                return BadRequest("Impossible de monter la section");
+            }
+            else
+            {
+                if (await _repo.SaveAll())
+                    return Ok();
+                return BadRequest("Impossible de monter la section");
+            }
         }
     }
 }

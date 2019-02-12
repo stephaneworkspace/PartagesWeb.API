@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Models;
+using System.Linq;
 
 namespace PartagesWeb.API.Data
 {
@@ -66,12 +67,13 @@ namespace PartagesWeb.API.Data
         /// </summary> 
         public async Task<List<Section>> GetSections()
         {
-            var sections = await _context.Sections.ToListAsync();//.Include(p => p.Photos).ToListAsync();
+            var sections = await _context.Sections
+                .OrderBy(x => x.SwHorsLigne)
+                .OrderBy(y => y.Position)
+                .ToListAsync();//.Include(p => p.Photos).ToListAsync();
 
             return sections;
         }
-
-
 
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà
@@ -117,12 +119,12 @@ namespace PartagesWeb.API.Data
         /// </summary>
         public async Task<bool> SortPositionSections()
         {
-            var sectionsEnLigne = await _context.Sections
+            var sections = await _context.Sections
                 .OrderBy(x => x.Position)
                 .ToListAsync();
             var i = 0;
             var j = 0;
-            foreach(var unite in sectionsEnLigne)
+            foreach(var unite in sections)
             {
                 var record = await _context.Sections.FirstOrDefaultAsync(x => x.Id == unite.Id);
                 if (unite.SwHorsLigne == true)
@@ -137,6 +139,60 @@ namespace PartagesWeb.API.Data
                 }
                 _context.Sections.Update(record);
             }
+            return true;
+        }
+       
+        /// <summary>
+        /// Monter une section
+        /// </summary>
+        /// <param name="id"> Clé principale du model Section à monter</param>
+        public async Task<bool> UpSection(int id)
+        {
+            var recordEnCours = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                var swHorsLigne = recordEnCours.SwHorsLigne;
+                var sections = await _context.Sections
+                    .Where(w => w.SwHorsLigne == swHorsLigne)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var i = 0;
+                var swFind = false;
+                sections.Reverse();
+                foreach (var unite in sections)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.Sections.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position++;
+                        _context.Sections.Update(recordInversion);
+                        break;
+                    } else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position--;
+                            swFind = true;
+                            _context.Sections.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }            
+        }
+
+        /// <summary>
+        /// Descendre une section
+        /// </summary>
+        /// <param name="id"> Clé principale du model Section à descendre</param>
+        public async Task<bool> DownSection(int id)
+        {
             return true;
         }
     }

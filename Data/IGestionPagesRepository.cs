@@ -52,5 +52,15 @@ namespace PartagesWeb.API.Data
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
         Task<bool> SortPositionSections();
+        /// <summary>
+        /// Monter une section
+        /// </summary>
+        /// <param name="id"> Clé principale du model Section à monter</param>
+        Task<bool> UpSection(int id);
+        /// <summary>
+        /// Descendre une section
+        /// </summary>
+        /// <param name="id"> Clé principale du model Section à descendre</param>
+        Task<bool> DownSection(int id);
     }
 }
