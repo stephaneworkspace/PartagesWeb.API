@@ -116,6 +116,7 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet d'effacer une section et de remettre dans l'ordre les position en ligne et hors ligne
         /// </summary> 
         /// <remarks>
+        /// 
         /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
         /// 11 Février : Trouver un moyen de RollBack
         /// </remarks>/// 
@@ -131,14 +132,14 @@ namespace PartagesWeb.API.Controllers
             {
                 _repo.Delete(item);
                 await _repo.SaveAll();
+                if (! await _repo.SaveAll())
+                    return BadRequest("Impossible d'effacer la section");
             }
 
+            // Pas de vérification, ça pourrait être le dernier enregistrement
             await _repo.SortPositionSections();
-
-            if (await _repo.SaveAll())
-                return Ok();
-
-            return BadRequest("Impossible d'effacer la section");
+            await _repo.SaveAll();
+            return Ok();
         }
 
         /// <summary>  
