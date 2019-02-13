@@ -78,7 +78,7 @@ namespace PartagesWeb.API
         /// </summary> 
         /// <param name="app"> IApplicationBuilder app</param>
         /// <param name="env"> IHostingEnvironment env</param>
-        //// <param name="seeder"> Seed seeder</param>
+        /// <param name="seeder"> Seed seeder</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())

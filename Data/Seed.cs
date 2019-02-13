@@ -66,7 +66,9 @@ namespace PartagesWeb.API.Data
             foreach (var section in sections)
             {
                 if (!_context.Sections.Any(x => x.Nom.ToLower() == section.Nom.ToLower()))
+                {
                     _context.Sections.Add(section);
+                }
             }
             _context.SaveChanges();
         }
