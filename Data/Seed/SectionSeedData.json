@@ -1,0 +1,37 @@
+[
+  {
+    "Nom": "Informatique Web",
+    "Icone": "desktop",
+    "Type": "none",
+    "Position": 1,
+    "SwHorsLigne": false
+  },
+  {
+    "Nom": "Thème astral",
+    "Icone": "globe",
+    "Type": "astral",
+    "Position": 2,
+    "SwHorsLigne": false
+  },
+  {
+    "Nom": "Forum",
+    "Icone": "comments",
+    "Type": "forum",
+    "Position": 1,
+    "SwHorsLigne": true
+  },
+  {
+    "Nom": "Musique assisté par ordinateur",
+    "Icone": "music",
+    "Type": "none",
+    "Position": 3,
+    "SwHorsLigne": false
+  },
+  {
+    "Nom": "Galerie de dessins",
+    "Icone": "image",
+    "Type": "galerie",
+    "Position": 4,
+    "SwHorsLigne": false
+  }
+]

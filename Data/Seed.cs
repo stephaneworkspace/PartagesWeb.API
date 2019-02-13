@@ -30,9 +30,11 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet d'executer la création d'utilisateur dans la base de donnée
         /// </summary> 
+        /// <remarks>
+        /// Don't work with IIS Express
+        /// </remarks>
         public void SeedUsers()
         {
-            // Don't work with IIS Express
             var userData = System.IO.File.ReadAllText("Data/Seed/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
             foreach (var user in users)
@@ -47,6 +49,23 @@ namespace PartagesWeb.API.Data
                 _context.Users.Add(user);
             }
 
+            _context.SaveChanges();
+        }
+
+        ///<summary>
+        ///Cette méthode permet d'ajouter les sections dans la base de donnée
+        ///</summary>
+        /// <remarks>
+        /// Don't work with IIS Express
+        /// </remarks>///
+        public void SeedSection()
+        {
+            var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionSeedData.json");
+            var sections = JsonConvert.DeserializeObject<List<Section>>(sectionData);
+            foreach (var section in sections)
+            {
+                _context.Sections.Add(section);
+            }
             _context.SaveChanges();
         }
 

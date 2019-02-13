@@ -57,7 +57,7 @@ namespace PartagesWeb.API
             services.AddSwaggerDocument();
             services.AddCors();
             // Seed
-            // services.AddTransient<Seed>();
+            //services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGestionPagesRepository, GestionPagesRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -79,7 +79,7 @@ namespace PartagesWeb.API
         /// <param name="app"> IApplicationBuilder app</param>
         /// <param name="env"> IHostingEnvironment env</param>
         //// <param name="seeder"> Seed seeder</param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) //, Seed seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)//, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -107,6 +107,7 @@ namespace PartagesWeb.API
             // Seed plus dans les param
             // Desactivé
             // seeder.SeedUsers();
+            // seeder.SeedSection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();
