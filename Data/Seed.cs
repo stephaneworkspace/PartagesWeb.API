@@ -7,6 +7,7 @@ using PartagesWeb.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PartagesWeb.API.Data
@@ -60,11 +61,12 @@ namespace PartagesWeb.API.Data
         /// </remarks>///
         public void SeedSection()
         {
-            var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionSeedData.json");
+            var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var sections = JsonConvert.DeserializeObject<List<Section>>(sectionData);
             foreach (var section in sections)
             {
-                _context.Sections.Add(section);
+                if (!_context.Sections.Any(x => x.Nom.ToLower() == section.Nom.ToLower()))
+                    _context.Sections.Add(section);
             }
             _context.SaveChanges();
         }
