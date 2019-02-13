@@ -116,6 +116,9 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
         public async Task<bool> SortPositionSections()
         {
             var sections = await _context.Sections

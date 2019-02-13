@@ -117,6 +117,7 @@ namespace PartagesWeb.API.Controllers
         /// </summary> 
         /// <remarks>
         /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
+        /// 11 Février : Trouver un moyen de RollBack
         /// </remarks>/// 
         /// <param name="id"> Id de la section à effacer</param>
         [HttpDelete("{id}")]
@@ -129,6 +130,7 @@ namespace PartagesWeb.API.Controllers
             if (item != null)
             {
                 _repo.Delete(item);
+                await _repo.SaveAll();
             }
 
             await _repo.SortPositionSections();
