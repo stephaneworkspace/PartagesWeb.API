@@ -62,6 +62,10 @@ namespace PartagesWeb.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /**
+         * Sections
+         **/
+
         /// <summary>  
         /// Cette méthode permet d'obtenir une section bien précise
         /// </summary>  
@@ -257,5 +261,30 @@ namespace PartagesWeb.API.Data
                 return true;
             }
         }
+
+
+        /**
+         * Icones
+         **/
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir une icone bien précise
+        /// </summary>  
+        /// <param name="id"> Clé principale du model Icone</param>
+        public async Task<Icone> GetIcone(int id)
+        {
+            return await _context.Icones.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les icones
+        /// </summary> 
+        public async Task<List<Icone>> GetIcones()
+        {
+            return await _context.Icones
+                .OrderBy(x => x.NomSelectBox)
+                .ToListAsync();
+        }
+
     }
 }

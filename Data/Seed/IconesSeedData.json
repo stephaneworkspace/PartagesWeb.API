@@ -1,0 +1,26 @@
+[
+  {
+    "FaValeur": "coffee",
+    "NomSelectBox": "Café"
+  },
+  {
+    "FaValeur": "desktop",
+    "NomSelectBox": "Informatique"
+  },
+  {
+    "FaValeur": "comments",
+    "NomSelectBox": "Forum"
+  },
+  {
+    "FaValeur": "galerie",
+    "NomSelectBox": "Galerie d'images"
+  },
+  {
+    "FaValeur": "music",
+    "NomSelectBox": "Musique"
+  },
+  {
+    "FaValeur": "globe",
+    "NomSelectBox": "Planète"
+  }
+]

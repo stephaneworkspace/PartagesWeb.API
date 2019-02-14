@@ -36,7 +36,7 @@ namespace PartagesWeb.API.Data
         /// </remarks>
         public void SeedUsers()
         {
-            var userData = System.IO.File.ReadAllText("Data/Seed/UserSeedData.json");
+            var userData = System.IO.File.ReadAllText("Data/Seed/UsersSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
             foreach (var user in users)
             {
@@ -59,9 +59,9 @@ namespace PartagesWeb.API.Data
         /// <remarks>
         /// Don't work with IIS Express
         /// </remarks>///
-        public async void SeedSection()
+        public async void SeedSections()
         {
-            var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionSeedData.json", Encoding.GetEncoding("iso-8859-1"));
+            var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionsSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var sections = JsonConvert.DeserializeObject<List<Section>>(sectionData);
             foreach (var section in sections)
             {
@@ -73,6 +73,26 @@ namespace PartagesWeb.API.Data
                     position++;
                     section.Position = position;
                     _context.Sections.Add(section);
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
+
+        ///<summary>
+        ///Cette méthode permet d'ajouter les icones dans la base de donnée
+        ///</summary>
+        /// <remarks>
+        /// Don't work with IIS Express
+        /// </remarks>///
+        public async void SeedIcones()
+        {
+            var data = System.IO.File.ReadAllText("Data/Seed/IconesSeedData.json", Encoding.GetEncoding("iso-8859-1"));
+            var icones = JsonConvert.DeserializeObject<List<Icone>>(data);
+            foreach (var icone in icones)
+            {
+                if (!_context.Icones.Any(x => x.NomSelectBox.ToLower() == icone.NomSelectBox.ToLower()))
+                {
+                    _context.Icones.Add(icone);
                     await _context.SaveChangesAsync();
                 }
             }

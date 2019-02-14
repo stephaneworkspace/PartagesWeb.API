@@ -50,7 +50,7 @@ namespace PartagesWeb.API.Controllers
         /// A faire automap avec l'arbre entier, pour le moment il y a seulement "section"
         /// </remarks>
         [HttpGet("gestion-pages-avec-arbre-complet")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des Sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des sections")]
         public async Task<IActionResult> GetArbreCompletSections()
         {
             var sections = await _repo.GetSections();
@@ -65,7 +65,7 @@ namespace PartagesWeb.API.Controllers
         /// Non utilisé pour le moment. Il faudra peut être l'améliorer avec un choix, aucune section (pour le mode hors ligne)
         /// </remarks>
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des Sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des sections")]
         public async Task<IActionResult> GetSections()
         {
             var sections = await _repo.GetSections();
@@ -180,8 +180,6 @@ namespace PartagesWeb.API.Controllers
             {
                 _repo.Delete(item);
                 await _repo.SaveAll();
-                if (await _repo.SaveAll())
-                    return BadRequest("Impossible d'effacer la section");
             } else
             {
                 return BadRequest("Impossible d'effacer la section");

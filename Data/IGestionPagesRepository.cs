@@ -36,6 +36,11 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet de sauvegarder tout dans le DataContext
         /// </summary> 
         Task<bool> SaveAll();
+
+        /**
+         * Sections
+         **/
+
         /// <summary>  
         /// Cette méthode permet d'obtenir une section bien précise
         /// </summary>  
@@ -75,5 +80,19 @@ namespace PartagesWeb.API.Data
         /// </summary>
         /// <param name="id"> Clé principale du model Section à descendre</param>
         Task<bool> DownSection(int id);
+
+        /**
+         * Icones
+         **/
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir une icone bien précise
+        /// </summary>  
+        /// <param name="id"> Clé principale du model Icone</param>
+        Task<Icone> GetIcone(int id);
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les icones
+        /// </summary> 
+        Task<List<Icone>> GetIcones();
     }
 }

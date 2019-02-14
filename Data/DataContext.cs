@@ -22,6 +22,10 @@ namespace PartagesWeb.API.Data
         /// </summary> 
         public DbSet<User> Users { get; set; }
         /// <summary>  
+        /// Cette méthode permet la connexion au model Icone
+        /// </summary> 
+        public DbSet<Icone> Icones { get; set; }
+        /// <summary>  
         /// Cette méthode permet la connexion au model Section
         /// </summary> 
         public DbSet<Section> Sections { get; set; }
