@@ -132,8 +132,11 @@ namespace PartagesWeb.API.Controllers
             {
                 _repo.Delete(item);
                 await _repo.SaveAll();
-                if (! await _repo.SaveAll())
+                if (await _repo.SaveAll())
                     return BadRequest("Impossible d'effacer la section");
+            } else
+            {
+                return BadRequest("Impossible d'effacer la section");
             }
 
             // Pas de vérification, ça pourrait être le dernier enregistrement
