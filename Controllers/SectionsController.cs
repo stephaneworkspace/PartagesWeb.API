@@ -50,7 +50,7 @@ namespace PartagesWeb.API.Controllers
         /// A faire automap avec l'arbre entier, pour le moment il y a seulement "section"
         /// </remarks>
         [HttpGet("gestion-pages-avec-arbre-complet")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section), Description = "Liste des Sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des Sections")]
         public async Task<IActionResult> GetArbreCompletSections()
         {
             var sections = await _repo.GetSections();
@@ -65,11 +65,32 @@ namespace PartagesWeb.API.Controllers
         /// Non utilisé pour le moment. Il faudra peut être l'améliorer avec un choix, aucune section (pour le mode hors ligne)
         /// </remarks>
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section), Description = "Liste des Sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des Sections")]
         public async Task<IActionResult> GetSections()
         {
             var sections = await _repo.GetSections();
             return Ok(sections);
+        }
+
+        /// <summary>
+        /// Cette méthode permet d'acceder à une section précise
+        /// </summary>
+        /// <param name="id">Clé principale de la section à atteindre</param>
+        [HttpGet("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Section), Description = "La section à atteindre")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder à la section")]
+        public async Task<IActionResult> GetSection(int id)
+        {
+            var item = await _repo.GetSection(id);
+
+            if (item != null)
+            {
+                return Ok(item);
+            }
+            else
+            {
+                return BadRequest("Impossible d'acceder à la section");
+            }
         }
 
         /// <summary>  
