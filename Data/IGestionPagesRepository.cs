@@ -18,8 +18,15 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet d'ajouter une entité dans le DataContext
         /// </summary>  
+        /// <typeparam name="T">Type d'entité</typeparam>
         /// <param name="entity"> Entité (par exemple Section)</param>
         void Add<T>(T entity) where T : class;
+        /// <summary>
+        /// Cette méthode permet de mettre à jour l'entité dans le DataContext
+        /// </summary>
+        /// <typeparam name="T">Type d'entité</typeparam>
+        /// <param name="entity"></param>
+        void Update<T>(T entity) where T : class;
         /// <summary>  
         /// Cette méthode permet d'effacer une entité dans le DataContext
         /// </summary>  
@@ -43,6 +50,12 @@ namespace PartagesWeb.API.Data
         /// </summary>  
         /// <param name="nom"> Nom de section</param>
         Task<bool> SectionExists(string nom);
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de section existe déjà et ignorer l'enregistrement en cours
+        /// </summary>  
+        /// <param name="id">Clé de l'enregistrement à igonrer</param>
+        /// <param name="nom"> Nom de section</param>
+        Task<bool> SectionExistsUpdate(int id, string nom);
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  

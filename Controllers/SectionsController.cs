@@ -75,10 +75,7 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode permet de créer une section
         /// </summary> 
-        /// <remarks>
-        /// 9 février : Status Created comme dans Auth à faire
-        /// </remarks>
-        /// <param name="sectionForCreateDto"> DTO de ce qui est envoyé depuis le frontend</param>
+        /// <param name="sectionForCreateDto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description="Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
@@ -110,6 +107,36 @@ namespace PartagesWeb.API.Controllers
                 return Ok(sectionToCreate);
 
             return BadRequest("Impossible d'ajouter la section");
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de modifier une section
+        /// </summary> 
+        /// <param name="id">Clé de l'enregistrement</param>
+        /// <param name="sectionForUpdateDto">DTO de ce qui est envoyé depuis le frontend</param>
+        [HttpPut("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour la section")]
+        public async Task<IActionResult> Update(int id, SectionForUpdateDto sectionForUpdateDto)
+        {
+            if (await _repo.SectionExistsUpdate(id, sectionForUpdateDto.Nom.ToLower()))
+                return BadRequest("Le nom de la section est déjà utilisé");
+            var section = await _repo.GetSection(id);
+
+            // Préparation du model
+            section.Nom = sectionForUpdateDto.Nom;
+            section.Icone = sectionForUpdateDto.Icone;
+            section.Type = sectionForUpdateDto.Type;
+            section.Position = sectionForUpdateDto.Position;
+            section.SwHorsLigne = sectionForUpdateDto.SwHorsLigne;
+
+            _repo.Update(section);
+
+            if (await _repo.SaveAll())
+                return Ok(section);
+
+            return BadRequest("Impossible de mettre à jour la section");
         }
 
         /// <summary>  
