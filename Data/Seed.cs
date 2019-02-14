@@ -73,9 +73,9 @@ namespace PartagesWeb.API.Data
                     position++;
                     section.Position = position;
                     _context.Sections.Add(section);
+                    await _context.SaveChangesAsync();
                 }
             }
-            _context.SaveChanges();
         }
 
         /// <summary>  
