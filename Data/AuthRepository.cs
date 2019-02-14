@@ -91,6 +91,9 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet de créer mot de passe "Hash"
         /// </summary>  
+        /// <remark>
+        /// Cette méthode est copier collé dans Seed
+        /// </remark>
         /// <param name="password"> Mot de passe</param>
         /// <param name="passwordHash"> (Out) Hash</param>
         /// <param name="passwordSalt"> (Out) Salt</param>

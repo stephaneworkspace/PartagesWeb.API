@@ -59,7 +59,7 @@ namespace PartagesWeb.API.Data
         /// <remarks>
         /// Don't work with IIS Express
         /// </remarks>///
-        public void SeedSection()
+        public async void SeedSection()
         {
             var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var sections = JsonConvert.DeserializeObject<List<Section>>(sectionData);
@@ -67,6 +67,11 @@ namespace PartagesWeb.API.Data
             {
                 if (!_context.Sections.Any(x => x.Nom.ToLower() == section.Nom.ToLower()))
                 {
+                    // Déterminer la dernière position en ligne ou hors ligne
+                    var position = await LastPositionSection(section.SwHorsLigne);
+                    // Prochaine position
+                    position++;
+                    section.Position = position;
                     _context.Sections.Add(section);
                 }
             }
@@ -75,7 +80,10 @@ namespace PartagesWeb.API.Data
 
         /// <summary>  
         /// Cette méthode permet de créer mot de passe "Hash"
-        /// </summary>  
+        /// </summary> 
+        /// <remarks>
+        /// Copier collé AuthRepository
+        /// </remarks>
         /// <param name="password"> Mot de passe</param>
         /// <param name="passwordHash"> (Out) Hash</param>
         /// <param name="passwordSalt"> (Out) Salt</param>
@@ -86,6 +94,26 @@ namespace PartagesWeb.API.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <remarks>
+        /// 9 février, je n'ai pas testé le OrderByDescending que j'ai rajouté
+        /// Copier Coller GestionPages Repository
+        /// </remarks>
+        /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
+        private async Task<int> LastPositionSection(bool swHorsLigne)
+        {
+            int lastPositon = _context.Sections
+                .Where(x => swHorsLigne == x.SwHorsLigne)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
         }
     }
 }

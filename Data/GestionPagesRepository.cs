@@ -116,9 +116,9 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// <remark>
+        /// Cette méthode est copier collé dans Seed
+        /// </remark>
         public async Task<bool> SortPositionSections()
         {
             var sections = await _context.Sections
