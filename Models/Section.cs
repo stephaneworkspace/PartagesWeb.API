@@ -42,6 +42,12 @@ namespace PartagesWeb.API.Models
         /// Switch si c'est en ligne true, si c'est hors ligne false
         /// </summary>
         public bool SwHorsLigne { get; set; }
-        // 8 février - Collection of TitreMenu à faire comme les photos 
+        /// <summary>
+        /// TitreMenu relié à cette section
+        /// </summary>
+        /// <remarks>
+        /// Trouver un moyen de trier cette collection
+        /// </remarks>
+        public ICollection<TitreMenu> TitreMenus { get; set; }
     }
 }

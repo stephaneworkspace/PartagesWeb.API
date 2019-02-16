@@ -96,6 +96,7 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode permet de créer une section
         /// </summary> 
+        /// <remarks>16 février : Il y a toutes autres sorte de warning si les champs ne sont pas rempli correctement A FAIRE</remarks>
         /// <param name="sectionForCreateDto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description="Ok")]
