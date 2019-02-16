@@ -14,17 +14,20 @@ namespace PartagesWeb.API.Dtos.GestionPages
     /// <summary>
     /// Dto pour la création d'une section depuis le frontend
     /// </summary>
+    /// <remarks>
+    /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-2.2#globalization-and-localization-terms
+    /// </remarks>
     public class SectionForCreateDto
     {
         /// <summary>
         /// Nom de la section
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
         public string Nom { get; set; }
         /// <summary>
         /// Icone fa de font awesome
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
         public string Icone { get; set; }
         /// <summary>
         /// Type de section
@@ -33,7 +36,7 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// 8 Février : 
         /// Pour le moment il n'y a pas de model relié à ça
         /// </remarks>
-        [Required]
+        [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
         [DisplayName("Type de section")]
         public string Type { get; set; }
         /// <summary>
