@@ -106,7 +106,7 @@ namespace PartagesWeb.API.Data
         /// <param name="nom">Nom du titre menu</param>
         /// <param name="sectionId">SectionId ou le nom doit être unique</param>
         /// <param name="swHorsLigne">Boolean si hors ligne</param>
-        Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId);
+        Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId, bool swHorsLigne);
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  
@@ -118,7 +118,7 @@ namespace PartagesWeb.API.Data
         /// </summary>
         /// <param name="swHorsLigne">Boolean si c'est hors ligne ou pas</param>
         /// <param name="sectionId">Clé du model Section pour trier cette section</param>
-        Task<bool> SortPositionTitreMenu();
+        Task<bool> SortPositionTitreMenu(bool swHorsLigne, int sectionId);
         /// <summary>
         /// Monter un titre menu
         /// </summary>
