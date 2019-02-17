@@ -100,11 +100,12 @@ namespace PartagesWeb.API.Data
         /// <param name="swHorsLigne">Boolean si hors ligne</param>
         Task<bool> TitreMenuExists(string nom, int sectionId, bool swHorsLigne);
         /// <summary>  
-        /// Cette méthode permet de vérifier si un nom de section existe déjà et ignorer l'enregistrement en cours
+        /// Cette méthode permet de vérifier si un nom de section existe déjà dans le cas d'une mise à jour des données
         /// </summary>  
-        /// <param name="id">Clé de l'enregistrement à igonrer</param>
+        /// <param name="id">Id de la clé principal de TitreMenu à mettre à jour et donc ignorer</param>
         /// <param name="nom">Nom du titre menu</param>
-        /// <param name="sectionId">SectionId ou le nom doit être unique</param>/// 
+        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
+        /// <param name="swHorsLigne">Boolean si hors ligne</param>
         Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId);
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
@@ -115,6 +116,8 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Cette méthode refait la liste des positions pour les titre menus
         /// </summary>
+        /// <param name="swHorsLigne">Boolean si c'est hors ligne ou pas</param>
+        /// <param name="sectionId">Clé du model Section pour trier cette section</param>
         Task<bool> SortPositionTitreMenu();
         /// <summary>
         /// Monter un titre menu
