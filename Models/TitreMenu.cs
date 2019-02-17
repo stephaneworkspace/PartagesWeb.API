@@ -44,5 +44,9 @@ namespace PartagesWeb.API.Models
         /// Position
         /// </summary>
         public int Position { get; set; }
+        /// <summary>
+        /// Switch si c'est en ligne true, si c'est hors ligne false
+        /// </summary>
+        public bool SwHorsLigne { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà
         /// </summary>  
-        /// <param name="nom"> Nom de section</param>
+        /// <param name="nom">Nom de section</param>
         Task<bool> SectionExists(string nom);
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà et ignorer l'enregistrement en cours
@@ -64,7 +64,7 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  
-        /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
+        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
         Task<int> LastPositionSection(bool swHorsLigne);
         /// <summary>
         /// Cette méthode refait la liste des positions pour les sections
@@ -73,13 +73,59 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Monter une section
         /// </summary>
-        /// <param name="id"> Clé principale du model Section à monter</param>
+        /// <param name="id">Clé principale du model Section à monter</param>
         Task<bool> UpSection(int id);
         /// <summary>
         /// Descendre une section
         /// </summary>
-        /// <param name="id"> Clé principale du model Section à descendre</param>
+        /// <param name="id">Clé principale du model Section à descendre</param>
         Task<bool> DownSection(int id);
+
+        /**
+         * TitreMenus
+         */
+
+        /// <summary> Cette méthode permet d'obtenir un titre menu bien précis</summary>
+        /// <param name="id"> Clé principale du model TitreMenu</param>/// 
+        Task<TitreMenu> GetTitreMenu(int id);
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne sans SectionId relationel
+        /// </summary>
+        Task<List<TitreMenu>> GetTitreMenuHorsLigne();
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de section existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
+        /// <param name="swHorsLigne">Boolean si hors ligne</param>
+        Task<bool> TitreMenuExists(string nom, int sectionId, bool swHorsLigne);
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de section existe déjà et ignorer l'enregistrement en cours
+        /// </summary>  
+        /// <param name="id">Clé de l'enregistrement à igonrer</param>
+        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="sectionId">SectionId ou le nom doit être unique</param>/// 
+        Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId);
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
+        /// <param name="sectionId">SectionId facultatif, si 0 c'est qu'elle est totalement hors ligne</param>
+        Task<int> LastPositionTitreMenu(bool swHorsLigne, int sectionId);
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les titre menus
+        /// </summary>
+        Task<bool> SortPositionTitreMenu();
+        /// <summary>
+        /// Monter un titre menu
+        /// </summary>
+        /// <param name="id">Clé principale du model TitreMenu à monter</param>
+        Task<bool> UpTitreMenu(int id);
+        /// <summary>
+        /// Descendre un titre menu
+        /// </summary>
+        /// <param name="id">Clé principale du model TitreMenu à descendre</param>
+        Task<bool> DownTitreMenu(int id);
 
         /**
          * Icones

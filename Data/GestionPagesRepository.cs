@@ -69,7 +69,7 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet d'obtenir une section bien précise
         /// </summary>  
-        /// <param name="id"> Clé principale du model Section</param>
+        /// <param name="id">Clé principale du model Section</param>
         public async Task<Section> GetSection(int id)
         {
             var section = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
@@ -85,6 +85,7 @@ namespace PartagesWeb.API.Data
             var sections = await _context.Sections
                 .OrderBy(x => x.SwHorsLigne)
                 .ThenBy(y => y.Position)
+                .Include(t => t.TitreMenus)
                 .ToListAsync();//.Include(p => p.Photos).ToListAsync();
 
             return sections;
@@ -93,7 +94,7 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà
         /// </summary>  
-        /// <param name="nom"> Nom de section</param>
+        /// <param name="nom">Nom de section</param>
         public async Task<bool> SectionExists(string nom)
         {
             if (await _context.Sections.AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
@@ -129,7 +130,7 @@ namespace PartagesWeb.API.Data
         /// <remarks>
         /// 9 février, je n'ai pas testé le OrderByDescending que j'ai rajouté
         /// </remarks>
-        /// <param name="swHorsLigne"> Switch si on est en ligne true ou hors ligne false</param>
+        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
         public async Task<int> LastPositionSection(bool swHorsLigne)
         {
             int lastPositon = _context.Sections
@@ -177,7 +178,7 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Monter une section
         /// </summary>
-        /// <param name="id"> Clé principale du model Section à monter</param>
+        /// <param name="id">Clé principale du model Section à monter</param>
         public async Task<bool> UpSection(int id)
         {
             var recordEnCours = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
@@ -221,7 +222,7 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Descendre une section
         /// </summary>
-        /// <param name="id"> Clé principale du model Section à descendre</param>
+        /// <param name="id">Clé principale du model Section à descendre</param>
         public async Task<bool> DownSection(int id)
         {
             var recordEnCours = await _context.Sections.FirstOrDefaultAsync(x => x.Id == id);
@@ -262,6 +263,106 @@ namespace PartagesWeb.API.Data
             }
         }
 
+        /**
+         * TitreMenus
+         */
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un titre menu bien précise
+        /// </summary>  
+        /// <param name="id">Clé principale du model TitreMenu</param>
+        public async Task<TitreMenu> GetTitreMenu(int id)
+        {
+            var item = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+
+            return item;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne sans SectionId relationel
+        /// </summary>
+        public async Task<List<TitreMenu>> GetTitreMenuHorsLigne()
+        {
+            var items = await _context.TitreMenus
+                .Where(x => x.SwHorsLigne == true)
+                .OrderBy(y => y.Position)
+                .ToListAsync();//.Include(p => p.TitreMenus).ToListAsync();
+
+            return items;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de section existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
+        /// <param name="swHorsLigne">Boolean si hors ligne</param>
+        public async Task<bool> TitreMenuExists(string nom, int sectionId, bool swHorsLigne)
+        {
+            if (swHorsLigne == true)
+            {
+                if (await _context.TitreMenus.Where(s => s.SwHorsLigne == swHorsLigne).AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                    return true;
+            }
+            else
+            {
+                if (await _context.TitreMenus.Where(s => s.SwHorsLigne == swHorsLigne).Where(s => s.SectionId == sectionId).AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                    return true;
+            }
+            return false;
+        }
+
+        public Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
+        /// <param name="sectionId">SectionId facultatif, si 0 c'est qu'elle est totalement hors ligne</param>
+        public async Task<int> LastPositionTitreMenu(bool swHorsLigne, int sectionId)
+        {
+            int lastPositon;
+            if (swHorsLigne == true)
+            {
+                lastPositon = _context.TitreMenus
+                .Where(x => swHorsLigne == x.SwHorsLigne)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            }
+            else
+            {
+                lastPositon = _context.TitreMenus
+                .Where(x => swHorsLigne == x.SwHorsLigne)
+                .Where(s => sectionId == s.SectionId)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            }
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        public Task<bool> SortPositionTitreMenu()
+        {
+            // Définir clairement se qu'il faut trier
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpTitreMenu(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DownTitreMenu(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         /**
          * Icones
@@ -286,5 +387,5 @@ namespace PartagesWeb.API.Data
                 .ToListAsync();
         }
 
-    }
+     }
 }
