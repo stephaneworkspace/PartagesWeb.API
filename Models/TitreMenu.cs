@@ -34,8 +34,8 @@ namespace PartagesWeb.API.Models
         /// 8 Février : 
         /// à tester
         /// </remarks>
-        [ForeignKey("SectionId")]
-        public virtual Section Section { get; set; }
+        // [ForeignKey("SectionId")]
+        // public virtual Section Section { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>

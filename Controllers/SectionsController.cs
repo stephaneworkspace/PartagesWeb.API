@@ -21,7 +21,7 @@ namespace PartagesWeb.API.Controllers
     /// <summary>
     /// Controller pour model Section
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [SwaggerTag("Sections", Description = "Controller pour model Section")]
@@ -191,7 +191,7 @@ namespace PartagesWeb.API.Controllers
         /// 8 Février : Mettre hors ligne l'arbre "titre menu - sous titre menu - article"
         /// 11 Février : Trouver un moyen de RollBack
         /// </remarks>/// 
-        /// <param name="id"> Id de la section à effacer</param>
+        /// <param name="id">Id de la section à effacer</param>
         [HttpDelete("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer la section")]
