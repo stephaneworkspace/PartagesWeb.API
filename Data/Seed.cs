@@ -73,8 +73,8 @@ namespace PartagesWeb.API.Data
                     position++;
                     section.Position = position;
                     _context.Sections.Add(section);
-                    await _context.SaveChangesAsync();
                 }
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -93,8 +93,8 @@ namespace PartagesWeb.API.Data
                 if (!_context.Icones.Any(x => x.NomSelectBox.ToLower() == icone.NomSelectBox.ToLower()))
                 {
                     _context.Icones.Add(icone);
-                    await _context.SaveChangesAsync();
                 }
+                await _context.SaveChangesAsync();
             }
         }
 

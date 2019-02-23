@@ -3,6 +3,7 @@
 // <author>Stéphane</author>
 //-----------------------------------------------------------------------
 using Microsoft.EntityFrameworkCore;
+using PartagesWeb.API.Data.Configuration;
 using PartagesWeb.API.Models;
 
 namespace PartagesWeb.API.Data
@@ -33,5 +34,14 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet la connexion au model TitreMenu
         /// </summary> 
         public DbSet<TitreMenu> TitreMenus { get; set; }
+        /// <summary>
+        /// Configuration des models
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected virtual void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new TitreMenuConfiguration());
+        }
     }
 }
