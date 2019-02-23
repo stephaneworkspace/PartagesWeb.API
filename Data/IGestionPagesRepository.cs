@@ -70,6 +70,7 @@ namespace PartagesWeb.API.Data
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
         Task<bool> SortPositionSections();
+        Task <bool> DeleteSection(Section section);
         /// <summary>
         /// Monter une section
         /// </summary>

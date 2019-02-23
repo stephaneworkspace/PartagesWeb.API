@@ -201,7 +201,7 @@ namespace PartagesWeb.API.Controllers
 
             if (item != null)
             {
-                _repo.Delete(item);
+                _repo.DeleteSection(item);
                 await _repo.SaveAll();
             } else
             {

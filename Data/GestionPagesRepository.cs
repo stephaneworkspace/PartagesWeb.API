@@ -54,6 +54,8 @@ namespace PartagesWeb.API.Data
             _context.Remove(entity);
         }
 
+
+
         /// <summary>  
         /// Cette méthode permet de sauvegarder tout dans le DataContext
         /// </summary> 
@@ -175,6 +177,35 @@ namespace PartagesWeb.API.Data
             return true;
         }
        
+        public async Task<bool> DeleteSection(Section section)
+        {
+
+            int lastPositonTitreMenusOffline = _context.TitreMenus
+                .Where(x => x.SwHorsLigne == true) // 23 février : peut être inutile
+                .Where(x => x.SectionId == null)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+
+
+                var titreMenus = await _context.TitreMenus
+                   .Where(x => x.SectionId == section.Id)
+                   .ToListAsync();
+            // 23 février : LAST OFFLINE POSITION A TESTER
+
+
+            foreach (var unite in titreMenus)
+            {
+                unite.SectionId = null;
+                unite.SwHorsLigne = true;
+                unite.Position = lastPositonTitreMenusOffline++;
+                _context.TitreMenus.Update(unite);
+            }
+            _context.Sections.Remove(section);
+            return true;
+        }
+
         /// <summary>
         /// Monter une section
         /// </summary>
