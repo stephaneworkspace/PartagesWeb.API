@@ -19,8 +19,14 @@ namespace PartagesWeb.API.Data.Configuration
         /// <param name="builder">Builder</param>
         public void Configure(EntityTypeBuilder<TitreMenu> builder)
         {
-            builder.HasKey(s => s.SectionId);
-            builder.Property(s => s.SectionId).IsRequired(false);
+            // J'ai pas forcement besoin de tout ça mainteant, je garde le code ça peux me servir pour le delete cascade ou dans le même genre
+
+            // builder.HasKey(s => s.SectionId);
+            // builder.HasOne<Section>(s => s.SectionId)
+            //    .WithOne().IsRequired(false);
+            // builder.Property(s => s.SectionId).HasOne(s => s.SectionId).WithMany("TitreMenus").IsRequired(false);
+            // builder.Property(s => s.SectionId).IsRequired(false);
+            // builder.HasOne(s => s.Section)        
         }
     }
 }
