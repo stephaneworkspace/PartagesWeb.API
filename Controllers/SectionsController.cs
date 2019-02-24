@@ -77,7 +77,7 @@ namespace PartagesWeb.API.Controllers
             var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
 
             var sectionsToReturn = _mapper.Map<List<SectionForListDto>>(sections);
-            var titreMenusHorsLigneToReturn = _mapper.Map<IEnumerable<TitreMenuForListDto>>(titreMenusHorsLigne);
+            var titreMenusHorsLigneToReturn = _mapper.Map<List<TitreMenuForListDto>>(titreMenusHorsLigne);
 
             var newSection = new SectionForListDto();
             newSection.Id = 0; // default(int);

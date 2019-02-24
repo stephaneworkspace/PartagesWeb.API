@@ -36,6 +36,6 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// <remarks>
         /// Trouver un moyen de trier cette collection
         /// </remarks>
-        public IEnumerable<TitreMenuForListDto> TitreMenus { get; set; }
+        public List<TitreMenuForListDto> TitreMenus { get; set; }
     }
 }
