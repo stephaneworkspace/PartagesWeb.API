@@ -66,8 +66,10 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de retourner les sections
         /// </summary> 
         /// <remarks>
-        /// 8 Février : 
-        /// Non utilisé pour le moment. Il faudra peut être l'améliorer avec un choix, aucune section (pour le mode hors ligne)
+        /// 24 février à tester : 
+        /// if (newSection.TitreMenus.Count > 0)
+        /// 24 février : (pas urgent, mais fais un unit test de ça)
+        /// Vérifier si unique Nom ainsi que mise offline
         /// </remarks>
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
@@ -80,21 +82,17 @@ namespace PartagesWeb.API.Controllers
             var titreMenusHorsLigneToReturn = _mapper.Map<List<TitreMenuForListDto>>(titreMenusHorsLigne);
 
             var newSection = new SectionForListDto();
-            newSection.Id = 0; // default(int);
-            newSection.Nom = "Hors Ligne";
-            newSection.Icone = "cafe";
-
-            // A faire get position
-
-            newSection.Position = 1;
+            newSection.Id = default(int);
+            newSection.Nom = "Titre de menus hors ligne";
+            newSection.Icone = "toggle-off";
+            newSection.Position = 1; // je filtre en fonction de SwHorsLigne == true et Id == 0
             newSection.SwHorsLigne = true;
             newSection.TitreMenus = titreMenusHorsLigneToReturn;
 
-            /*foreach (var record in titreMenusHorsLigneToReturn)
+            if (newSection.TitreMenus.Count > 0)
             {
-                newSection.TitreMenus.Append(record);
-            }*/
-            sectionsToReturn.Add(newSection);
+                sectionsToReturn.Add(newSection);
+            }
 
             return Ok(sectionsToReturn);
         }

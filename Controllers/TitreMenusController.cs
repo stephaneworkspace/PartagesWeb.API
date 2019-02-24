@@ -77,8 +77,6 @@ namespace PartagesWeb.API.Controllers
 
             // Déterminer la dernière position en ligne ou hors ligne
             var position = await _repo.LastPositionTitreMenu(titreMenuForCreateDto.SectionId);
-
-            // Prochaine position
             position++;
 
             // Préparation du model
