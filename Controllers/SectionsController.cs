@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,16 +29,19 @@ namespace PartagesWeb.API.Controllers
     public class SectionsController : ControllerBase
     {
         private readonly IGestionPagesRepository _repo;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _config;
 
         /// <summary>  
         /// Cette méthode est le constructeur 
         /// </summary>  
         /// <param name="repo"> Repository GestionPages</param>
+        /// <param name="mapper">Mapper de AutoMapper</param>
         /// <param name="config"> Configuration</param>
-        public SectionsController(IGestionPagesRepository repo, IConfiguration config)
+        public SectionsController(IGestionPagesRepository repo, IMapper mapper, IConfiguration config)
         {
             _config = config;
+            _mapper = mapper;
             _repo = repo;
         }
 
@@ -54,6 +58,7 @@ namespace PartagesWeb.API.Controllers
         public async Task<IActionResult> GetArbreCompletSections()
         {
             var sections = await _repo.GetSections();
+
             return Ok(sections);
         }
 
@@ -65,11 +70,33 @@ namespace PartagesWeb.API.Controllers
         /// Non utilisé pour le moment. Il faudra peut être l'améliorer avec un choix, aucune section (pour le mode hors ligne)
         /// </remarks>
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
         public async Task<IActionResult> GetSections()
         {
             var sections = await _repo.GetSections();
-            return Ok(sections);
+            var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
+
+            var sectionsToReturn = _mapper.Map<List<SectionForListDto>>(sections);
+            var titreMenusHorsLigneToReturn = _mapper.Map<IEnumerable<TitreMenuForListDto>>(titreMenusHorsLigne);
+
+            var newSection = new SectionForListDto();
+            newSection.Id = 0; // default(int);
+            newSection.Nom = "Hors Ligne";
+            newSection.Icone = "cafe";
+
+            // A faire get position
+
+            newSection.Position = 1;
+            newSection.SwHorsLigne = true;
+            newSection.TitreMenus = titreMenusHorsLigneToReturn;
+
+            /*foreach (var record in titreMenusHorsLigneToReturn)
+            {
+                newSection.TitreMenus.Append(record);
+            }*/
+            sectionsToReturn.Add(newSection);
+
+            return Ok(sectionsToReturn);
         }
 
         /// <summary>
@@ -201,7 +228,7 @@ namespace PartagesWeb.API.Controllers
 
             if (item != null)
             {
-                _repo.DeleteSection(item);
+                await _repo.DeleteSection(item);
                 await _repo.SaveAll();
             } else
             {

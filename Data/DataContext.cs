@@ -38,7 +38,7 @@ namespace PartagesWeb.API.Data
         /// Configuration des models
         /// </summary>
         /// <param name="modelBuilder"></param>
-        protected virtual void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new TitreMenuConfiguration());

@@ -28,15 +28,6 @@ namespace PartagesWeb.API.Models
         /// </remarks>
         public int? SectionId { get; set; }
         /// <summary>
-        /// Virtual Clé facultative du model Section parent
-        /// </summary>
-        /// <remarks>
-        /// 8 Février : 
-        /// à tester
-        /// </remarks>
-        // [ForeignKey("SectionId")]
-        // public virtual Section Section { get; set; }
-        /// <summary>
         /// Nom du titre menu
         /// </summary>
         public string Nom { get; set; }
@@ -44,9 +35,5 @@ namespace PartagesWeb.API.Models
         /// Position
         /// </summary>
         public int Position { get; set; }
-        /// <summary>
-        /// Switch si c'est en ligne true, si c'est hors ligne false
-        /// </summary>
-        public bool SwHorsLigne { get; set; }
     }
 }

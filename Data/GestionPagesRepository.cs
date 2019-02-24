@@ -176,12 +176,15 @@ namespace PartagesWeb.API.Data
             }
             return true;
         }
-       
+
+        /// <summary>
+        /// Cette méthode permet d'effacer une entitée Section ainsi que rendre offline TitreMenu[]
+        /// </summary>
+        /// <param name="section">Section à effacer</param>
         public async Task<bool> DeleteSection(Section section)
         {
 
             int lastPositonTitreMenusOffline = _context.TitreMenus
-                .Where(x => x.SwHorsLigne == true) // 23 février : peut être inutile
                 .Where(x => x.SectionId == null)
                 .OrderByDescending(x => x.Position)
                 .Select(p => p.Position)
@@ -189,16 +192,15 @@ namespace PartagesWeb.API.Data
                 .Max();
 
 
-                var titreMenus = await _context.TitreMenus
-                   .Where(x => x.SectionId == section.Id)
-                   .ToListAsync();
+            var titreMenus = await _context.TitreMenus
+                .Where(x => x.SectionId == section.Id)
+                .ToListAsync();
             // 23 février : LAST OFFLINE POSITION A TESTER
 
 
             foreach (var unite in titreMenus)
             {
                 unite.SectionId = null;
-                unite.SwHorsLigne = true;
                 unite.Position = lastPositonTitreMenusOffline++;
                 _context.TitreMenus.Update(unite);
             }
@@ -310,12 +312,12 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
-        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne sans SectionId relationel
+        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne int? SectionId
         /// </summary>
         public async Task<List<TitreMenu>> GetTitreMenuHorsLigne()
         {
             var items = await _context.TitreMenus
-                .Where(x => x.SwHorsLigne == true)
+                .Where(x => x.SectionId == null) // default(int) ? 24 février
                 .OrderBy(y => y.Position)
                 .ToListAsync();//.Include(p => p.TitreMenus).ToListAsync();
 
@@ -326,25 +328,13 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet de vérifier si un nom de section existe déjà
         /// </summary>  
         /// <param name="nom">Nom du titre menu</param>
-        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
-        /// <param name="swHorsLigne">Boolean si hors ligne</param>
-        public async Task<bool> TitreMenuExists(string nom, int sectionId, bool swHorsLigne)
+        /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
+        public async Task<bool> TitreMenuExists(string nom, int? sectionId)
         {
-            if (swHorsLigne == true)
-            {
-                if (await _context.TitreMenus
-                    .Where(s => s.SwHorsLigne == swHorsLigne)
-                    .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
-                    return true;
-            }
-            else
-            {
-                if (await _context.TitreMenus
-                    .Where(s => s.SwHorsLigne == swHorsLigne)
-                    .Where(s => s.SectionId == sectionId)
-                    .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
-                    return true;
-            }
+            if (await _context.TitreMenus
+                .Where(s => s.SectionId == sectionId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
             return false;
         }
 
@@ -353,57 +343,30 @@ namespace PartagesWeb.API.Data
         /// </summary>  
         /// <param name="id">Id de la clé principal de TitreMenu à mettre à jour et donc ignorer</param>
         /// <param name="nom">Nom du titre menu</param>
-        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
-        /// <param name="swHorsLigne">Boolean si hors ligne</param>
-        public async Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId, bool swHorsLigne)
+        /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
+        public async Task<bool> TitreMenuExistsUpdate(int id, string nom, int? sectionId)
         {
-            if (swHorsLigne == true)
-            {
-                if (await _context.TitreMenus
-                    .Where(x => x.Id != id)
-                    .Where(s => s.SwHorsLigne == swHorsLigne)
-                    .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
-                    return true;
-            }
-            else
-            {
-                if (await _context.TitreMenus
-                    .Where(x => x.Id != id)
-                    .Where(s => s.SwHorsLigne == swHorsLigne)
-                    .Where(s => s.SectionId == sectionId)
-                    .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
-                    return true;
-            }
+            if (await _context.TitreMenus
+                .Where(x => x.Id != id)
+                .Where(s => s.SectionId == sectionId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
             return false;
         }
 
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  
-        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
-        /// <param name="sectionId">SectionId facultatif, si 0 c'est qu'elle est totalement hors ligne</param>
-        public async Task<int> LastPositionTitreMenu(bool swHorsLigne, int sectionId)
+        /// <param name="sectionId">SectionId facultatif int?</param>
+        public async Task<int> LastPositionTitreMenu(int? sectionId)
         {
             int lastPositon;
-            if (swHorsLigne == true)
-            {
-                lastPositon = _context.TitreMenus
-                .Where(x => swHorsLigne == x.SwHorsLigne)
+            lastPositon = _context.TitreMenus
+                .Where(x => sectionId == x.SectionId)
                 .OrderByDescending(x => x.Position)
                 .Select(p => p.Position)
                 .DefaultIfEmpty(0)
                 .Max();
-            }
-            else
-            {
-                lastPositon = _context.TitreMenus
-                .Where(x => swHorsLigne == x.SwHorsLigne)
-                .Where(s => sectionId == s.SectionId)
-                .OrderByDescending(x => x.Position)
-                .Select(p => p.Position)
-                .DefaultIfEmpty(0)
-                .Max();
-            }
             await Task.FromResult(lastPositon);
             return lastPositon;
         }
@@ -411,42 +374,22 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Cette méthode refait la liste des positions pour les titre menus
         /// </summary>
-        /// <param name="swHorsLigne">Boolean si c'est hors ligne ou pas</param>
-        /// <param name="sectionId">Clé du model Section pour trier cette section</param>
-        public async Task<bool> SortPositionTitreMenu(bool swHorsLigne, int sectionId)
+        /// <param name="sectionId">Clé du model Section int?</param>
+        public async Task<bool> SortPositionTitreMenu(int? sectionId)
         {
             var i = 0;
-            if (swHorsLigne)
+            var sections = await _context.TitreMenus
+                .Where(x => sectionId == x.SectionId)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            foreach (var unite in sections)
             {
-                var sections = await _context.TitreMenus
-                    .Where(x => x.SwHorsLigne == swHorsLigne)
-                    .OrderBy(x => x.Position)
-                    .ToListAsync();
-                foreach (var unite in sections)
-                {
-                    var record = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
-                    i++;
-                    record.Position = i;
-                    _context.TitreMenus.Update(record);
-                }
-                return true;
+                var record = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                i++;
+                record.Position = i;
+                _context.TitreMenus.Update(record);
             }
-            else
-            {
-                var sections = await _context.TitreMenus
-                    .Where(x => sectionId == x.SectionId)
-                    .Where(x => x.SwHorsLigne == swHorsLigne)
-                    .OrderBy(x => x.Position)
-                    .ToListAsync();
-                foreach (var unite in sections)
-                {
-                    var record = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
-                    i++;
-                    record.Position = i;
-                    _context.TitreMenus.Update(record);
-                }
-                return true;
-            }
+            return true;
         }
 
         public Task<bool> UpTitreMenu(int id)

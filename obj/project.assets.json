@@ -2,22 +2,48 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "GST.Fake.Authentication.JwtBearer/2.0.0": {
+      "AutoMapper/8.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication": "2.0.0",
-          "Microsoft.AspNetCore.Session": "2.0.0",
-          "Microsoft.Extensions.Options": "2.0.0",
-          "Newtonsoft.Json": "10.0.3"
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
         },
         "compile": {
-          "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll": {}
+          "lib/netstandard2.0/AutoMapper.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll": {}
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
+      "GST.Fake.Authentication.JwtBearer/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "2.2.0",
+          "Microsoft.AspNetCore.Session": "2.2.0",
+          "Microsoft.Extensions.Options": "2.2.0",
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netcoreapp2.2/GST.Fake.Authentication.JwtBearer.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.2/GST.Fake.Authentication.JwtBearer.dll": {}
         },
         "contentFiles": {
-          "contentFiles/any/netcoreapp2.0/Properties/launchSettings.json": {
+          "contentFiles/any/netcoreapp2.2/Properties/launchSettings.json": {
             "buildAction": "Content",
             "codeLanguage": "any",
             "copyToOutput": false
@@ -1787,10 +1813,10 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/2.2.0": {
+      "Microsoft.EntityFrameworkCore.Relational/2.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "2.2.0"
+          "Microsoft.EntityFrameworkCore": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
@@ -1799,10 +1825,10 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/2.2.0": {
+      "Microsoft.EntityFrameworkCore.SqlServer/2.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "2.2.0",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "System.Data.SqlClient": "4.6.0"
         },
         "compile": {
@@ -2739,18 +2765,18 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.0.2105168": {
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.4.4": {
         "type": "package",
         "build": {
           "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props": {},
           "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration/2.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "2.2.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {}
@@ -2759,7 +2785,7 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
@@ -2771,11 +2797,11 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "2.2.2",
           "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
@@ -2785,10 +2811,10 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "2.2.0"
+          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/dotnet-aspnet-codegenerator-design.dll": {}
@@ -2797,10 +2823,10 @@
           "lib/netstandard2.0/dotnet-aspnet-codegenerator-design.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "2.2.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {}
@@ -2809,12 +2835,12 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Razor.Language": "2.2.0",
           "Microsoft.CodeAnalysis.CSharp": "2.8.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "2.2.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {}
@@ -2823,11 +2849,11 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "2.8.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "2.2.2",
           "Newtonsoft.Json": "11.0.2",
           "NuGet.Frameworks": "4.7.0"
         },
@@ -2838,10 +2864,10 @@
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {}
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.0": {
+      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration": "2.2.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration": "2.2.2"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
@@ -2888,7 +2914,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -2910,7 +2936,7 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NJsonSchema/9.13.15": {
+      "NJsonSchema/9.13.18": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -2922,7 +2948,7 @@
           "lib/netstandard2.0/NJsonSchema.dll": {}
         }
       },
-      "NSwag.Annotations/12.0.12": {
+      "NSwag.Annotations/12.0.14": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -2934,18 +2960,18 @@
           "lib/netstandard2.0/NSwag.Annotations.dll": {}
         }
       },
-      "NSwag.AspNetCore/12.0.12": {
+      "NSwag.AspNetCore/12.0.14": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.3",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.0.3",
           "Microsoft.AspNetCore.StaticFiles": "1.0.2",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.1",
-          "NSwag.Annotations": "12.0.12",
-          "NSwag.Core": "12.0.12",
-          "NSwag.SwaggerGeneration": "12.0.12",
-          "NSwag.SwaggerGeneration.AspNetCore": "12.0.12",
-          "NSwag.SwaggerGeneration.WebApi": "12.0.12",
+          "NSwag.Annotations": "12.0.14",
+          "NSwag.Core": "12.0.14",
+          "NSwag.SwaggerGeneration": "12.0.14",
+          "NSwag.SwaggerGeneration.AspNetCore": "12.0.14",
+          "NSwag.SwaggerGeneration.WebApi": "12.0.14",
           "System.IO.FileSystem": "4.3.0",
           "System.Xml.XPath.XDocument": "4.0.1"
         },
@@ -2956,10 +2982,10 @@
           "lib/netstandard2.0/NSwag.AspNetCore.dll": {}
         }
       },
-      "NSwag.Core/12.0.12": {
+      "NSwag.Core/12.0.14": {
         "type": "package",
         "dependencies": {
-          "NJsonSchema": "9.13.15",
+          "NJsonSchema": "9.13.18",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2969,11 +2995,11 @@
           "lib/netstandard2.0/NSwag.Core.dll": {}
         }
       },
-      "NSwag.SwaggerGeneration/12.0.12": {
+      "NSwag.SwaggerGeneration/12.0.14": {
         "type": "package",
         "dependencies": {
-          "NJsonSchema": "9.13.15",
-          "NSwag.Core": "12.0.12",
+          "NJsonSchema": "9.13.18",
+          "NSwag.Core": "12.0.14",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -2983,14 +3009,14 @@
           "lib/netstandard2.0/NSwag.SwaggerGeneration.dll": {}
         }
       },
-      "NSwag.SwaggerGeneration.AspNetCore/12.0.12": {
+      "NSwag.SwaggerGeneration.AspNetCore/12.0.14": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.0.3",
           "Microsoft.AspNetCore.Mvc.Core": "1.0.3",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.0.3",
-          "NJsonSchema": "9.13.15",
-          "NSwag.SwaggerGeneration": "12.0.12"
+          "NJsonSchema": "9.13.18",
+          "NSwag.SwaggerGeneration": "12.0.14"
         },
         "compile": {
           "lib/netstandard2.0/NSwag.SwaggerGeneration.AspNetCore.dll": {}
@@ -2999,11 +3025,11 @@
           "lib/netstandard2.0/NSwag.SwaggerGeneration.AspNetCore.dll": {}
         }
       },
-      "NSwag.SwaggerGeneration.WebApi/12.0.12": {
+      "NSwag.SwaggerGeneration.WebApi/12.0.14": {
         "type": "package",
         "dependencies": {
-          "NJsonSchema": "9.13.15",
-          "NSwag.SwaggerGeneration": "12.0.12",
+          "NJsonSchema": "9.13.18",
+          "NSwag.SwaggerGeneration": "12.0.14",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
@@ -4856,19 +4882,63 @@
     }
   },
   "libraries": {
-    "GST.Fake.Authentication.JwtBearer/2.0.0": {
-      "sha512": "SgP6tAmNGu0aqytEs1CWKXUHWLlLMpHzJ5timxVUudSpYkmhrYwX+b0fYYDPUGiNUKkH8EwZhREFx/IDyX+FHQ==",
+    "AutoMapper/8.0.0": {
+      "sha512": "kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
       "type": "package",
-      "path": "gst.fake.authentication.jwtbearer/2.0.0",
+      "path": "automapper/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.8.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "sha512": "EHxmLh6OuTuiGU3U+pHhNHwWOq1juK+Wbvr2n7Oj8/L819+DCnr7dtVtIGmBYHrle6foukEXqT5rcbRS9+CFyA==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
+    "GST.Fake.Authentication.JwtBearer/2.2.0": {
+      "sha512": "YkDTUWJEt7mjlHhQeqamM1V3m/Oz4owZGxShsqVgzR2FK9Yw1aSaGceIr8ElCKjB1gYcz5YyVBa3CKji7Xprtw==",
+      "type": "package",
+      "path": "gst.fake.authentication.jwtbearer/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "content/Properties/launchSettings.json",
-        "contentFiles/any/netcoreapp2.0/Properties/launchSettings.json",
-        "gst.fake.authentication.jwtbearer.2.0.0.nupkg.sha512",
+        "contentFiles/any/netcoreapp2.2/Properties/launchSettings.json",
+        "gst.fake.authentication.jwtbearer.2.2.0.nupkg.sha512",
         "gst.fake.authentication.jwtbearer.nuspec",
-        "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.dll",
-        "lib/netcoreapp2.0/GST.Fake.Authentication.JwtBearer.xml"
+        "lib/netcoreapp2.2/GST.Fake.Authentication.JwtBearer.dll",
+        "lib/netcoreapp2.2/GST.Fake.Authentication.JwtBearer.pdb",
+        "lib/netcoreapp2.2/GST.Fake.Authentication.JwtBearer.xml",
+        "src/GST.Fake.Authentication.JwtBearer/Events/AuthenticationFailedContext.cs",
+        "src/GST.Fake.Authentication.JwtBearer/Events/JwtBearerChallengeContext.cs",
+        "src/GST.Fake.Authentication.JwtBearer/Events/JwtBearerEvents.cs",
+        "src/GST.Fake.Authentication.JwtBearer/Events/MessageReceivedContext.cs",
+        "src/GST.Fake.Authentication.JwtBearer/Events/TokenValidatedContext.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerAppBuilderExtensions.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerDefaults.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerExtensions.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerHandler.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerOptions.cs",
+        "src/GST.Fake.Authentication.JwtBearer/FakeJwtBearerPostConfigureOptions.cs",
+        "src/GST.Fake.Authentication.JwtBearer/GST.Fake.Authentication.JwtBearer.csproj",
+        "src/GST.Fake.Authentication.JwtBearer/HttpClientExtensions.cs"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -6415,29 +6485,29 @@
         "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/2.2.0": {
-      "sha512": "JCmBWVP5ZJGC4eKQg2GYJs0W9RMQdSZ6jsWh9zZk2fuxpGJuVKTFy4eFAHq9dgKu7N07IW+CPkNBA8LthS3q0A==",
+    "Microsoft.EntityFrameworkCore.Relational/2.2.2": {
+      "sha512": "k0euxFNySwWj6+gdBrQGDRqZTrI685f/0btdMVJxun42fYozYmShxrSQPoT7LfGK6Z80m1R9obWwFWOSHNL9gQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/2.2.0",
+      "path": "microsoft.entityframeworkcore.relational/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.2.2.0.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.2.2.2.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/2.2.0": {
-      "sha512": "6wGv0oqusLfjfznd9hpbkeKs5vNYJ9UDyFMj+u2cHyZZZOKcGhtANXFqS5JusDWQmYfkX3tDZSRFIr+3zdCU8Q==",
+    "Microsoft.EntityFrameworkCore.SqlServer/2.2.2": {
+      "sha512": "6KykeLQIsxDPIXwZxVT7IfldHQtH0NYbRTpzJ/8LxGzquc3RXEeUQPNGLZd3qHWQqD7TZaSX9xGlPbsEnHXWyw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/2.2.0",
+      "path": "microsoft.entityframeworkcore.sqlserver/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
-        "microsoft.entityframeworkcore.sqlserver.2.2.0.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlserver.2.2.2.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -7630,84 +7700,112 @@
         "version.txt"
       ]
     },
-    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.0.2105168": {
-      "sha512": "IvTqpjvXEnfPjwIO92QeTWyBNPjVBllt9dws/E29erQRH3BmM46OwO4Hromu4/YtXjDPilHAij3SQP5hDyvvFQ==",
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.4.4": {
+      "sha512": "sO34TtLrVLegVIb9UESSVANZ01tNtU3PMWYurK4tewJxUzwPMZxhOYefxqyK2gOpo3UKqtoETWGhxcRZKq6r+g==",
       "type": "package",
-      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.0.2105168",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.4.4",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "EULA.md",
         "build/Container.props",
         "build/Container.targets",
         "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props",
         "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets",
         "build/ToolsTarget.props",
         "build/ToolsTarget.targets",
-        "microsoft.visualstudio.azure.containers.tools.targets.1.0.2105168.nupkg.sha512",
+        "microsoft.visualstudio.azure.containers.tools.targets.1.4.4.nupkg.sha512",
         "microsoft.visualstudio.azure.containers.tools.targets.nuspec",
         "tools/Microsoft.VisualStudio.Containers.Tools.Common.dll",
+        "tools/Microsoft.VisualStudio.Containers.Tools.Shared.dll",
         "tools/Microsoft.VisualStudio.Containers.Tools.Tasks.dll",
         "tools/Newtonsoft.Json.dll",
+        "tools/cs/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/cs/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/cs/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/de/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/de/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/de/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/es/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/es/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/es/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/fr/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/fr/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/fr/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/it/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/it/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/it/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ja/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ja/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/ja/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ko/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ko/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/ko/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/pl/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/pl/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/pl/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ru/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ru/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/ru/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/tr/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/tr/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/tr/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
         "tools/utils/KillProcess.exe",
+        "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
         "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration/2.2.0": {
-      "sha512": "hwJ000llwuI8vJn/mqVl2cNIfB0t+99Wu/gixfYDR9sX1ynWoO/bK6UDaw8MRmC9cW6r07sGM6XHxHN4jzBFKQ==",
+    "Microsoft.VisualStudio.Web.CodeGeneration/2.2.2": {
+      "sha512": "C1WA/Kpb2H1vqhBCG9/gONifmg9bzH4wjQ0JtbKxOyuJFcyWJBvncQfEwzck5gXrFN9Ud9n6Ja6iMYXRovVqGg==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.xml",
-        "microsoft.visualstudio.web.codegeneration.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.0": {
-      "sha512": "85ghsz7+veQEvIVVMgzxrdb6as+eSRL0/iTrkdZAUr+Xw3ED1vs0bzLa6k8s7mAMoRvYmNisMAQLp7l0yW3gbQ==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.2": {
+      "sha512": "HQUWPpoI/aYsWgm0giuW/iBLVdM73CG8P6DZxR8E9uFYe5h6q5YZ8sToq107K3XVj8wRvxjRWx8EXnJ2Dcqp4Q==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.contracts/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.contracts/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.xml",
-        "microsoft.visualstudio.web.codegeneration.contracts.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.contracts.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.contracts.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.0": {
-      "sha512": "Z0p6viSlN+2swAU4E/MWi2/Qhs4984TN2TPmGCzAmFwZwK4AgdpAlLh7UNdQppoUNxrT8Hh1MxBMWisNru12gQ==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.2": {
+      "sha512": "QLI5sl0RubOhtSG8Kgk1jeb+/qrpNsTZG65IHlew4eWSYMznWmOOtWZf4p/kRQgoEUoec7rre1HZIc5458JczQ==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.core/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.core/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.xml",
-        "microsoft.visualstudio.web.codegeneration.core.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.core.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.core.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.0": {
-      "sha512": "2l/Tr/Qym+byw/ZiBNTH+oh/iTLetZGCJ8F8k+BUgc8Pwmo+3ROQabmhr7vH/yLSjuhMYEuDEzY4ZWmzdln9lw==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.2": {
+      "sha512": "Zx61Is3yhEL2ijM6XEIJyhKRedlsQCa4pT0+vEwLDSV64orDpWamcqKc1Csex3xNLR5mBirvkBewfiOFZBk1Ag==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.design/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.design/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7715,7 +7813,7 @@
         "lib/net461/dotnet-aspnet-codegenerator-design.xml",
         "lib/netstandard2.0/dotnet-aspnet-codegenerator-design.dll",
         "lib/netstandard2.0/dotnet-aspnet-codegenerator-design.xml",
-        "microsoft.visualstudio.web.codegeneration.design.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.design.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.design.nuspec",
         "runtimes/win-arm/lib/net461/dotnet-aspnet-codegenerator-design.exe",
         "runtimes/win-arm/lib/net461/dotnet-aspnet-codegenerator-design.xml",
@@ -7727,50 +7825,50 @@
         "runtimes/win7-x86/lib/net461/dotnet-aspnet-codegenerator-design.xml"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.0": {
-      "sha512": "OJyhib+Bm/L7yRW2tMkZIgJrR6NlJeyJmf0JQgDWR8m+aP0aRDb5kRiXI0b45j1RXRfmtQsrmIOfzhq9TWE7Uw==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.2": {
+      "sha512": "30Crg18Jq+mA23R5rSd2WT2vTTa1hvIbdQ0MxK3IYyAg8fVBEDnkXjGmz4Z8k4PRdMukxm6eUj649IsKUAO9hA==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Templates/DbContext/NewLocalDbContext.cshtml",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.xml",
-        "microsoft.visualstudio.web.codegeneration.entityframeworkcore.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.entityframeworkcore.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.0": {
-      "sha512": "4jiW9u5TAOTNY/GgCZy+gdl8JP7dHsw2zPIK1k+Fd4AtLu9cdIYVpVxj+CWgXKbfGwqxiM+mXzJ6I0/bjYVOeQ==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.2": {
+      "sha512": "Z0KedGbubMLs1rWbsBuEsn9ztP5gz+dYzEsm7Xbsj3d4k87PfCX4w5bnqnsXf6ImkHS7b6DfJVnGEyIRqPx2BA==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.templating/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.templating/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.xml",
-        "microsoft.visualstudio.web.codegeneration.templating.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.templating.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.templating.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.0": {
-      "sha512": "kaEp3SVcfqX6eYXmAXackCf4nbkuwpz/1PHA1h1hN5V/J7G2skokgILKCqLECaKnocx0ipIV73rWtoUY2kqKQw==",
+    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.2": {
+      "sha512": "R6Sm6H/tJRki4RZUDs5f/HjQoQPlO3vJGTP8cdDf6TrxrmF47BdY251P97GQLHIXSLiwI3kxE98pMk8Aer7GCw==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegeneration.utils/2.2.0",
+      "path": "microsoft.visualstudio.web.codegeneration.utils/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll",
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.xml",
-        "microsoft.visualstudio.web.codegeneration.utils.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegeneration.utils.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegeneration.utils.nuspec"
       ]
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.0": {
-      "sha512": "0CKCe4GNJlCIY5DqM52jD+DIvjhjBMxv3iBShdgGkGUZ+kVbb0ruvyJfgy+9Xk+erDxirNOXWGk4f6E9bqoNAA==",
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.2": {
+      "sha512": "LIaeanIBJqV88ju6UglCaP3vjXroDBQBzQn4m4Rfu9rNyps6QG66V9wcn93ycE8Sd96IX6n/I6aUvYK8RHDL7g==",
       "type": "package",
-      "path": "microsoft.visualstudio.web.codegenerators.mvc/2.2.0",
+      "path": "microsoft.visualstudio.web.codegenerators.mvc/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8058,7 +8156,7 @@
         "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.xml",
         "lib/netstandard2.0/bootstrap3_identitygeneratorfilesconfig.json",
         "lib/netstandard2.0/bootstrap4_identitygeneratorfilesconfig.json",
-        "microsoft.visualstudio.web.codegenerators.mvc.2.2.0.nupkg.sha512",
+        "microsoft.visualstudio.web.codegenerators.mvc.2.2.2.nupkg.sha512",
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
@@ -8230,33 +8328,42 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "znZGbws7E4BA9jxNZ7FuiIRI3C9hrgatVQSTKhIYZYNOud4M5VfGlTYi6RdYO5sQrebFuF/g9UEV3hOxDMXF6Q==",
+    "Newtonsoft.Json/12.0.1": {
+      "sha512": "jmVyoEyk0In8r+AObYQyFKVFm7uSRzE0XSHSbEtBJcZDMV6DqJoyB4FLcHwprPVhAh826so0db3DIKXVnpGoPA==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.pdb",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.pdb",
         "lib/net35/Newtonsoft.Json.xml",
         "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.pdb",
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.pdb",
         "lib/net45/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.pdb",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.pdb",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.pdb",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.pdb",
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.pdb",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
+        "newtonsoft.json.12.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
     },
@@ -8275,10 +8382,10 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
-    "NJsonSchema/9.13.15": {
-      "sha512": "+QxaswQMIA0ozWayAuIiQIB/3h0nxOf3WdI+TiHa/9Q2ExyvG/TEHcnLjuJU1Hv46Fn3MMlgdMeuvIXgYIfSnA==",
+    "NJsonSchema/9.13.18": {
+      "sha512": "qzIa/2/UNwnn5R8DHrgBwBYlsptgm3SAczTtPNBrYuT09cHKqc1jE4WCJb1gRTVuuwSkPx34mRnS7tn2XNxQow==",
       "type": "package",
-      "path": "njsonschema/9.13.15",
+      "path": "njsonschema/9.13.18",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8290,14 +8397,14 @@
         "lib/netstandard1.0/NJsonSchema.xml",
         "lib/netstandard2.0/NJsonSchema.dll",
         "lib/netstandard2.0/NJsonSchema.xml",
-        "njsonschema.9.13.15.nupkg.sha512",
+        "njsonschema.9.13.18.nupkg.sha512",
         "njsonschema.nuspec"
       ]
     },
-    "NSwag.Annotations/12.0.12": {
-      "sha512": "JESRraDa1FCQJrS3/AT65f7tDIZ50/0alDn0io+NBiiRB/tpkCh1pQW+jaU5YvGk998x97GrWEuGyaP0e71rnw==",
+    "NSwag.Annotations/12.0.14": {
+      "sha512": "IPZtkFEsp5JV33F12oy2TZVVDqptpu0rA4uBoTvIXTbEwIKfhlEHWoHPAYuB4Hzg96neAoTKN7xF0oWDGsyN1Q==",
       "type": "package",
-      "path": "nswag.annotations/12.0.12",
+      "path": "nswag.annotations/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8307,14 +8414,14 @@
         "lib/netstandard1.0/NSwag.Annotations.xml",
         "lib/netstandard2.0/NSwag.Annotations.dll",
         "lib/netstandard2.0/NSwag.Annotations.xml",
-        "nswag.annotations.12.0.12.nupkg.sha512",
+        "nswag.annotations.12.0.14.nupkg.sha512",
         "nswag.annotations.nuspec"
       ]
     },
-    "NSwag.AspNetCore/12.0.12": {
-      "sha512": "oIchcUGbKxsCvPR4FspnKorxl70SRmiFYTDsQapQVKvaemQ6qAuJ67rF9Seh/FRVk09GEvy+T6usjL8HyGVliA==",
+    "NSwag.AspNetCore/12.0.14": {
+      "sha512": "tltlVEL87wuR1Mek/hjLHMByjvaqSy5qXcgOVks2SpIMASOgvxvc32eF2waomF9/srAQBagizIO0oTVHuxLS0A==",
       "type": "package",
-      "path": "nswag.aspnetcore/12.0.12",
+      "path": "nswag.aspnetcore/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8324,14 +8431,14 @@
         "lib/netstandard1.6/NSwag.AspNetCore.xml",
         "lib/netstandard2.0/NSwag.AspNetCore.dll",
         "lib/netstandard2.0/NSwag.AspNetCore.xml",
-        "nswag.aspnetcore.12.0.12.nupkg.sha512",
+        "nswag.aspnetcore.12.0.14.nupkg.sha512",
         "nswag.aspnetcore.nuspec"
       ]
     },
-    "NSwag.Core/12.0.12": {
-      "sha512": "fXWM8G/0lC85xBjfEGAVHaoubun3ZPVh2Q2vV6S00/RIRa10/07mEOf0fAmo0W+q+wHSf4DBNDf/En3oqAqJ9Q==",
+    "NSwag.Core/12.0.14": {
+      "sha512": "ArPnxeNPARlZmBkictFozuw1GB7bSDVTDoFA4jOCpYVtMnXcR+KAmCz3NHbNn3TPibbKGyLxggFY4TQQ+e+vGQ==",
       "type": "package",
-      "path": "nswag.core/12.0.12",
+      "path": "nswag.core/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8341,14 +8448,14 @@
         "lib/netstandard1.0/NSwag.Core.xml",
         "lib/netstandard2.0/NSwag.Core.dll",
         "lib/netstandard2.0/NSwag.Core.xml",
-        "nswag.core.12.0.12.nupkg.sha512",
+        "nswag.core.12.0.14.nupkg.sha512",
         "nswag.core.nuspec"
       ]
     },
-    "NSwag.SwaggerGeneration/12.0.12": {
-      "sha512": "e3ljhPdiv1QXu9Iz8VinUrJVOyZev/ubm/5pGJRNbSe1wOUcZCnV3ji0u+gcg083obYKlAJjAxIqU89N+euzCA==",
+    "NSwag.SwaggerGeneration/12.0.14": {
+      "sha512": "MnBF+j6IQxYHp0bxwEOQiFKb2rGhReVS7hqyuwAg1ASQS44btRS836BR9DZU34wEUTE4fRXI6jhRPh/raWEGgw==",
       "type": "package",
-      "path": "nswag.swaggergeneration/12.0.12",
+      "path": "nswag.swaggergeneration/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8358,14 +8465,14 @@
         "lib/netstandard1.0/NSwag.SwaggerGeneration.xml",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.dll",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.xml",
-        "nswag.swaggergeneration.12.0.12.nupkg.sha512",
+        "nswag.swaggergeneration.12.0.14.nupkg.sha512",
         "nswag.swaggergeneration.nuspec"
       ]
     },
-    "NSwag.SwaggerGeneration.AspNetCore/12.0.12": {
-      "sha512": "ELiRSZNsq8wKKt88l5cLDdBR7pzqeA8nVv5GARH0ynHdwZ5vVx5mgBQRkP7JNAivYZ+rUiWUMJ3g9ADFiLPOtg==",
+    "NSwag.SwaggerGeneration.AspNetCore/12.0.14": {
+      "sha512": "0ksxomWxMTGFDj60bNEu67OQEkyzNG/hOK4RjfGcCsObWNopGUxLOHtldNn9Zf3wYP087zpUjb4VsNMj3tSV0g==",
       "type": "package",
-      "path": "nswag.swaggergeneration.aspnetcore/12.0.12",
+      "path": "nswag.swaggergeneration.aspnetcore/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8375,14 +8482,14 @@
         "lib/netstandard1.6/NSwag.SwaggerGeneration.AspNetCore.xml",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.AspNetCore.dll",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.AspNetCore.xml",
-        "nswag.swaggergeneration.aspnetcore.12.0.12.nupkg.sha512",
+        "nswag.swaggergeneration.aspnetcore.12.0.14.nupkg.sha512",
         "nswag.swaggergeneration.aspnetcore.nuspec"
       ]
     },
-    "NSwag.SwaggerGeneration.WebApi/12.0.12": {
-      "sha512": "yFXDBBo4HNsTN2yhoJ2SnIzoyxuTZ2Bcv0GfHLfA+HWuFtYdNMnysZfpqUHtyiWlkWS6HYl4G4/4eSDhB2C52w==",
+    "NSwag.SwaggerGeneration.WebApi/12.0.14": {
+      "sha512": "UB5m7s8SozBQ1Bo0sYsUmV22ILtZ3Fn1DpZXafWFcpjR5MPKMIBB40A1fM5m6F953QFLnfSF8nFo5fdrFHOewQ==",
       "type": "package",
-      "path": "nswag.swaggergeneration.webapi/12.0.12",
+      "path": "nswag.swaggergeneration.webapi/12.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8392,7 +8499,7 @@
         "lib/netstandard1.0/NSwag.SwaggerGeneration.WebApi.xml",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.WebApi.dll",
         "lib/netstandard2.0/NSwag.SwaggerGeneration.WebApi.xml",
-        "nswag.swaggergeneration.webapi.12.0.12.nupkg.sha512",
+        "nswag.swaggergeneration.webapi.12.0.14.nupkg.sha512",
         "nswag.swaggergeneration.webapi.nuspec"
       ]
     },
@@ -13247,18 +13354,20 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "GST.Fake.Authentication.JwtBearer >= 2.0.0",
+      "AutoMapper >= 8.0.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
+      "GST.Fake.Authentication.JwtBearer >= 2.2.0",
       "Microsoft.AspNetCore >= 2.2.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.EntityFrameworkCore.InMemory >= 2.2.2",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.0",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.2",
       "Microsoft.Extensions.Logging.Debug >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.0.2105168",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.0",
-      "NSwag.AspNetCore >= 12.0.12"
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.4.4",
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.2",
+      "NSwag.AspNetCore >= 12.0.14"
     ]
   },
   "packageFolders": {
@@ -13302,9 +13411,17 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "GST.Fake.Authentication.JwtBearer": {
             "target": "Package",
-            "version": "[2.0.0, )"
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore": {
             "target": "Package",
@@ -13331,7 +13448,7 @@
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.2.2, )"
           },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
@@ -13345,15 +13462,15 @@
           },
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
             "target": "Package",
-            "version": "[1.0.2105168, )"
+            "version": "[1.4.4, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
-            "version": "[2.2.0, )"
+            "version": "[2.2.2, )"
           },
           "NSwag.AspNetCore": {
             "target": "Package",
-            "version": "[12.0.12, )"
+            "version": "[12.0.14, )"
           }
         },
         "imports": [

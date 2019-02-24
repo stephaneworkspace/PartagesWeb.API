@@ -11,14 +11,14 @@ using PartagesWeb.API.Data;
 namespace PartagesWeb.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190214212857_IconeAdded")]
-    partial class IconeAdded
+    [Migration("20190224150751_SuppressionSwHorsLigneTitreMenuEntity")]
+    partial class SuppressionSwHorsLigneTitreMenuEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -98,8 +98,8 @@ namespace PartagesWeb.API.Migrations
 
             modelBuilder.Entity("PartagesWeb.API.Models.TitreMenu", b =>
                 {
-                    b.HasOne("PartagesWeb.API.Models.Section", "Section")
-                        .WithMany()
+                    b.HasOne("PartagesWeb.API.Models.Section")
+                        .WithMany("TitreMenus")
                         .HasForeignKey("SectionId");
                 });
 #pragma warning restore 612, 618

@@ -72,23 +72,20 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         public async Task<IActionResult> Create(TitreMenuForCreateDto titreMenuForCreateDto)
         {
-            if (await _repo.TitreMenuExists(titreMenuForCreateDto.Nom.ToLower(), titreMenuForCreateDto.SectionId, titreMenuForCreateDto.SwHorsLigne))
+            if (await _repo.TitreMenuExists(titreMenuForCreateDto.Nom.ToLower(), titreMenuForCreateDto.SwHorsLigne == true ? null : titreMenuForCreateDto.SectionId))
                 return BadRequest("Le nom du titre menu est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
-            var position = await _repo.LastPositionTitreMenu(titreMenuForCreateDto.SwHorsLigne, titreMenuForCreateDto.SectionId);
+            var position = await _repo.LastPositionTitreMenu(titreMenuForCreateDto.SectionId);
 
             // Prochaine position
             position++;
 
             // Préparation du model
-            var titreMenuToCreate = new TitreMenu
-            {
-                SectionId = titreMenuForCreateDto.SectionId,
-                Nom = titreMenuForCreateDto.Nom,
-                Position = position,
-                SwHorsLigne = titreMenuForCreateDto.SwHorsLigne
-            };
+            var titreMenuToCreate = new TitreMenu();
+            titreMenuToCreate.SectionId = titreMenuForCreateDto.SwHorsLigne == true ? default(int) : titreMenuForCreateDto.SectionId;
+            titreMenuToCreate.Nom = titreMenuForCreateDto.Nom;
+            titreMenuToCreate.Position = position;
 
             _repo.Add(titreMenuToCreate);
 
@@ -116,7 +113,6 @@ namespace PartagesWeb.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repo.GetTitreMenu(id);
-            var swHorsLigne = item.SwHorsLigne;
             int sectionId = item.SectionId ?? default(int);
 
             if (item != null)
@@ -129,7 +125,7 @@ namespace PartagesWeb.API.Controllers
                 return BadRequest("Impossible d'effacer le titre menu");
             }
 
-            await _repo.SortPositionTitreMenu(swHorsLigne, sectionId);
+            await _repo.SortPositionTitreMenu(sectionId);
             await _repo.SaveAll();
             return Ok();
         }

@@ -22,7 +22,7 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// <summary>
         /// SectionId si sélectioné (sinon 0)
         /// </summary>
-        public int SectionId { get; set; }
+        public int? SectionId { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>

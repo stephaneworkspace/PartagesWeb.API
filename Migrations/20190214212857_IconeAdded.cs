@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿#pragma warning disable 1591
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PartagesWeb.API.Migrations

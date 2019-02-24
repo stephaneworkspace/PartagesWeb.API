@@ -70,6 +70,11 @@ namespace PartagesWeb.API.Data
         /// Cette méthode refait la liste des positions pour les sections
         /// </summary>
         Task<bool> SortPositionSections();
+        /// <summary>
+        /// Cette méthode permet d'effacer une entitée Section ainsi que rendre offline TitreMenu[]
+        /// </summary>
+        /// <param name="section">Section à effacer</param>
+        /// <returns></returns>
         Task <bool> DeleteSection(Section section);
         /// <summary>
         /// Monter une section
@@ -90,36 +95,32 @@ namespace PartagesWeb.API.Data
         /// <param name="id"> Clé principale du model TitreMenu</param>/// 
         Task<TitreMenu> GetTitreMenu(int id);
         /// <summary>  
-        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne sans SectionId relationel
+        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne int? SectionId
         /// </summary>
         Task<List<TitreMenu>> GetTitreMenuHorsLigne();
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà
         /// </summary>  
         /// <param name="nom">Nom du titre menu</param>
-        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
-        /// <param name="swHorsLigne">Boolean si hors ligne</param>
-        Task<bool> TitreMenuExists(string nom, int sectionId, bool swHorsLigne);
+        /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
+        Task<bool> TitreMenuExists(string nom, int? sectionId);
         /// <summary>  
         /// Cette méthode permet de vérifier si un nom de section existe déjà dans le cas d'une mise à jour des données
         /// </summary>  
         /// <param name="id">Id de la clé principal de TitreMenu à mettre à jour et donc ignorer</param>
         /// <param name="nom">Nom du titre menu</param>
-        /// <param name="sectionId">SectionId ou le nom doit être unique</param>
-        /// <param name="swHorsLigne">Boolean si hors ligne</param>
-        Task<bool> TitreMenuExistsUpdate(int id, string nom, int sectionId, bool swHorsLigne);
+        /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
+        Task<bool> TitreMenuExistsUpdate(int id, string nom, int? sectionId);
         /// <summary>  
         /// Cette méthode permet de détermine la dernière position
         /// </summary>  
-        /// <param name="swHorsLigne">Switch si on est en ligne true ou hors ligne false</param>
-        /// <param name="sectionId">SectionId facultatif, si 0 c'est qu'elle est totalement hors ligne</param>
-        Task<int> LastPositionTitreMenu(bool swHorsLigne, int sectionId);
+        /// <param name="sectionId">SectionId facultatif int?</param>
+        Task<int> LastPositionTitreMenu(int? sectionId);
         /// <summary>
         /// Cette méthode refait la liste des positions pour les titre menus
         /// </summary>
-        /// <param name="swHorsLigne">Boolean si c'est hors ligne ou pas</param>
-        /// <param name="sectionId">Clé du model Section pour trier cette section</param>
-        Task<bool> SortPositionTitreMenu(bool swHorsLigne, int sectionId);
+        /// <param name="sectionId">Clé du model Section int? pour trier cette section</param>
+        Task<bool> SortPositionTitreMenu(int? sectionId);
         /// <summary>
         /// Monter un titre menu
         /// </summary>
