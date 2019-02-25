@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,16 +28,19 @@ namespace PartagesWeb.API.Controllers
     public class TitreMenusController : ControllerBase
     {
         private readonly IGestionPagesRepository _repo;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _config;
 
         /// <summary>  
         /// Cette méthode est le constructeur 
         /// </summary>  
-        /// <param name="repo"> Repository GestionPages</param>
-        /// <param name="config"> Configuration</param>
-        public TitreMenusController(IGestionPagesRepository repo, IConfiguration config)
+        /// <param name="repo">Repository GestionPages</param>
+        /// <param name="mapper">Mapper de AutoMapper</param>
+        /// <param name="config">Configuration</param>
+        public TitreMenusController(IGestionPagesRepository repo, IMapper mapper, IConfiguration config)
         {
             _config = config;
+            _mapper = mapper;
             _repo = repo;
         }
 
@@ -45,19 +49,18 @@ namespace PartagesWeb.API.Controllers
         /// </summary>
         /// <param name="id">Clé principale du titre menu à atteindre</param>
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenu), Description = "Le titre menu à atteindre")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder au titre menu")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForReadDto), Description = "Le titre de menu à atteindre")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder au titre du menu")]
         public async Task<IActionResult> GetTitreMenu(int id)
         {
             var item = await _repo.GetTitreMenu(id);
-
             if (item != null)
             {
-                return Ok(item);
+                return Ok(_mapper.Map<TitreMenuForReadDto>(item));
             }
             else
             {
-                return BadRequest("Impossible d'acceder au titre menu");
+                return BadRequest("Impossible d'acceder au titre du menu");
             }
         }
 
@@ -67,21 +70,21 @@ namespace PartagesWeb.API.Controllers
         /// <param name="titreMenuForCreateDto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom du titre menu est déjà utilisé")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'ajouter le titre menu")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom du titre du menu est déjà utilisé")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'ajouter le titre du menu")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         public async Task<IActionResult> Create(TitreMenuForCreateDto titreMenuForCreateDto)
         {
             if (await _repo.TitreMenuExists(titreMenuForCreateDto.Nom.ToLower(), titreMenuForCreateDto.SwHorsLigne == true ? null : titreMenuForCreateDto.SectionId))
-                return BadRequest("Le nom du titre menu est déjà utilisé");
+                return BadRequest("Le nom du titre du menu est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
-            var position = await _repo.LastPositionTitreMenu(titreMenuForCreateDto.SectionId);
+            var position = await _repo.LastPositionTitreMenu(titreMenuForCreateDto.SectionId > 0 ? titreMenuForCreateDto.SectionId : null);
             position++;
 
             // Préparation du model
             var titreMenuToCreate = new TitreMenu();
-            titreMenuToCreate.SectionId = titreMenuForCreateDto.SwHorsLigne == true ? default(int) : titreMenuForCreateDto.SectionId;
+            titreMenuToCreate.SectionId = titreMenuForCreateDto.SectionId > 0 ? titreMenuForCreateDto.SectionId : null;
             titreMenuToCreate.Nom = titreMenuForCreateDto.Nom;
             titreMenuToCreate.Position = position;
 
@@ -90,7 +93,7 @@ namespace PartagesWeb.API.Controllers
             if (await _repo.SaveAll())
                 return Ok(titreMenuToCreate);
 
-            return BadRequest("Impossible d'ajouter le titre menu");
+            return BadRequest("Impossible d'ajouter le titre du menu");
         }
 
         // Update a faire
@@ -107,11 +110,11 @@ namespace PartagesWeb.API.Controllers
         /// <param name="id">Id du titre menu à effacer</param>
         [HttpDelete("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer le titre menu")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer le titre du menu")]
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _repo.GetTitreMenu(id);
-            int sectionId = item.SectionId ?? default(int);
+            int? sectionId = item.SectionId > 0 ? item.SectionId  : null;
 
             if (item != null)
             {
@@ -120,7 +123,7 @@ namespace PartagesWeb.API.Controllers
             }
             else
             {
-                return BadRequest("Impossible d'effacer le titre menu");
+                return BadRequest("Impossible d'effacer le titre du menu");
             }
 
             await _repo.SortPositionTitreMenu(sectionId);

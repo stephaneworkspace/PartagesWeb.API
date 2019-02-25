@@ -35,31 +35,14 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode est le constructeur 
         /// </summary>  
-        /// <param name="repo"> Repository GestionPages</param>
+        /// <param name="repo">Repository GestionPages</param>
         /// <param name="mapper">Mapper de AutoMapper</param>
-        /// <param name="config"> Configuration</param>
+        /// <param name="config">Configuration</param>
         public SectionsController(IGestionPagesRepository repo, IMapper mapper, IConfiguration config)
         {
             _config = config;
             _mapper = mapper;
             _repo = repo;
-        }
-
-        /// <summary>  
-        /// Cette méthode permet de retourner l'arbre complet avec un mapping special qui permet d'avoir
-        /// la hiérachie section - titre menu - sous titre menu - article
-        /// </summary>  
-        /// <remarks>
-        /// 8 Février : 
-        /// A faire automap avec l'arbre entier, pour le moment il y a seulement "section"
-        /// </remarks>
-        [HttpGet("gestion-pages-avec-arbre-complet")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(Section[]), Description = "Liste des sections")]
-        public async Task<IActionResult> GetArbreCompletSections()
-        {
-            var sections = await _repo.GetSections();
-
-            return Ok(sections);
         }
 
         /// <summary>  
@@ -85,14 +68,11 @@ namespace PartagesWeb.API.Controllers
             newSection.Id = default(int);
             newSection.Nom = "Titre de menus hors ligne";
             newSection.Icone = "toggle-off";
-            newSection.Position = 1; // je filtre en fonction de SwHorsLigne == true et Id == 0
+            newSection.Position = 1;
             newSection.SwHorsLigne = true;
             newSection.TitreMenus = titreMenusHorsLigneToReturn;
 
-            if (newSection.TitreMenus.Count > 0)
-            {
-                sectionsToReturn.Add(newSection);
-            }
+            sectionsToReturn.Add(newSection);
 
             return Ok(sectionsToReturn);
         }
