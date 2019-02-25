@@ -223,10 +223,10 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de monter une section
         /// </summary> 
         /// <param name="id"> Id de la section à monter</param>
-        [HttpPost("monter/{id}")]
+        [HttpPost("up/{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de monter la section")]
-        public async Task<IActionResult> Monter(int id)
+        public async Task<IActionResult> Up(int id)
         {
             var status = await _repo.UpSection(id);
             if (!status)
@@ -245,10 +245,10 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de descendre une section
         /// </summary> 
         /// <param name="id"> Id de la section à descendre</param>
-        [HttpPost("descendre/{id}")]
+        [HttpPost("down/{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de descendre la section")]
-        public async Task<IActionResult> Descendre(int id)
+        public async Task<IActionResult> Down(int id)
         {
             var status = await _repo.DownSection(id);
             if (!status)

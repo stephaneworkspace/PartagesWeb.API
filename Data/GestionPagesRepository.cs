@@ -392,14 +392,93 @@ namespace PartagesWeb.API.Data
             return true;
         }
 
-        public Task<bool> UpTitreMenu(int id)
+        /// <summary>
+        /// Monter un titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model TitreMenu à monter</param>
+        public async Task<bool> UpTitreMenu(int id)
         {
-            throw new NotImplementedException();
+            var recordEnCours = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? sectionId = recordEnCours.SectionId > 0 ? recordEnCours.SectionId : null;
+                var titreMenus = await _context.TitreMenus
+                    .Where(w => w.SectionId == sectionId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                titreMenus.Reverse();
+                foreach (var unite in titreMenus)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position++;
+                        _context.TitreMenus.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position--;
+                            swFind = true;
+                            _context.TitreMenus.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
         }
 
-        public Task<bool> DownTitreMenu(int id)
+        /// <summary>
+        /// Descendre un titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model TitreMenu à descendre</param>
+        public async Task<bool> DownTitreMenu(int id)
         {
-            throw new NotImplementedException();
+            var recordEnCours = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? sectionId = recordEnCours.SectionId > 0 ? recordEnCours.SectionId : null;
+                var titreMenus = await _context.TitreMenus
+                    .Where(w => w.SectionId == sectionId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                foreach (var unite in titreMenus)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position--;
+                        _context.TitreMenus.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position++;
+                            swFind = true;
+                            _context.TitreMenus.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
         }
 
         /**

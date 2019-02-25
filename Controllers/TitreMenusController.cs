@@ -45,7 +45,7 @@ namespace PartagesWeb.API.Controllers
         }
 
         /// <summary>
-        /// Cette méthode permet d'acceder à un titre menu précis
+        /// Cette méthode permet d'acceder à un titre de menu précis
         /// </summary>
         /// <param name="id">Clé principale du titre menu à atteindre</param>
         [HttpGet("{id}")]
@@ -65,7 +65,7 @@ namespace PartagesWeb.API.Controllers
         }
 
         /// <summary>  
-        /// Cette méthode permet de créer un titre menu
+        /// Cette méthode permet de créer un titre de menu
         /// </summary> 
         /// <param name="titreMenuForCreateDto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
@@ -99,7 +99,7 @@ namespace PartagesWeb.API.Controllers
         // Update a faire
 
         /// <summary>  
-        /// Cette méthode permet d'effacer un titre menu et de remettre dans l'ordre les position en ligne et hors ligne
+        /// Cette méthode permet d'effacer un titre de menu et de remettre dans l'ordre les position en ligne et hors ligne
         /// </summary> 
         /// <remarks>
         /// 
@@ -129,6 +129,50 @@ namespace PartagesWeb.API.Controllers
             await _repo.SortPositionTitreMenu(sectionId);
             await _repo.SaveAll();
             return Ok();
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de monter un titre de menu
+        /// </summary> 
+        /// <param name="id"> Id du titre de menu à monter</param>
+        [HttpPost("up/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de monter le titre de menu")]
+        public async Task<IActionResult> Up(int id)
+        {
+            var status = await _repo.UpTitreMenu(id);
+            if (!status)
+            {
+                return BadRequest("Impossible de monter le titre de menu");
+            }
+            else
+            {
+                if (await _repo.SaveAll())
+                    return Ok();
+                return BadRequest("Impossible de monter le titre de menu");
+            }
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de descendre un titre de menu
+        /// </summary> 
+        /// <param name="id"> Id du titre de menu à descendre</param>
+        [HttpPost("down/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de descendre le titre de menu")]
+        public async Task<IActionResult> Down(int id)
+        {
+            var status = await _repo.DownTitreMenu(id);
+            if (!status)
+            {
+                return BadRequest("Impossible de descendre le titre de menu");
+            }
+            else
+            {
+                if (await _repo.SaveAll())
+                    return Ok();
+                return BadRequest("Impossible de descendre le titre de menu");
+            }
         }
     }
 }
