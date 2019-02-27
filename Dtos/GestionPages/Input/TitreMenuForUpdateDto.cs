@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages
 {
     /// <summary>
-    /// Dto pour la création d'un titre menu depuis le frontend
+    /// Dto pour la mise à jour d'un titre menu depuis le frontend
     /// </summary>
     /// <remarks>
     /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-2.2#globalization-and-localization-terms
     /// </remarks>
-    public class TitreMenuForCreateDto
+    public class TitreMenuForUpdateDto
     {
         /// <summary>
         /// SectionId si sélectioné (sinon 0)

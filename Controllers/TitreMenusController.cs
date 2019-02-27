@@ -75,7 +75,7 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         public async Task<IActionResult> Create(TitreMenuForCreateDto titreMenuForCreateDto)
         {
-            if (await _repo.TitreMenuExists(titreMenuForCreateDto.Nom.ToLower(), titreMenuForCreateDto.SwHorsLigne == true ? null : titreMenuForCreateDto.SectionId))
+            if (await _repo.TitreMenuExists(titreMenuForCreateDto.Nom.ToLower(), titreMenuForCreateDto.SectionId > 0 ? titreMenuForCreateDto.SectionId : null))
                 return BadRequest("Le nom du titre du menu est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
@@ -96,7 +96,53 @@ namespace PartagesWeb.API.Controllers
             return BadRequest("Impossible d'ajouter le titre du menu");
         }
 
-        // Update a faire
+        /// <summary>
+        /// Cette méthode permet de mettre à jour un titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale de titre de menu à éditer</param>
+        /// <param name="titreMenuForUpdateDto">Dto de ce qui est envoyé par le frontend</param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom du titre du menu est déjà utilisé")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'ajouter le titre du menu")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
+        public async Task<IActionResult> Update(int id, TitreMenuForUpdateDto titreMenuForUpdateDto)
+        {
+            if (await _repo.TitreMenuExistsUpdate(id, titreMenuForUpdateDto.Nom.ToLower(), titreMenuForUpdateDto.SectionId))
+                return BadRequest("Le nom du titre de menu est déjà utilisé");
+
+            var titreMenu = await _repo.GetTitreMenu(id);
+            var oldSectionId = titreMenu.SectionId;
+
+            // Déterminer la positon
+            if (titreMenu.SectionId != titreMenuForUpdateDto.SectionId)
+            {
+                // Déterminer la dernière position en ligne ou hors ligne
+                var position = await _repo.LastPositionTitreMenu(titreMenuForUpdateDto.SectionId > 0 ? titreMenuForUpdateDto.SectionId : null);
+                // Prochaine position
+                position++;
+                titreMenu.Position = position;
+            }
+
+            // Préparation du model
+            titreMenu.Nom = titreMenuForUpdateDto.Nom;
+            titreMenu.SectionId = titreMenuForUpdateDto.SectionId > 0 ? titreMenuForUpdateDto.SectionId : null;
+            _repo.Update(titreMenu);
+
+            if (await _repo.SaveAll())
+            {
+                // continue
+            }
+            else
+            {
+                return BadRequest("Impossible de mettre à jour le titre du menu");
+            }
+
+            await _repo.SortPositionTitreMenu(oldSectionId);
+            await _repo.SaveAll();
+            return Ok(titreMenu);
+        }
 
         /// <summary>  
         /// Cette méthode permet d'effacer un titre de menu et de remettre dans l'ordre les position en ligne et hors ligne
