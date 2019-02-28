@@ -88,9 +88,25 @@ namespace PartagesWeb.API.Data
                 .OrderBy(x => x.SwHorsLigne)
                 .ThenBy(y => y.Position)
                 .Include(t => t.TitreMenus)
-                .ToListAsync();//.Include(p => p.Photos).ToListAsync();
+                .Select(p => SortIncludeSection(p))
+                // .OrderBy(u => u.TitreMenus.OrderBy(b => b.Position).FirstOrDefault().Position)
+                .ToListAsync();
 
             return sections;
+        }
+
+        /// <summary>
+        /// Sort include
+        /// </summary>
+        /// <remarks>https://stackoverflow.com/questions/15378136/entity-framework-ordering-includes</remarks>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private Section SortIncludeSection(Section p)
+        {
+            p.TitreMenus = (p.TitreMenus as HashSet<TitreMenu>)?
+                .OrderBy(s => s.Position)
+                .ToHashSet<TitreMenu>();
+            return p;
         }
 
         /// <summary>  
