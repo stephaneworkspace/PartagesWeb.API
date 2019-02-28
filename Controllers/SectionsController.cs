@@ -60,18 +60,50 @@ namespace PartagesWeb.API.Controllers
         {
             var sections = await _repo.GetSections();
             var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
+            var sousTitreMenusHorsligne = await _repo.GetSousTitreMenuHorsLigne();
 
             var sectionsToReturn = _mapper.Map<List<SectionForListDto>>(sections);
             var titreMenusHorsLigneToReturn = _mapper.Map<List<TitreMenuForListDto>>(titreMenusHorsLigne);
+            var sousTitreMenusHorsLigneToReturn = _mapper.Map<List<SousTitreMenuForListDto>>(sousTitreMenusHorsligne);
 
+            // Section
             var newSection = new SectionForListDto();
             newSection.Id = default(int);
             newSection.Nom = "Titre de menus hors ligne";
             newSection.Icone = "toggle-off";
             newSection.Position = 1;
             newSection.SwHorsLigne = true;
-            newSection.TitreMenus = titreMenusHorsLigneToReturn;
 
+            // Titre Menu
+            var newTitreMenu = new TitreMenuForListDto();
+            newTitreMenu.Id = default(int);
+            newTitreMenu.Nom = "Sous titre de menus hors ligne";
+            // newTitreMenu.Position = 1;
+            newTitreMenu.SousTitreMenus = sousTitreMenusHorsLigneToReturn;
+
+
+            var swFind = false;
+            var position = 0;
+            titreMenusHorsLigneToReturn.Reverse();
+            foreach (var unite in titreMenusHorsLigneToReturn)
+            {
+                if (swFind == false)
+                {
+                    swFind = true;
+                    position = unite.Position;
+                }
+            }
+            titreMenusHorsLigneToReturn.Reverse();
+            position++;
+            newTitreMenu.Position = position;
+
+
+
+            titreMenusHorsLigneToReturn.Add(newTitreMenu);
+
+            // Section
+            newSection.TitreMenus = titreMenusHorsLigneToReturn;
+                                             
             sectionsToReturn.Add(newSection);
 
             return Ok(sectionsToReturn);
