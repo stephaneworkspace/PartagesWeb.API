@@ -103,7 +103,22 @@ namespace PartagesWeb.API.Data
         {
             p.TitreMenus = (p.TitreMenus as HashSet<TitreMenu>)?
                 .OrderBy(s => s.Position)
+                .Select(x => SortIncludeTitreMenu(x))
                 .ToHashSet<TitreMenu>();
+            return p;
+        }
+
+        /// <summary>
+        /// Sort include
+        /// </summary>
+        /// <remarks>https://stackoverflow.com/questions/15378136/entity-framework-ordering-includes</remarks>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private TitreMenu SortIncludeTitreMenu(TitreMenu p)
+        {
+            p.SousTitreMenus = (p.SousTitreMenus as HashSet<SousTitreMenu>)?
+                .OrderBy(s => s.Position)
+                .ToHashSet<SousTitreMenu>();
             return p;
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages
 {
     /// <summary>
-    /// Dto pour l'affichage des sections sans le champ Type et avec la Id en int?
+    /// Dto pour l'affichage du tableau
     /// </summary>
     public class SectionForListDto
     {
@@ -33,9 +33,6 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// <summary>
         /// TitreMenu relié à cette section
         /// </summary>
-        /// <remarks>
-        /// Trouver un moyen de trier cette collection
-        /// </remarks>
         public List<TitreMenuForListDto> TitreMenus { get; set; }
     }
 }

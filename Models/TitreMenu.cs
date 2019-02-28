@@ -32,5 +32,12 @@ namespace PartagesWeb.API.Models
         /// Position
         /// </summary>
         public int Position { get; set; }
+        /// <summary>
+        /// SousTitreMenu relié à cette section
+        /// </summary>
+        /// <remarks>
+        /// Trouver un moyen de trier cette collection
+        /// </remarks>
+        public ICollection<SousTitreMenu> SousTitreMenus { get; set; }
     }
 }
