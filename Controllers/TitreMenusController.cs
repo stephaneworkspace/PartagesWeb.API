@@ -58,7 +58,10 @@ namespace PartagesWeb.API.Controllers
             var newTitreMenu = new TitreMenuForSelectDto();
             newTitreMenu.Id = default(int);
             newTitreMenu.Nom = "Titre de menus hors ligne";
-            newTitreMenu.SectionId = null;
+            newTitreMenu.SectionId = default(int);
+            newTitreMenu.Section = new SectionForSelectInsideDto();
+            newTitreMenu.Section.Id = default(int);
+            newTitreMenu.Section.Nom = "Hors ligne";
             titreMenusToReturn.Add(newTitreMenu);
 
             /*
