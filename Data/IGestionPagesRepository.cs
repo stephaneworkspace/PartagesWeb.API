@@ -99,16 +99,16 @@ namespace PartagesWeb.API.Data
         /// </summary>
         Task<List<TitreMenu>> GetTitreMenuHorsLigne();
         /// <summary>  
-        /// Cette méthode permet de vérifier si un nom de section existe déjà
+        /// Cette méthode permet de vérifier si un nom de titre de menu existe déjà
         /// </summary>  
-        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="nom">Nom du titre de menu</param>
         /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
         Task<bool> TitreMenuExists(string nom, int? sectionId);
         /// <summary>  
-        /// Cette méthode permet de vérifier si un nom de section existe déjà dans le cas d'une mise à jour des données
+        /// Cette méthode permet de vérifier si un nom de titre de menu existe déjà dans le cas d'une mise à jour des données
         /// </summary>  
         /// <param name="id">Id de la clé principal de TitreMenu à mettre à jour et donc ignorer</param>
-        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="nom">Nom du titre de menu</param>
         /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
         Task<bool> TitreMenuExistsUpdate(int id, string nom, int? sectionId);
         /// <summary>  
@@ -117,17 +117,17 @@ namespace PartagesWeb.API.Data
         /// <param name="sectionId">SectionId facultatif int?</param>
         Task<int> LastPositionTitreMenu(int? sectionId);
         /// <summary>
-        /// Cette méthode refait la liste des positions pour les titre menus
+        /// Cette méthode refait la liste des positions pour les titre de menus
         /// </summary>
         /// <param name="sectionId">Clé du model Section int? pour trier cette section</param>
         Task<bool> SortPositionTitreMenu(int? sectionId);
         /// <summary>
-        /// Monter un titre menu
+        /// Monter un titre de menu
         /// </summary>
         /// <param name="id">Clé principale du model TitreMenu à monter</param>
         Task<bool> UpTitreMenu(int id);
         /// <summary>
-        /// Descendre un titre menu
+        /// Descendre un titre de menu
         /// </summary>
         /// <param name="id">Clé principale du model TitreMenu à descendre</param>
         Task<bool> DownTitreMenu(int id);
@@ -143,6 +143,39 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet d'obtenir toutes les sous titre de menus hors ligne int? TitreMenuId
         /// </summary>
         Task<List<SousTitreMenu>> GetSousTitreMenuHorsLigne();
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de sous titre de menu existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="titreMenuId">TitremenuId int? ou le nom doit être unique</param>
+        Task<bool> SousTitreMenuExists(string nom, int? titreMenuId);
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de sous titre de menu existe déjà dans le cas d'une mise à jour des données
+        /// </summary>  
+        /// <param name="id">Id de la clé principal de SousTitreMenu à mettre à jour et donc ignorer</param>
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="titreMenuId">TitreMenuid int? ou le nom doit être unique</param>
+        Task<bool> SousTitreMenuExistsUpdate(int id, string nom, int? titreMenuId);
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="titreMenuId">TitreMenuId facultatif int?</param>
+        Task<int> LastPositionSousTitreMenu(int? titreMenuId);
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les sous titre de menus
+        /// </summary>
+        /// <param name="titreMenuId">Clé du model TitreMenu int? pour trier ce titre de menu</param>
+        Task<bool> SortPositionSousTitreMenu(int? titreMenuId);
+        /// <summary>
+        /// Monter un sous titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model SousTitreMenu à monter</param>
+        Task<bool> UpSousTitreMenu(int id);
+        /// <summary>
+        /// Descendre un sous titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model SousTitreMenu à descendre</param>
+        Task<bool> DownSousTitreMenu(int id);
 
         /**
          * Icones

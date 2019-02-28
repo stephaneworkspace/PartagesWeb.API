@@ -339,9 +339,9 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
-        /// Cette méthode permet de vérifier si un nom de section existe déjà
+        /// Cette méthode permet de vérifier si un nom de titre de menu existe déjà
         /// </summary>  
-        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="nom">Nom du titre de menu</param>
         /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
         public async Task<bool> TitreMenuExists(string nom, int? sectionId)
         {
@@ -353,10 +353,10 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
-        /// Cette méthode permet de vérifier si un nom de section existe déjà dans le cas d'une mise à jour des données
+        /// Cette méthode permet de vérifier si un nom de titre de menu existe déjà dans le cas d'une mise à jour des données
         /// </summary>  
         /// <param name="id">Id de la clé principal de TitreMenu à mettre à jour et donc ignorer</param>
-        /// <param name="nom">Nom du titre menu</param>
+        /// <param name="nom">Nom du titre de menu</param>
         /// <param name="sectionId">SectionId int? ou le nom doit être unique</param>
         public async Task<bool> TitreMenuExistsUpdate(int id, string nom, int? sectionId)
         {
@@ -386,7 +386,7 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>
-        /// Cette méthode refait la liste des positions pour les titre menus
+        /// Cette méthode refait la liste des positions pour les titre de menus
         /// </summary>
         /// <param name="sectionId">Clé du model Section int?</param>
         public async Task<bool> SortPositionTitreMenu(int? sectionId)
@@ -522,6 +522,164 @@ namespace PartagesWeb.API.Data
 
             return items;
         }
+
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de sous titre de menu existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="titreMenuId">TitremenuId int? ou le nom doit être unique</param>
+        public async Task<bool> SousTitreMenuExists(string nom, int? titreMenuId)
+        {
+            if (await _context.SousTitreMenus
+                .Where(s => s.TitreMenuId == titreMenuId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
+            return false;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom de sous titre de menu existe déjà dans le cas d'une mise à jour des données
+        /// </summary>  
+        /// <param name="id">Id de la clé principal de SousTitreMenu à mettre à jour et donc ignorer</param>
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="titreMenuId">TitreMenuid int? ou le nom doit être unique</param>
+        public async Task<bool> SousTitreMenuExistsUpdate(int id, string nom, int? titreMenuId)
+        {
+            if (await _context.SousTitreMenus
+                .Where(x => x.Id != id)
+                .Where(s => s.TitreMenuId == titreMenuId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
+            return false;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="titreMenuId">TitreMenuId facultatif int?</param>
+        public async Task<int> LastPositionSousTitreMenu(int? titreMenuId)
+        {
+            int lastPositon;
+            lastPositon = _context.SousTitreMenus
+                .Where(x => titreMenuId == x.TitreMenuId)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les sous titre de menus
+        /// </summary>
+        /// <param name="titreMenuId">Clé du model TitreMenu int? pour trier ce titre de menu</param>
+        public async Task<bool> SortPositionSousTitreMenu(int? titreMenuId)
+        {
+            var i = 0;
+            var titreMenus = await _context.SousTitreMenus
+                .Where(x => titreMenuId == x.TitreMenuId)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            foreach (var unite in titreMenus)
+            {
+                var record = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                i++;
+                record.Position = i;
+                _context.SousTitreMenus.Update(record);
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Monter un sous titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model SousTitreMenu à monter</param>
+        public async Task<bool> UpSousTitreMenu(int id)
+        {
+            var recordEnCours = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? titreMenuId = recordEnCours.TitreMenuId > 0 ? recordEnCours.TitreMenuId : null;
+                var sousTitreMenus = await _context.SousTitreMenus
+                    .Where(w => w.TitreMenuId == titreMenuId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                sousTitreMenus.Reverse();
+                foreach (var unite in sousTitreMenus)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position++;
+                        _context.SousTitreMenus.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position--;
+                            swFind = true;
+                            _context.SousTitreMenus.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Descendre un sous titre de menu
+        /// </summary>
+        /// <param name="id">Clé principale du model SousTitreMenu à descendre</param>
+        public async Task<bool> DownSousTitreMenu(int id)
+        {
+            var recordEnCours = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? titreMenuId = recordEnCours.TitreMenuId > 0 ? recordEnCours.TitreMenuId : null;
+                var sousTitreMenus = await _context.SousTitreMenus
+                    .Where(w => w.TitreMenuId == titreMenuId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                foreach (var unite in sousTitreMenus)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position--;
+                        _context.SousTitreMenus.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position++;
+                            swFind = true;
+                            _context.SousTitreMenus.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
 
         /**
          * Icones
