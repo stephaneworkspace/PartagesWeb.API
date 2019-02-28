@@ -11,18 +11,17 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Models
 {
     /// <summary>
-    /// Model TitreMenu
+    /// Model SousTitreMenu
     /// </summary>
-    public class TitreMenu
+    public class SousTitreMenu
     {
         /// <summary>
         /// Clé principale
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Clé facultative du model Section parent
+        /// Clé facultative du model TitreMenu parent
         /// </summary>
-        /// <remarks>
         public int? SectionId { get; set; }
         /// <summary>
         /// Nom du titre menu

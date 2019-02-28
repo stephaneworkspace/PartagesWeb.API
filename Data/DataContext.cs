@@ -35,6 +35,10 @@ namespace PartagesWeb.API.Data
         /// </summary> 
         public DbSet<TitreMenu> TitreMenus { get; set; }
         /// <summary>
+        /// Cette méthode permet la connexion au model SousTitreMenu
+        /// </summary>
+        public DbSet<SousTitreMenu> SousTitreMenus { get; set; }
+        /// <summary>
         /// Configuration des models
         /// </summary>
         /// <param name="modelBuilder"></param>
