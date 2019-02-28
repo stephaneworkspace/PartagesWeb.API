@@ -101,7 +101,7 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode permet de créer une section
         /// </summary> 
-        /// <param name="sectionForCreateDto">DTO de ce qui est envoyé depuis le frontend</param>
+        /// <param name="dto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
@@ -109,31 +109,31 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Icone[0] == Le champ « Icone » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Type[0] == Le champ « Type de section » est obligatoire.")]
-        public async Task<IActionResult> Create(SectionForCreateDto sectionForCreateDto)
+        public async Task<IActionResult> Create(SectionForCreateDto dto)
         {
-            if (await _repo.SectionExists(sectionForCreateDto.Nom.ToLower()))
+            if (await _repo.SectionExists(dto.Nom.ToLower()))
                 return BadRequest("Le nom de la section est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
-            var position = await _repo.LastPositionSection(sectionForCreateDto.SwHorsLigne);
+            var position = await _repo.LastPositionSection(dto.SwHorsLigne);
             
             // Prochaine position
             position++;
 
             // Préparation du model
-            var sectionToCreate = new Section
+            var item = new Section
             {
-                Nom = sectionForCreateDto.Nom,
-                Icone = sectionForCreateDto.Icone,
-                Type = sectionForCreateDto.Type,
+                Nom = dto.Nom,
+                Icone = dto.Icone,
+                Type = dto.Type,
                 Position = position,
-                SwHorsLigne = sectionForCreateDto.SwHorsLigne
+                SwHorsLigne = dto.SwHorsLigne
             };
 
-            _repo.Add(sectionToCreate);
+            _repo.Add(item);
 
             if (await _repo.SaveAll())
-                return Ok(sectionToCreate);
+                return Ok(item);
 
             return BadRequest("Impossible d'ajouter la section");
         }
@@ -142,7 +142,7 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de modifier une section
         /// </summary> 
         /// <param name="id">Clé de l'enregistrement</param>
-        /// <param name="sectionForUpdateDto">DTO de ce qui est envoyé depuis le frontend</param>
+        /// <param name="dto">DTO de ce qui est envoyé depuis le frontend</param>
         [HttpPut("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Le nom de la section est déjà utilisé")]
@@ -150,29 +150,29 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Icone[0] == Le champ « Icone » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Type[0] == Le champ « Type de section » est obligatoire.")]
-        public async Task<IActionResult> Update(int id, SectionForUpdateDto sectionForUpdateDto)
+        public async Task<IActionResult> Update(int id, SectionForUpdateDto dto)
         {
-            if (await _repo.SectionExistsUpdate(id, sectionForUpdateDto.Nom.ToLower()))
+            if (await _repo.SectionExistsUpdate(id, dto.Nom.ToLower()))
                 return BadRequest("Le nom de la section est déjà utilisé");
-            var section = await _repo.GetSection(id);
+            var item = await _repo.GetSection(id);
 
             // Déterminer la positon
-            if (section.SwHorsLigne != sectionForUpdateDto.SwHorsLigne)
+            if (item.SwHorsLigne != dto.SwHorsLigne)
             {
                 // Déterminer la dernière position en ligne ou hors ligne
-                var position = await _repo.LastPositionSection(sectionForUpdateDto.SwHorsLigne);
+                var position = await _repo.LastPositionSection(dto.SwHorsLigne);
                 // Prochaine position
                 position++;
-                section.Position = position;
+                item.Position = position;
             }
 
             // Préparation du model
-            section.Nom = sectionForUpdateDto.Nom;
-            section.Icone = sectionForUpdateDto.Icone;
-            section.Type = sectionForUpdateDto.Type;
-            section.SwHorsLigne = sectionForUpdateDto.SwHorsLigne;
+            item.Nom = dto.Nom;
+            item.Icone = dto.Icone;
+            item.Type = dto.Type;
+            item.SwHorsLigne = dto.SwHorsLigne;
 
-            _repo.Update(section);
+            _repo.Update(item);
 
             if (await _repo.SaveAll())
             {
@@ -185,7 +185,7 @@ namespace PartagesWeb.API.Controllers
 
             await _repo.SortPositionSections();
             await _repo.SaveAll();
-            return Ok(section);
+            return Ok(item);
         }
 
         /// <summary>  

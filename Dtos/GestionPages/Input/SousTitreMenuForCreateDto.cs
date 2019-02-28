@@ -12,19 +12,19 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages
 {
     /// <summary>
-    /// Dto pour la mise à jour d'un titre de menu depuis le frontend
+    /// Dto pour la création d'un sous titre de menu depuis le frontend
     /// </summary>
     /// <remarks>
     /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-2.2#globalization-and-localization-terms
     /// </remarks>
-    public class TitreMenuForUpdateDto
+    public class SousTitreMenuForCreateDto
     {
         /// <summary>
-        /// SectionId si sélectioné (sinon 0)
+        /// TitreMenuId si sélectioné (sinon 0)
         /// </summary>
-        public int? SectionId { get; set; }
+        public int? TitreMenuId { get; set; }
         /// <summary>
-        /// Nom du titre de menu
+        /// Nom du sous titre menu
         /// </summary>
         [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
         public string Nom { get; set; }

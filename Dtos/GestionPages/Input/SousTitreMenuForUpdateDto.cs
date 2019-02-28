@@ -17,14 +17,14 @@ namespace PartagesWeb.API.Dtos.GestionPages
     /// <remarks>
     /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-2.2#globalization-and-localization-terms
     /// </remarks>
-    public class TitreMenuForUpdateDto
+    public class SousTitreMenuForUpdateDto
     {
         /// <summary>
-        /// SectionId si sélectioné (sinon 0)
+        /// TitreMenuId si sélectioné (sinon 0)
         /// </summary>
-        public int? SectionId { get; set; }
+        public int? TitreMenuId { get; set; }
         /// <summary>
-        /// Nom du titre de menu
+        /// Nom du sous titre de menu
         /// </summary>
         [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
         public string Nom { get; set; }

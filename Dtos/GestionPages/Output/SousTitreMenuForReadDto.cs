@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages
 {
     /// <summary>
-    /// Dto pour l'affichage du titre de menu à éditer
+    /// Dto pour l'affichage du sous titre menu à éditer
     /// </summary>
-    public class TitreMenuForReadDto
+    public class SousTitreMenuForReadDto
     {
         /// <summary>
         /// Clé principale
@@ -17,7 +17,7 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// <summary>
         /// SectionId si sélectioné (sinon 0)
         /// </summary>
-        public int? SectionId { get; set; }
+        public int? TitreMenuId { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>
