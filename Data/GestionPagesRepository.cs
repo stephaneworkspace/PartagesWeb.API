@@ -341,6 +341,26 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
+        /// Cette méthode permet d'obtenir touts les titres de menus
+        /// </summary> 
+        public async Task<List<TitreMenu>> GetTitreMenus()
+        {
+            var items = await _context.TitreMenus
+                .Where(x => x.SectionId != null)
+                .OrderBy(x => x.SectionId)
+                .ThenBy(y => y.Position)
+                .ToListAsync();
+
+            var itemOffline = await _context.TitreMenus
+                .Where(x => x.SectionId == null)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            items.AddRange(itemOffline);
+
+            return items;
+        }
+
+        /// <summary>  
         /// Cette méthode permet d'obtenir toutes les titre de menus hors ligne int? SectionId
         /// </summary>
         public async Task<List<TitreMenu>> GetTitreMenuHorsLigne()

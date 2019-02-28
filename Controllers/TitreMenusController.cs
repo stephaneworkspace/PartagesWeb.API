@@ -44,6 +44,76 @@ namespace PartagesWeb.API.Controllers
             _repo = repo;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de retourner les titres menu d'une clé principale section
+        /// </summary> 
+        /// <param name="id">Clé principale section</param>
+        // [HttpGet("gets/{id}")]
+        [HttpGet]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForSelectDto[]), Description = "Liste des titres menus")]
+        public async Task<IActionResult> GetTitreMenus()
+        {
+            var titreMenus = await _repo.GetTitreMenus();
+            var titreMenusToReturn = _mapper.Map<List<TitreMenuForSelectDto>>(titreMenus);
+            var newTitreMenu = new TitreMenuForSelectDto();
+            newTitreMenu.Id = default(int);
+            newTitreMenu.Nom = "Titre de menus hors ligne";
+            newTitreMenu.SectionId = null;
+            titreMenusToReturn.Add(newTitreMenu);
+
+            /*
+            var sections = await _repo.GetSections();
+            var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
+            var sousTitreMenusHorsligne = await _repo.GetSousTitreMenuHorsLigne();
+
+            var sectionsToReturn = _mapper.Map<List<SectionForListDto>>(sections);
+            var titreMenusHorsLigneToReturn = _mapper.Map<List<TitreMenuForListDto>>(titreMenusHorsLigne);
+            var sousTitreMenusHorsLigneToReturn = _mapper.Map<List<SousTitreMenuForListDto>>(sousTitreMenusHorsligne);
+
+            // Section
+            var newSection = new SectionForListDto();
+            newSection.Id = default(int);
+            newSection.Nom = "Titre de menus hors ligne";
+            newSection.Icone = "toggle-off";
+            newSection.Position = 1;
+            newSection.SwHorsLigne = true;
+
+            // Titre Menu
+            var newTitreMenu = new TitreMenuForListDto();
+            newTitreMenu.Id = default(int);
+            newTitreMenu.Nom = "Sous titre de menus hors ligne";
+            // newTitreMenu.Position = 1;
+            newTitreMenu.SousTitreMenus = sousTitreMenusHorsLigneToReturn;
+
+
+            var swFind = false;
+            var position = 0;
+            titreMenusHorsLigneToReturn.Reverse();
+            foreach (var unite in titreMenusHorsLigneToReturn)
+            {
+                if (swFind == false)
+                {
+                    swFind = true;
+                    position = unite.Position;
+                }
+            }
+            titreMenusHorsLigneToReturn.Reverse();
+            position++;
+            newTitreMenu.Position = position;
+
+
+
+            titreMenusHorsLigneToReturn.Add(newTitreMenu);
+
+            // Section
+            newSection.TitreMenus = titreMenusHorsLigneToReturn;
+
+            sectionsToReturn.Add(newSection);
+
+            return Ok(sectionsToReturn);*/
+            return Ok(titreMenusToReturn);
+        }
+
         /// <summary>
         /// Cette méthode permet d'acceder à un titre de menu précis
         /// </summary>

@@ -95,6 +95,10 @@ namespace PartagesWeb.API.Data
         /// <param name="id"> Clé principale du model TitreMenu</param> 
         Task<TitreMenu> GetTitreMenu(int id);
         /// <summary>  
+        /// Cette méthode permet d'obtenir touts les titres de menus
+        /// </summary>
+        Task<List<TitreMenu>> GetTitreMenus();
+        /// <summary>  
         /// Cette méthode permet d'obtenir toutes les titre de menus hors ligne int? SectionId
         /// </summary>
         Task<List<TitreMenu>> GetTitreMenuHorsLigne();
