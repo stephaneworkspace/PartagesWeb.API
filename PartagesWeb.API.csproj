@@ -16,6 +16,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190209165246_UserToUsername.cs" />
     <Compile Remove="Migrations\20190209165246_UserToUsername.Designer.cs" />
+    <Compile Remove="Migrations\20190228215415_AjoutChampVirtuelTitreMenuEntity3.cs" />
+    <Compile Remove="Migrations\20190228215415_AjoutChampVirtuelTitreMenuEntity3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

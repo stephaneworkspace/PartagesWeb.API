@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PartagesWeb.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,12 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// </summary>
         public int Id { get; set; }
         /// <summary>
+        /// SectionId relié à cette section
+        /// </summary>
+        public int? SectionId { get; set; }
+
+        public virtual SectionForSelectInsideDto Section { get; set; }
+        /// <summary>
         /// Nom du titre menu
         /// </summary>
         public string Nom { get; set; }
@@ -22,9 +29,5 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// Position
         /// </summary>
         public int Position { get; set; }
-        /// <summary>
-        /// SectionId relié à cette section
-        /// </summary>
-        public int? SectionId { get; set; }
     }
 }

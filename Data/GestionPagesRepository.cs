@@ -341,7 +341,7 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
-        /// Cette méthode permet d'obtenir touts les titres de menus
+        /// Cette méthode permet d'obtenir touts les titres de menus ainsi que la section pour <optgroup></optgroup> en frontend
         /// </summary> 
         public async Task<List<TitreMenu>> GetTitreMenus()
         {
@@ -349,13 +349,25 @@ namespace PartagesWeb.API.Data
                 .Where(x => x.SectionId != null)
                 .OrderBy(x => x.SectionId)
                 .ThenBy(y => y.Position)
+                .Include(z => z.Section)
                 .ToListAsync();
 
             var itemOffline = await _context.TitreMenus
                 .Where(x => x.SectionId == null)
                 .OrderBy(x => x.Position)
                 .ToListAsync();
-            items.AddRange(itemOffline);
+            List<TitreMenu> itemOfflineok = new List<TitreMenu>();
+
+            var sectionOffline = new Section();
+            sectionOffline.Id = default(int);
+            sectionOffline.Nom = "Hors ligne";
+            foreach (var unite in itemOffline)
+            {
+                unite.Section = sectionOffline;
+                itemOfflineok.Add(unite);
+            }
+
+            items.AddRange(itemOfflineok);
 
             return items;
         }

@@ -24,6 +24,7 @@ namespace PartagesWeb.API.Models
         /// </summary>
         /// <remarks>
         public int? SectionId { get; set; }
+        public virtual Section Section { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>
