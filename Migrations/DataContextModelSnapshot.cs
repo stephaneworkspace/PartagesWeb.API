@@ -65,7 +65,7 @@ namespace PartagesWeb.API.Migrations
 
                     b.Property<int>("Position");
 
-                    b.Property<int?>("SectionId");
+                    b.Property<int?>("TitreMenuId");
 
                     b.HasKey("Id");
 

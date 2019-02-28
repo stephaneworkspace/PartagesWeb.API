@@ -54,8 +54,6 @@ namespace PartagesWeb.API.Data
             _context.Remove(entity);
         }
 
-
-
         /// <summary>  
         /// Cette méthode permet de sauvegarder tout dans le DataContext
         /// </summary> 
@@ -317,7 +315,7 @@ namespace PartagesWeb.API.Data
          */
 
         /// <summary>  
-        /// Cette méthode permet d'obtenir un titre menu bien précise
+        /// Cette méthode permet d'obtenir un titre de menu bien précise
         /// </summary>  
         /// <param name="id">Clé principale du model TitreMenu</param>
         public async Task<TitreMenu> GetTitreMenu(int id)
@@ -328,7 +326,7 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
-        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne int? SectionId
+        /// Cette méthode permet d'obtenir toutes les titre de menus hors ligne int? SectionId
         /// </summary>
         public async Task<List<TitreMenu>> GetTitreMenuHorsLigne()
         {
@@ -495,6 +493,34 @@ namespace PartagesWeb.API.Data
                 }
                 return true;
             }
+        }
+
+        /**
+         * SousTitreMenu
+         */
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un sous titre de menu bien précise
+        /// </summary>  
+        /// <param name="id">Clé principale du model SousTitreMenu</param>
+        public async Task<SousTitreMenu> GetSousTitreMenu(int id)
+        {
+            var item = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == id);
+
+            return item;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les sous titre de menus hors ligne int? TitreMenuId
+        /// </summary>
+        public async Task<List<SousTitreMenu>> GetSousTitreMenuHorsLigne()
+        {
+            var items = await _context.SousTitreMenus
+                .Where(x => x.TitreMenuId == null)
+                .OrderBy(y => y.Position)
+                .ToListAsync();
+
+            return items;
         }
 
         /**

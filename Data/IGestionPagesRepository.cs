@@ -91,11 +91,11 @@ namespace PartagesWeb.API.Data
          * TitreMenus
          */
 
-        /// <summary> Cette méthode permet d'obtenir un titre menu bien précis</summary>
-        /// <param name="id"> Clé principale du model TitreMenu</param>/// 
+        /// <summary> Cette méthode permet d'obtenir un titre de menu bien précis</summary>
+        /// <param name="id"> Clé principale du model TitreMenu</param> 
         Task<TitreMenu> GetTitreMenu(int id);
         /// <summary>  
-        /// Cette méthode permet d'obtenir toutes les titre menus hors ligne int? SectionId
+        /// Cette méthode permet d'obtenir toutes les titre de menus hors ligne int? SectionId
         /// </summary>
         Task<List<TitreMenu>> GetTitreMenuHorsLigne();
         /// <summary>  
@@ -131,6 +131,18 @@ namespace PartagesWeb.API.Data
         /// </summary>
         /// <param name="id">Clé principale du model TitreMenu à descendre</param>
         Task<bool> DownTitreMenu(int id);
+
+        /**
+         * SousTitreMenus
+         */
+
+        /// <summary> Cette méthode permet d'obtenir un sous titre de menu bien précis</summary>
+        /// <param name="id"> Clé principale du model SousTitreMenu</param> 
+        Task<SousTitreMenu> GetSousTitreMenu(int id);
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les sous titre de menus hors ligne int? TitreMenuId
+        /// </summary>
+        Task<List<SousTitreMenu>> GetSousTitreMenuHorsLigne();
 
         /**
          * Icones

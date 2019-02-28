@@ -22,7 +22,7 @@ namespace PartagesWeb.API.Models
         /// <summary>
         /// Clé facultative du model TitreMenu parent
         /// </summary>
-        public int? SectionId { get; set; }
+        public int? TitreMenuId { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>

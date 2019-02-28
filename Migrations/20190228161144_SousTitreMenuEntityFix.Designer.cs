@@ -11,8 +11,8 @@ using PartagesWeb.API.Data;
 namespace PartagesWeb.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190228155942_SousTitreMenuEntity")]
-    partial class SousTitreMenuEntity
+    [Migration("20190228161144_SousTitreMenuEntityFix")]
+    partial class SousTitreMenuEntityFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,7 +68,7 @@ namespace PartagesWeb.API.Migrations
 
                     b.Property<int>("Position");
 
-                    b.Property<int?>("SectionId");
+                    b.Property<int?>("TitreMenuId");
 
                     b.HasKey("Id");
 
