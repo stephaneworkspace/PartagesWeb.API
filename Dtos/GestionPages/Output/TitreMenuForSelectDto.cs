@@ -19,7 +19,9 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// SectionId relié à cette section
         /// </summary>
         public int? SectionId { get; set; }
-
+        /// <summary>
+        /// Relation avec model Section
+        /// </summary>
         public virtual SectionForSelectInsideDto Section { get; set; }
         /// <summary>
         /// Nom du titre menu

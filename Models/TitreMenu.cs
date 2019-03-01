@@ -22,8 +22,10 @@ namespace PartagesWeb.API.Models
         /// <summary>
         /// Clé facultative du model Section parent
         /// </summary>
-        /// <remarks>
         public int? SectionId { get; set; }
+        /// <summary>
+        /// Relation avec model Section
+        /// </summary>
         public virtual Section Section { get; set; }
         /// <summary>
         /// Nom du titre menu

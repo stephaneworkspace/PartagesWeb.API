@@ -47,8 +47,6 @@ namespace PartagesWeb.API.Controllers
         /// <summary>  
         /// Cette méthode permet de retourner les titres menu d'une clé principale section
         /// </summary> 
-        /// <param name="id">Clé principale section</param>
-        // [HttpGet("gets/{id}")]
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForSelectDto[]), Description = "Liste des titres menus")]
         public async Task<IActionResult> GetTitreMenus()

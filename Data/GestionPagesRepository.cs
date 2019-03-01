@@ -86,6 +86,7 @@ namespace PartagesWeb.API.Data
                 .OrderBy(x => x.SwHorsLigne)
                 .ThenBy(y => y.Position)
                 .Include(t => t.TitreMenus)
+                .Include("TitreMenus.SousTitreMenus") // .Include(i => i.Modules.Select(s => s.Chapters))
                 .Select(p => SortIncludeSection(p))
                 // .OrderBy(u => u.TitreMenus.OrderBy(b => b.Position).FirstOrDefault().Position)
                 .ToListAsync();
