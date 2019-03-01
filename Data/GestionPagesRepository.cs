@@ -379,9 +379,11 @@ namespace PartagesWeb.API.Data
         public async Task<List<TitreMenu>> GetTitreMenuHorsLigne()
         {
             var items = await _context.TitreMenus
-                .Where(x => x.SectionId == null) // default(int) ? 24 février
+                .Where(x => x.SectionId == null)
                 .OrderBy(y => y.Position)
-                .ToListAsync();//.Include(p => p.TitreMenus).ToListAsync();
+                .Include(t => t.SousTitreMenus)
+                .Select(x => SortIncludeTitreMenu(x))
+                .ToListAsync();
 
             return items;
         }
