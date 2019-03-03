@@ -182,6 +182,51 @@ namespace PartagesWeb.API.Data
         Task<bool> DownSousTitreMenu(int id);
 
         /**
+         * Articles
+         */
+
+        /// <summary> Cette méthode permet d'obtenir un article bien précis</summary>
+        /// <param name="id"> Clé principale du model ARticle</param> 
+        Task<Article> GetArticle(int id);
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les articles hors ligne int? SousTitreMenuId
+        /// </summary>
+        Task<List<Article>> GetArticleHorsLigne();
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom d'article existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="sousTitreMenuId">SousTitreMenuId int? ou le nom doit être unique</param>
+        Task<bool> ArticleExists(string nom, int? sousTitreMenuId);
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un article existe déjà dans le cas d'une mise à jour des données
+        /// </summary>  
+        /// <param name="id">Id de la clé principal de ARticle à mettre à jour et donc ignorer</param>
+        /// <param name="nom">Nom de l'article</param>
+        /// <param name="sousTitreMenuId">SousTitreMenuid int? ou le nom doit être unique</param>
+        Task<bool> ArticleExistsUpdate(int id, string nom, int? sousTitreMenuId);
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="sousTitreMenuId">SousTitreMenuId facultatif int?</param>
+        Task<int> LastPositionArticle(int? sousTitreMenuId);
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les articles
+        /// </summary>
+        /// <param name="sousTitreMenuId">Clé du model SousTitreMenu int? pour trier cet article</param>
+        Task<bool> SortPositionArticle(int? sousTitreMenuId);
+        /// <summary>
+        /// Monter un article
+        /// </summary>
+        /// <param name="id">Clé principale du model ARticle à monter</param>
+        Task<bool> UpArticle(int id);
+        /// <summary>
+        /// Descendre un article
+        /// </summary>
+        /// <param name="id">Clé principale du model Article à descendre</param>
+        Task<bool> DownArticle(int id);
+
+        /**
          * Icones
          **/
 

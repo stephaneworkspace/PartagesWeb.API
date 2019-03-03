@@ -253,13 +253,13 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 var swHorsLigne = recordEnCours.SwHorsLigne;
-                var sections = await _context.Sections
+                var data = await _context.Sections
                     .Where(w => w.SwHorsLigne == swHorsLigne)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                sections.Reverse();
-                foreach (var unite in sections)
+                data.Reverse();
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -297,12 +297,12 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 var swHorsLigne = recordEnCours.SwHorsLigne;
-                var sections = await _context.Sections
+                var data = await _context.Sections
                     .Where(w => w.SwHorsLigne == swHorsLigne)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                foreach (var unite in sections)
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -442,11 +442,11 @@ namespace PartagesWeb.API.Data
         public async Task<bool> SortPositionTitreMenu(int? sectionId)
         {
             var i = 0;
-            var sections = await _context.TitreMenus
+            var data = await _context.TitreMenus
                 .Where(x => sectionId == x.SectionId)
                 .OrderBy(x => x.Position)
                 .ToListAsync();
-            foreach (var unite in sections)
+            foreach (var unite in data)
             {
                 var record = await _context.TitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
                 i++;
@@ -471,13 +471,13 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 int? sectionId = recordEnCours.SectionId > 0 ? recordEnCours.SectionId : null;
-                var titreMenus = await _context.TitreMenus
+                var data = await _context.TitreMenus
                     .Where(w => w.SectionId == sectionId)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                titreMenus.Reverse();
-                foreach (var unite in titreMenus)
+                data.Reverse();
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -516,12 +516,12 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 int? sectionId = recordEnCours.SectionId > 0 ? recordEnCours.SectionId : null;
-                var titreMenus = await _context.TitreMenus
+                var data = await _context.TitreMenus
                     .Where(w => w.SectionId == sectionId)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                foreach (var unite in titreMenus)
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -627,11 +627,11 @@ namespace PartagesWeb.API.Data
         public async Task<bool> SortPositionSousTitreMenu(int? titreMenuId)
         {
             var i = 0;
-            var titreMenus = await _context.SousTitreMenus
+            var data = await _context.SousTitreMenus
                 .Where(x => titreMenuId == x.TitreMenuId)
                 .OrderBy(x => x.Position)
                 .ToListAsync();
-            foreach (var unite in titreMenus)
+            foreach (var unite in data)
             {
                 var record = await _context.SousTitreMenus.FirstOrDefaultAsync(x => x.Id == unite.Id);
                 i++;
@@ -656,13 +656,13 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 int? titreMenuId = recordEnCours.TitreMenuId > 0 ? recordEnCours.TitreMenuId : null;
-                var sousTitreMenus = await _context.SousTitreMenus
+                var data = await _context.SousTitreMenus
                     .Where(w => w.TitreMenuId == titreMenuId)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                sousTitreMenus.Reverse();
-                foreach (var unite in sousTitreMenus)
+                data.Reverse();
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -701,12 +701,12 @@ namespace PartagesWeb.API.Data
             {
                 var positionRecordEnCours = recordEnCours.Position;
                 int? titreMenuId = recordEnCours.TitreMenuId > 0 ? recordEnCours.TitreMenuId : null;
-                var sousTitreMenus = await _context.SousTitreMenus
+                var data = await _context.SousTitreMenus
                     .Where(w => w.TitreMenuId == titreMenuId)
                     .OrderBy(x => x.Position)
                     .ToListAsync();
                 var swFind = false;
-                foreach (var unite in sousTitreMenus)
+                foreach (var unite in data)
                 {
                     // id principal est déjà trouvé, donc le prochain logiquement arrive ici
                     if (swFind)
@@ -730,6 +730,190 @@ namespace PartagesWeb.API.Data
             }
         }
 
+        /**
+         * Article
+         */
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir unarticle bien précise
+        /// </summary>  
+        /// <param name="id">Clé principale du model ARticle</param>
+        public async Task<Article> GetArticle(int id)
+        {
+            var item = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
+
+            return item;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les articles hors ligne int? SousTitreMenuId
+        /// </summary>
+        public async Task<List<Article>> GetArticleHorsLigne()
+        {
+            var items = await _context.Articles
+                .Where(x => x.SousTitreMenuId == null)
+                .OrderBy(y => y.Position)
+                .ToListAsync();
+
+            return items;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un article existe déjà
+        /// </summary>  
+        /// <param name="nom">Nom du sous titre de menu</param>
+        /// <param name="sousTitreMenuId">SousTitreMenuId int? ou le nom doit être unique</param>
+        public async Task<bool> ArticleExists(string nom, int? sousTitreMenuId)
+        {
+            if (await _context.Articles
+                .Where(s => s.SousTitreMenuId == sousTitreMenuId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
+            return false;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de vérifier si un nom d'article existe déjà dans le cas d'une mise à jour des données
+        /// </summary>  
+        /// <param name="id">Id de la clé principal de ARticle à mettre à jour et donc ignorer</param>
+        /// <param name="nom">Nom de l'article</param>
+        /// <param name="sousTitreMenuId">SousTitreMenuid int? ou le nom doit être unique</param>
+        public async Task<bool> ArticleExistsUpdate(int id, string nom, int? sousTitreMenuId)
+        {
+            if (await _context.Articles
+                .Where(x => x.Id != id)
+                .Where(s => s.SousTitreMenuId == sousTitreMenuId)
+                .AnyAsync(x => x.Nom.ToLower() == nom.ToLower()))
+                return true;
+            return false;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="sousTitreMenuId">SousTitreMenuId facultatif int?</param>
+        public async Task<int> LastPositionArticle(int? sousTitreMenuId)
+        {
+            int lastPositon;
+            lastPositon = _context.Articles
+                .Where(x => sousTitreMenuId == x.SousTitreMenuId)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        /// <summary>
+        /// Cette méthode refait la liste des positions pour les articles
+        /// </summary>
+        /// <param name="sousTitreMenuId">Clé du model SousTitreMenu int? pour trier cet article</param>
+        public async Task<bool> SortPositionArticle(int? sousTitreMenuId)
+        {
+            var i = 0;
+            var data = await _context.Articles
+                .Where(x => sousTitreMenuId == x.SousTitreMenuId)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            foreach (var unite in data)
+            {
+                var record = await _context.Articles.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                i++;
+                record.Position = i;
+                _context.Articles.Update(record);
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Monter un article
+        /// </summary>
+        /// <param name="id">Clé principale du model Article à monter</param>
+        public async Task<bool> UpArticle(int id)
+        {
+            var recordEnCours = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? sousTitreMenuId = recordEnCours.SousTitreMenuId > 0 ? recordEnCours.SousTitreMenuId : null;
+                var data = await _context.Articles
+                    .Where(w => w.SousTitreMenuId == sousTitreMenuId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                data.Reverse();
+                foreach (var unite in data)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.Articles.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position++;
+                        _context.Articles.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position--;
+                            swFind = true;
+                            _context.Articles.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Descendre un article
+        /// </summary>
+        /// <param name="id">Clé principale du model Article à descendre</param>
+        public async Task<bool> DownArticle(int id)
+        {
+            var recordEnCours = await _context.Articles.FirstOrDefaultAsync(x => x.Id == id);
+            if (recordEnCours == null)
+            {
+                return false;
+            }
+            else
+            {
+                var positionRecordEnCours = recordEnCours.Position;
+                int? sousTitreMenuId = recordEnCours.SousTitreMenuId > 0 ? recordEnCours.SousTitreMenuId : null;
+                var data = await _context.Articles
+                    .Where(w => w.SousTitreMenuId == sousTitreMenuId)
+                    .OrderBy(x => x.Position)
+                    .ToListAsync();
+                var swFind = false;
+                foreach (var unite in data)
+                {
+                    // id principal est déjà trouvé, donc le prochain logiquement arrive ici
+                    if (swFind)
+                    {
+                        var recordInversion = await _context.Articles.FirstOrDefaultAsync(x => x.Id == unite.Id);
+                        recordInversion.Position--;
+                        _context.Articles.Update(recordInversion);
+                        break;
+                    }
+                    else
+                    {
+                        if (unite.Id == id)
+                        {
+                            recordEnCours.Position++;
+                            swFind = true;
+                            _context.Articles.Update(recordEnCours);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
 
         /**
          * Icones
