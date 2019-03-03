@@ -144,6 +144,10 @@ namespace PartagesWeb.API.Data
         /// <param name="id"> Clé principale du model SousTitreMenu</param> 
         Task<SousTitreMenu> GetSousTitreMenu(int id);
         /// <summary>  
+        /// Cette méthode permet d'obtenir touts les sous titres de menus
+        /// </summary>
+        Task<List<SousTitreMenu>> GetSousTitreMenus();
+        /// <summary>  
         /// Cette méthode permet d'obtenir toutes les sous titre de menus hors ligne int? TitreMenuId
         /// </summary>
         Task<List<SousTitreMenu>> GetSousTitreMenuHorsLigne();

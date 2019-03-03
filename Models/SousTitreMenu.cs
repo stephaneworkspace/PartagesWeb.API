@@ -24,6 +24,10 @@ namespace PartagesWeb.API.Models
         /// </summary>
         public int? TitreMenuId { get; set; }
         /// <summary>
+        /// Relation avec model TitreMenu
+        /// </summary>
+        public virtual TitreMenu TitreMenu { get; set; }
+        /// <summary>
         /// Nom du titre menu
         /// </summary>
         public string Nom { get; set; }
@@ -31,5 +35,6 @@ namespace PartagesWeb.API.Models
         /// Position
         /// </summary>
         public int Position { get; set; }
+
     }
 }

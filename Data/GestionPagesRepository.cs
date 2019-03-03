@@ -561,6 +561,47 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>  
+        /// Cette méthode permet d'obtenir touts les sous titres de menus ainsi que la section pour <optgroup></optgroup> en frontend
+        /// </summary> 
+        /// <remarks>
+        /// 4 mars: .OrderBy(x => x.TitreMenuId) ???
+        /// </remarks>
+        public async Task<List<SousTitreMenu>> GetSousTitreMenus()
+        {
+            var items = await _context.SousTitreMenus
+                .Where(x => x.TitreMenuId != null)
+                .OrderBy(x => x.TitreMenuId)
+                .ThenBy(y => y.Position)
+                .Include(z => z.TitreMenu)
+                .Include("TitreMenu.Section")
+
+                .ToListAsync();
+
+            var itemOffline = await _context.SousTitreMenus
+                .Where(x => x.TitreMenuId == null)
+                .OrderBy(x => x.Position)
+                .ToListAsync();
+            List<SousTitreMenu> itemOfflineok = new List<SousTitreMenu>();
+
+            var sectionOffline = new Section();
+            sectionOffline.Id = default(int);
+            sectionOffline.Nom = "Section hors ligne";
+            var titreMenuOffline = new TitreMenu();
+            titreMenuOffline.Id = default(int);
+            titreMenuOffline.Nom = "Titre du menu hors ligne";
+            titreMenuOffline.Section = sectionOffline;
+            foreach (var unite in itemOffline)
+            {
+                unite.TitreMenu = titreMenuOffline;
+                itemOfflineok.Add(unite);
+            }
+
+            items.AddRange(itemOfflineok);
+
+            return items;
+        }
+
+        /// <summary>  
         /// Cette méthode permet d'obtenir toutes les sous titre de menus hors ligne int? TitreMenuId
         /// </summary>
         public async Task<List<SousTitreMenu>> GetSousTitreMenuHorsLigne()
