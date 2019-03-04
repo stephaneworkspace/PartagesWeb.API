@@ -53,6 +53,7 @@ namespace PartagesWeb.API.Controllers
         /// if (newSection.TitreMenus.Count > 0)
         /// 24 février : (pas urgent, mais fais un unit test de ça)
         /// Vérifier si unique Nom ainsi que mise offline
+        /// 5 mars fais le reverse pour titre menu sous titre menu... ne fonctionne pas à lire comme ça
         /// </remarks>
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
@@ -69,25 +70,32 @@ namespace PartagesWeb.API.Controllers
             var articleHorsLigneToReturn = _mapper.Map<List<ArticleForListDto>>(articleHorsLigne);
 
             // Section
-            SectionForListDto newSection = new SectionForListDto();
-            newSection.Id = default(int);
-            newSection.Nom = "Titre de menus hors ligne";
-            newSection.Icone = "toggle-off";
-            newSection.Position = 1;
-            newSection.SwHorsLigne = true;
+            SectionForListDto newSection = new SectionForListDto
+            {
+                Id = default(int),
+                Nom = "Titre de menus hors ligne",
+                Icone = "toggle-off",
+                Position = 1,
+                SwHorsLigne = true
+            };
 
             // Titre Menu
-            TitreMenuForListDto newTitreMenu = new TitreMenuForListDto();
-            newTitreMenu.Id = default(int);
-            newTitreMenu.Nom = "Sous titre de menus hors ligne";
-            // newTitreMenu.Position = 1;
-            newTitreMenu.SousTitreMenus = sousTitreMenusHorsLigneToReturn;
+            TitreMenuForListDto newTitreMenu = new TitreMenuForListDto
+            {
+                Id = default(int),
+                Nom = "Sous titre de menus hors ligne",
+                // newTitreMenu.Position = 1;
+                SousTitreMenus = sousTitreMenusHorsLigneToReturn
+            };
 
             // Sous titre menu
-            SousTitreMenuForListDto newSousTitreMenu = new SousTitreMenuForListDto();
-            newSousTitreMenu.Id = default(int);
-            newSousTitreMenu.Nom = "Articles hors ligne";
-            newSousTitreMenu.Articles = articleHorsLigneToReturn;
+            SousTitreMenuForListDto newSousTitreMenu = new SousTitreMenuForListDto
+            {
+                Id = default(int),
+                Nom = "Articles hors ligne",
+                Articles = articleHorsLigneToReturn
+            };
+            newTitreMenu.SousTitreMenus.Add(newSousTitreMenu);
 
 
             var swFind = false;
@@ -111,6 +119,7 @@ namespace PartagesWeb.API.Controllers
 
             // Section
             newSection.TitreMenus = titreMenusHorsLigneToReturn;
+            
                                              
             sectionsToReturn.Add(newSection);
 

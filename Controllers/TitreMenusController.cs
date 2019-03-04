@@ -53,13 +53,17 @@ namespace PartagesWeb.API.Controllers
         {
             var titreMenus = await _repo.GetTitreMenus();
             var titreMenusToReturn = _mapper.Map<List<TitreMenuForSelectDto>>(titreMenus);
-            var newTitreMenu = new TitreMenuForSelectDto();
-            newTitreMenu.Id = default(int);
-            newTitreMenu.Nom = "Titre de menus hors ligne";
-            newTitreMenu.SectionId = default(int);
-            newTitreMenu.Section = new SectionForSelectInsideDto();
-            newTitreMenu.Section.Id = default(int);
-            newTitreMenu.Section.Nom = "Hors ligne";
+            TitreMenuForSelectDto newTitreMenu = new TitreMenuForSelectDto
+            {
+                Id = default(int),
+                Nom = "Titre de menus hors ligne",
+                SectionId = default(int),
+                Section = new SectionForSelectInsideDto
+                {
+                    Id = default(int),
+                    Nom = "Hors ligne"
+                }
+            };
             titreMenusToReturn.Add(newTitreMenu);
 
             /*
@@ -154,10 +158,12 @@ namespace PartagesWeb.API.Controllers
             position++;
 
             // Préparation du model
-            var item = new TitreMenu();
-            item.SectionId = dto.SectionId > 0 ? dto.SectionId : null;
-            item.Nom = dto.Nom;
-            item.Position = position;
+            TitreMenu item = new TitreMenu
+            {
+                SectionId = dto.SectionId > 0 ? dto.SectionId : null,
+                Nom = dto.Nom,
+                Position = position
+            };
 
             _repo.Add(item);
 

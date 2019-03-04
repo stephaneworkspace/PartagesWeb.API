@@ -80,11 +80,13 @@ namespace PartagesWeb.API.Controllers
             position++;
 
             // Préparation du model
-            Article item = new Article();
-            item.SousTitreMenuId = dto.SousTitreMenuId > 0 ? dto.SousTitreMenuId : null;
-            item.Nom = dto.Nom;
-            item.Position = position;
-            item.Contenu = dto.Contenu;
+            Article item = new Article
+            {
+                SousTitreMenuId = dto.SousTitreMenuId > 0 ? dto.SousTitreMenuId : null,
+                Nom = dto.Nom,
+                Position = position,
+                Contenu = dto.Contenu
+            };
 
             _repo.Add(item);
 

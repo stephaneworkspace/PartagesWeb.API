@@ -375,9 +375,11 @@ namespace PartagesWeb.API.Data
                 .ToListAsync();
             List<TitreMenu> itemOfflineok = new List<TitreMenu>();
 
-            var sectionOffline = new Section();
-            sectionOffline.Id = default(int);
-            sectionOffline.Nom = "Hors ligne";
+            Section sectionOffline = new Section
+            {
+                Id = default(int),
+                Nom = "Hors ligne"
+            };
             foreach (var unite in itemOffline)
             {
                 unite.Section = sectionOffline;
@@ -599,13 +601,17 @@ namespace PartagesWeb.API.Data
                 .ToListAsync();
             List<SousTitreMenu> itemOfflineok = new List<SousTitreMenu>();
 
-            var sectionOffline = new Section();
-            sectionOffline.Id = default(int);
-            sectionOffline.Nom = "Section hors ligne";
-            var titreMenuOffline = new TitreMenu();
-            titreMenuOffline.Id = default(int);
-            titreMenuOffline.Nom = "Titre du menu hors ligne";
-            titreMenuOffline.Section = sectionOffline;
+            Section sectionOffline = new Section
+            {
+                Id = default(int),
+                Nom = "Section hors ligne"
+            };
+            var titreMenuOffline = new TitreMenu
+            {
+                Id = default(int),
+                Nom = "Titre du menu hors ligne",
+                Section = sectionOffline
+            };
             foreach (var unite in itemOffline)
             {
                 unite.TitreMenu = titreMenuOffline;

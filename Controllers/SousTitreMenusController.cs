@@ -53,17 +53,21 @@ namespace PartagesWeb.API.Controllers
         {
             var sousTitreMenus = await _repo.GetSousTitreMenus();
             var sousTitreMenusToReturn = _mapper.Map<List<SousTitreMenuForSelectDto>>(sousTitreMenus);
-            SousTitreMenuForSelectDto newSousTitreMenu = new SousTitreMenuForSelectDto();
-            newSousTitreMenu.Id = default(int);
-            newSousTitreMenu.Nom = "Sous titre de menus hors ligne";
-            newSousTitreMenu.TitreMenuId = default(int);
-            newSousTitreMenu.TitreMenu = new TitreMenuForSelectInsideDto();
+            SousTitreMenuForSelectDto newSousTitreMenu = new SousTitreMenuForSelectDto
+            {
+                Id = default(int),
+                Nom = "Sous titre de menus hors ligne",
+                TitreMenuId = default(int),
+                TitreMenu = new TitreMenuForSelectInsideDto()
+            };
             newSousTitreMenu.TitreMenu.Id = default(int);
             newSousTitreMenu.TitreMenu.Nom = "Titre du menu hors ligne";
             newSousTitreMenu.TitreMenu.SectionId = default(int);
-            newSousTitreMenu.TitreMenu.Section = new SectionForSelectInsideDto();
-            newSousTitreMenu.TitreMenu.Section.Id = default(int);
-            newSousTitreMenu.TitreMenu.Section.Nom = "Sections hors ligne";
+            newSousTitreMenu.TitreMenu.Section = new SectionForSelectInsideDto
+            {
+                Id = default(int),
+                Nom = "Sections hors ligne"
+            };
             sousTitreMenusToReturn.Add(newSousTitreMenu);
 
             return Ok(sousTitreMenusToReturn);
@@ -108,10 +112,12 @@ namespace PartagesWeb.API.Controllers
             position++;
 
             // Préparation du model
-            SousTitreMenu item = new SousTitreMenu();
-            item.TitreMenuId = dto.TitreMenuId > 0 ? dto.TitreMenuId : null;
-            item.Nom = dto.Nom;
-            item.Position = position;
+            SousTitreMenu item = new SousTitreMenu
+            {
+                TitreMenuId = dto.TitreMenuId > 0 ? dto.TitreMenuId : null,
+                Nom = dto.Nom,
+                Position = position
+            };
 
             _repo.Add(item);
 
