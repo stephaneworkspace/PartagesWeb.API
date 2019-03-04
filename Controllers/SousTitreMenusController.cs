@@ -44,12 +44,37 @@ namespace PartagesWeb.API.Controllers
             _repo = repo;
         }
 
+        /// <summary>  
+        /// Cette méthode permet de retourner les titres menu d'une clé principale section
+        /// </summary> 
+        [HttpGet]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(SousTitreMenuForSelectDto[]), Description = "Liste des sous titres du menus")]
+        public async Task<IActionResult> GetTitreMenus()
+        {
+            var sousTitreMenus = await _repo.GetSousTitreMenus();
+            var sousTitreMenusToReturn = _mapper.Map<List<SousTitreMenuForSelectDto>>(sousTitreMenus);
+            var newSousTitreMenu = new SousTitreMenuForSelectDto();
+            newSousTitreMenu.Id = default(int);
+            newSousTitreMenu.Nom = "Sous titre de menus hors ligne";
+            newSousTitreMenu.TitreMenuId = default(int);
+            newSousTitreMenu.TitreMenu = new TitreMenuForSelectInsideDto();
+            newSousTitreMenu.TitreMenu.Id = default(int);
+            newSousTitreMenu.TitreMenu.Nom = "Titre du menu hors ligne";
+            newSousTitreMenu.TitreMenu.SectionId = default(int);
+            newSousTitreMenu.TitreMenu.Section = new SectionForSelectInsideDto();
+            newSousTitreMenu.TitreMenu.Section.Id = default(int);
+            newSousTitreMenu.TitreMenu.Section.Nom = "Sections hors ligne";
+            sousTitreMenusToReturn.Add(newSousTitreMenu);
+
+            return Ok(sousTitreMenusToReturn);
+        }
+
         /// <summary>
         /// Cette méthode permet d'acceder à un sous titre de menu précis
         /// </summary>
         /// <param name="id">Clé principale du sous titre menu à atteindre</param>
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(SousTitreMenuForReadDto), Description = "Le sous titre de menu à atteindre")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(SousTitreMenuForReadDto), Description = "Le sous titre du menu à atteindre")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder au sous titre du menu")]
         public async Task<IActionResult> GetSousTitreMenu(int id)
         {

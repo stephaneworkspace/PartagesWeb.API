@@ -48,7 +48,7 @@ namespace PartagesWeb.API.Controllers
         /// Cette méthode permet de retourner les titres menu d'une clé principale section
         /// </summary> 
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForSelectDto[]), Description = "Liste des titres menus")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForSelectDto[]), Description = "Liste des titres du menus")]
         public async Task<IActionResult> GetTitreMenus()
         {
             var titreMenus = await _repo.GetTitreMenus();
@@ -120,7 +120,7 @@ namespace PartagesWeb.API.Controllers
         /// </summary>
         /// <param name="id">Clé principale du titre menu à atteindre</param>
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForReadDto), Description = "Le titre de menu à atteindre")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(TitreMenuForReadDto), Description = "Le titre du menu à atteindre")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder au titre du menu")]
         public async Task<IActionResult> GetTitreMenu(int id)
         {
