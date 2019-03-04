@@ -58,6 +58,8 @@ namespace PartagesWeb.API
             services.AddSwaggerDocument();
             services.AddCors();
             services.AddAutoMapper();
+            // services.AddSingleton<IConfiguration>(Configuration); // BRICOLAGE 5 février > à effacer
+            // services.AddScoped<IGestionPagesRepository, GestionPagesRepository>(); BRICOLAGE 5 février > à effacer
             // Seed
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();

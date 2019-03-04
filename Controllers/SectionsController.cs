@@ -60,14 +60,16 @@ namespace PartagesWeb.API.Controllers
         {
             var sections = await _repo.GetSections();
             var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
-            var sousTitreMenusHorsligne = await _repo.GetSousTitreMenuHorsLigne();
+            var sousTitreMenusHorsLigne = await _repo.GetSousTitreMenuHorsLigne();
+            var articleHorsLigne = await _repo.GetArticleHorsLigne();
 
             var sectionsToReturn = _mapper.Map<List<SectionForListDto>>(sections);
             var titreMenusHorsLigneToReturn = _mapper.Map<List<TitreMenuForListDto>>(titreMenusHorsLigne);
-            var sousTitreMenusHorsLigneToReturn = _mapper.Map<List<SousTitreMenuForListDto>>(sousTitreMenusHorsligne);
+            var sousTitreMenusHorsLigneToReturn = _mapper.Map<List<SousTitreMenuForListDto>>(sousTitreMenusHorsLigne);
+            var articleHorsLigneToReturn = _mapper.Map<List<ArticleForListDto>>(articleHorsLigne);
 
             // Section
-            var newSection = new SectionForListDto();
+            SectionForListDto newSection = new SectionForListDto();
             newSection.Id = default(int);
             newSection.Nom = "Titre de menus hors ligne";
             newSection.Icone = "toggle-off";
@@ -75,11 +77,17 @@ namespace PartagesWeb.API.Controllers
             newSection.SwHorsLigne = true;
 
             // Titre Menu
-            var newTitreMenu = new TitreMenuForListDto();
+            TitreMenuForListDto newTitreMenu = new TitreMenuForListDto();
             newTitreMenu.Id = default(int);
             newTitreMenu.Nom = "Sous titre de menus hors ligne";
             // newTitreMenu.Position = 1;
             newTitreMenu.SousTitreMenus = sousTitreMenusHorsLigneToReturn;
+
+            // Sous titre menu
+            SousTitreMenuForListDto newSousTitreMenu = new SousTitreMenuForListDto();
+            newSousTitreMenu.Id = default(int);
+            newSousTitreMenu.Nom = "Articles hors ligne";
+            newSousTitreMenu.Articles = articleHorsLigneToReturn;
 
 
             var swFind = false;

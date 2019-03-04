@@ -35,6 +35,12 @@ namespace PartagesWeb.API.Models
         /// Position
         /// </summary>
         public int Position { get; set; }
-
+        /// <summary>
+        /// Article relié à cette section
+        /// </summary>
+        /// <remarks>
+        /// Trouver un moyen de trier cette collection
+        /// </remarks>
+        public ICollection<Article> Articles { get; set; }
     }
 }

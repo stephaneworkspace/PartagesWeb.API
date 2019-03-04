@@ -8,7 +8,7 @@ namespace PartagesWeb.API.Dtos.GestionPages
     /// <summary>
     /// Dto pour l'affichage du tableau
     /// </summary>
-    public class SousTitreMenuForListDto
+    public class ArticleForListDto
     {
         /// <summary>
         /// Clé principale
@@ -19,12 +19,12 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// </summary>
         public string Nom { get; set; }
         /// <summary>
+        /// Nom du titre menu
+        /// </summary>
+        public string Contenu { get; set; }
+        /// <summary>
         /// Position
         /// </summary>
         public int Position { get; set; }
-        /// <summary>
-        /// Article relié à cette section
-        /// </summary>
-        public List<ArticleForListDto> Articles { get; set; }
     }
 }

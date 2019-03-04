@@ -18,7 +18,13 @@ namespace PartagesWeb.API.Dtos.GestionPages
         /// Nom de la section
         /// </summary>
         public string Nom { get; set; }
+        /// <summary>
+        /// Relation au model Section clé principale
+        /// </summary>
         public int? SectionId { get; set; }
+        /// <summary>
+        /// Model Section Dto
+        /// </summary>
         public virtual SectionForSelectInsideDto Section { get; set; }
     }
 }

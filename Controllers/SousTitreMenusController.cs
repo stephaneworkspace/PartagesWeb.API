@@ -53,7 +53,7 @@ namespace PartagesWeb.API.Controllers
         {
             var sousTitreMenus = await _repo.GetSousTitreMenus();
             var sousTitreMenusToReturn = _mapper.Map<List<SousTitreMenuForSelectDto>>(sousTitreMenus);
-            var newSousTitreMenu = new SousTitreMenuForSelectDto();
+            SousTitreMenuForSelectDto newSousTitreMenu = new SousTitreMenuForSelectDto();
             newSousTitreMenu.Id = default(int);
             newSousTitreMenu.Nom = "Sous titre de menus hors ligne";
             newSousTitreMenu.TitreMenuId = default(int);
@@ -108,7 +108,7 @@ namespace PartagesWeb.API.Controllers
             position++;
 
             // Préparation du model
-            var item = new SousTitreMenu();
+            SousTitreMenu item = new SousTitreMenu();
             item.TitreMenuId = dto.TitreMenuId > 0 ? dto.TitreMenuId : null;
             item.Nom = dto.Nom;
             item.Position = position;

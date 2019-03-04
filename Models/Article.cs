@@ -24,6 +24,10 @@ namespace PartagesWeb.API.Models
         /// </summary>
         public int? SousTitreMenuId { get; set; }
         /// <summary>
+        /// Relation avec model SousTitreMenu
+        /// </summary>
+        public virtual SousTitreMenu SousTitreMenu { get; set; }
+        /// <summary>
         /// Nom du titre menu
         /// </summary>
         public string Nom { get; set; }

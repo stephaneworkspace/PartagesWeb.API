@@ -87,6 +87,7 @@ namespace PartagesWeb.API.Data
                 .ThenBy(y => y.Position)
                 .Include(t => t.TitreMenus)
                 .Include("TitreMenus.SousTitreMenus") // .Include(i => i.Modules.Select(s => s.Chapters))
+                .Include("TitreMenus.SousTitreMenus.Articles")
                 .Select(p => SortIncludeSection(p))
                 // .OrderBy(u => u.TitreMenus.OrderBy(b => b.Position).FirstOrDefault().Position)
                 .ToListAsync();
@@ -119,7 +120,22 @@ namespace PartagesWeb.API.Data
         {
             p.SousTitreMenus = (p.SousTitreMenus as HashSet<SousTitreMenu>)?
                 .OrderBy(s => s.Position)
+                .Select(x => SortIncludeSousTitreMenu(x))
                 .ToHashSet<SousTitreMenu>();
+            return p;
+        }
+
+        /// <summary>
+        /// Sort include
+        /// </summary>
+        /// <remarks>https://stackoverflow.com/questions/15378136/entity-framework-ordering-includes</remarks>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private SousTitreMenu SortIncludeSousTitreMenu(SousTitreMenu p)
+        {
+            p.Articles = (p.Articles as HashSet<Article>)?
+                .OrderBy(s => s.Position)
+                .ToHashSet<Article>();
             return p;
         }
 

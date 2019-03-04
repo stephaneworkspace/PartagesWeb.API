@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
 using PartagesWeb.API.Dtos.GestionPages;
@@ -47,7 +47,7 @@ namespace PartagesWeb.API.Controllers
         [HttpGet("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ArticleForReadDto), Description = "L'article à atteindre")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'acceder à l'article")]
-        public async Task<IActionResult> GetSousTitreMenu(int id)
+        public async Task<IActionResult> GetArticle(int id)
         {
             var item = await _repo.GetArticle(id);
             if (item != null)
@@ -80,7 +80,7 @@ namespace PartagesWeb.API.Controllers
             position++;
 
             // Préparation du model
-            var item = new Article();
+            Article item = new Article();
             item.SousTitreMenuId = dto.SousTitreMenuId > 0 ? dto.SousTitreMenuId : null;
             item.Nom = dto.Nom;
             item.Position = position;

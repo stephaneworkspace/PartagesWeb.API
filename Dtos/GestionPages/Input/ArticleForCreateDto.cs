@@ -20,7 +20,7 @@ namespace PartagesWeb.API.Dtos.GestionPages
     public class ArticleForCreateDto
     {
         /// <summary>
-        /// TitreMenuId si sélectioné (sinon 0)
+        /// SousTitreMenuId si sélectioné (sinon 0)
         /// </summary>
         public int? SousTitreMenuId { get; set; }
         /// <summary>
