@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages
 {
     /// <summary>
-    /// Dto pour l'affichage du sous titre menu à éditer
+    /// Dto pour l'affichage de l'article à éditer
     /// </summary>
-    public class SousTitreMenuForReadDto
+    public class ArticleForReadDto
     {
         /// <summary>
         /// Clé principale
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// TitreMenuId si sélectioné (sinon 0)
+        /// SousTitreMenuId si sélectioné (sinon 0)
         /// </summary>
-        public int? TitreMenuId { get; set; }
+        public int? SousTitreMenuId { get; set; }
         /// <summary>
         /// Nom du titre menu
         /// </summary>
         public string Nom { get; set; }
+        /// <summary>
+        /// Contenu de l'article
+        /// </summary>
+        public string Contenu { get; set; }
     }
 }

@@ -49,7 +49,7 @@ namespace PartagesWeb.API.Controllers
         /// </summary> 
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, typeof(SousTitreMenuForSelectDto[]), Description = "Liste des sous titres du menus")]
-        public async Task<IActionResult> GetTitreMenus()
+        public async Task<IActionResult> GetSousTitreMenus()
         {
             var sousTitreMenus = await _repo.GetSousTitreMenus();
             var sousTitreMenusToReturn = _mapper.Map<List<SousTitreMenuForSelectDto>>(sousTitreMenus);
@@ -100,7 +100,7 @@ namespace PartagesWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom » est obligatoire.")]
         public async Task<IActionResult> Create(SousTitreMenuForCreateDto dto)
         {
-            if (await _repo.TitreMenuExists(dto.Nom.ToLower(), dto.TitreMenuId > 0 ? dto.TitreMenuId : null))
+            if (await _repo.SousTitreMenuExists(dto.Nom.ToLower(), dto.TitreMenuId > 0 ? dto.TitreMenuId : null))
                 return BadRequest("Le nom du sous titre du menu est déjà utilisé");
 
             // Déterminer la dernière position en ligne ou hors ligne
