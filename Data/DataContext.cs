@@ -50,6 +50,25 @@ namespace PartagesWeb.API.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new TitreMenuConfiguration());
+            modelBuilder.ApplyConfiguration(new SousTitreMenuConfiguration());
+
+            modelBuilder.Entity<Section>()
+                .HasMany<TitreMenu>(c => c.TitreMenus).WithOne(x => x.Section)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            // modelBuilder.Entity<TitreMenu>().HasKey(x => x.SectionId); plante
+
+            modelBuilder.Entity<TitreMenu>()
+                .HasMany<SousTitreMenu>(c => c.SousTitreMenus).WithOne(x => x.TitreMenu)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            // modelBuilder.Entity<SousTitreMenu>().HasKey(x => x.TitreMenuId); plante
+
+            modelBuilder.Entity<SousTitreMenu>()
+                .HasMany<Article>(c => c.Articles).WithOne(x => x.SousTitreMenu)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            // modelBuilder.Entity<Article>().HasKey(x => x.SousTitreMenuId); plante
         }
     }
 }

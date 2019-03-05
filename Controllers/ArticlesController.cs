@@ -173,7 +173,7 @@ namespace PartagesWeb.API.Controllers
                 return BadRequest("Impossible d'effacer l'article");
             }
 
-            await _repo.SortPositionSousTitreMenu(sousTitreMenuId);
+            await _repo.SortPositionArticle(sousTitreMenuId);
             await _repo.SaveAll();
             return Ok();
         }

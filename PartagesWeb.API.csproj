@@ -18,6 +18,14 @@
     <Compile Remove="Migrations\20190209165246_UserToUsername.Designer.cs" />
     <Compile Remove="Migrations\20190228215415_AjoutChampVirtuelTitreMenuEntity3.cs" />
     <Compile Remove="Migrations\20190228215415_AjoutChampVirtuelTitreMenuEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190305212716_SousTitreMenuSetDeleteBehaviorToRestrict.cs" />
+    <Compile Remove="Migrations\20190305212716_SousTitreMenuSetDeleteBehaviorToRestrict.Designer.cs" />
+    <Compile Remove="Migrations\20190305213234_DeleteBehaviorToRestrict.cs" />
+    <Compile Remove="Migrations\20190305213234_DeleteBehaviorToRestrict.Designer.cs" />
+    <Compile Remove="Migrations\20190305213759_DeleteBehaviorToRestrict.cs" />
+    <Compile Remove="Migrations\20190305213759_DeleteBehaviorToRestrict.Designer.cs" />
+    <Compile Remove="Migrations\20190305214005_DeleteBehaviorToRestrict.cs" />
+    <Compile Remove="Migrations\20190305214005_DeleteBehaviorToRestrict.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
