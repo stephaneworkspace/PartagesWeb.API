@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartagesWeb.API.Data;
 
 namespace PartagesWeb.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190307173147_CorrectionErreurSousTitreMenuEntity")]
+    partial class CorrectionErreurSousTitreMenuEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,21 +139,24 @@ namespace PartagesWeb.API.Migrations
                 {
                     b.HasOne("PartagesWeb.API.Models.SousTitreMenu", "SousTitreMenu")
                         .WithMany("Articles")
-                        .HasForeignKey("SousTitreMenuId");
+                        .HasForeignKey("SousTitreMenuId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("PartagesWeb.API.Models.SousTitreMenu", b =>
                 {
                     b.HasOne("PartagesWeb.API.Models.TitreMenu", "TitreMenu")
                         .WithMany("SousTitreMenus")
-                        .HasForeignKey("TitreMenuId");
+                        .HasForeignKey("TitreMenuId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("PartagesWeb.API.Models.TitreMenu", b =>
                 {
                     b.HasOne("PartagesWeb.API.Models.Section", "Section")
                         .WithMany("TitreMenus")
-                        .HasForeignKey("SectionId");
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

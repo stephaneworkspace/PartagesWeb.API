@@ -52,6 +52,8 @@ namespace PartagesWeb.API.Data
             modelBuilder.ApplyConfiguration(new TitreMenuConfiguration());
             modelBuilder.ApplyConfiguration(new SousTitreMenuConfiguration());
 
+            /*
+
             modelBuilder.Entity<Section>()
                 .HasMany<TitreMenu>(c => c.TitreMenus).WithOne(x => x.Section)
                  .OnDelete(DeleteBehavior.Restrict);
@@ -69,6 +71,24 @@ namespace PartagesWeb.API.Data
                  .OnDelete(DeleteBehavior.Restrict);
 
             // modelBuilder.Entity<Article>().HasKey(x => x.SousTitreMenuId); plante
+            */
+            /*
+            modelBuilder.Entity<SousTitreMenu>(e =>
+            {
+                e.HasOne(p => p.TitreMenu)
+                    .WithOne()
+                    .HasForeignKey<SousTitreMenu>(p => p.TitreMenuId)
+                    .IsRequired(false);
+            });*/
+
+            /*
+            modelBuilder.Entity<SousTitreMenu>()
+                .HasMany(s => s.Articles)
+                .WithOne(c => c.SousTitreMenu)
+                .OnDelete(DeleteBehavior.Restrict);
+            */
+
+
         }
     }
 }

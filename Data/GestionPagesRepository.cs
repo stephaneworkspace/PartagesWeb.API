@@ -475,6 +475,36 @@ namespace PartagesWeb.API.Data
         }
 
         /// <summary>
+        /// Cette méthode permet d'effacer une entitée TitreMenu ainsi que rendre offline SousTitreMenu[]
+        /// </summary>
+        /// <param name="item">TitreMenu à effacer</param>
+        public async Task<bool> DeleteTitreMenu(TitreMenu item)
+        {
+            int lastPositonOffline = _context.SousTitreMenus
+                .Where(x => x.TitreMenuId == null)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+
+
+            var otherItem = await _context.SousTitreMenus
+                .Where(x => x.TitreMenuId == item.Id)
+                .ToListAsync();
+            // 23 février : LAST OFFLINE POSITION A TESTER
+
+
+            foreach (var unite in otherItem)
+            {
+                unite.TitreMenuId = null;
+                unite.Position = lastPositonOffline++;
+                _context.SousTitreMenus.Update(unite);
+            }
+            _context.TitreMenus.Remove(item);
+            return true;
+        }
+
+        /// <summary>
         /// Monter un titre de menu
         /// </summary>
         /// <param name="id">Clé principale du model TitreMenu à monter</param>
@@ -701,6 +731,36 @@ namespace PartagesWeb.API.Data
                 record.Position = i;
                 _context.SousTitreMenus.Update(record);
             }
+            return true;
+        }
+
+        /// <summary>
+        /// Cette méthode permet d'effacer une entitée SousTitreMenu ainsi que rendre offline Article[]
+        /// </summary>
+        /// <param name="item">SousTitreMenu à effacer</param>
+        public async Task<bool> DeleteSousTitreMenu(SousTitreMenu item)
+        {
+            int lastPositonOffline = _context.Articles
+                .Where(x => x.SousTitreMenuId == null)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+
+
+            var otherItem = await _context.Articles
+                .Where(x => x.SousTitreMenuId == item.Id)
+                .ToListAsync();
+            // 23 février : LAST OFFLINE POSITION A TESTER
+
+
+            foreach (var unite in otherItem)
+            {
+                unite.SousTitreMenuId = null;
+                unite.Position = lastPositonOffline++;
+                _context.Articles.Update(unite);
+            }
+            _context.SousTitreMenus.Remove(item);
             return true;
         }
 

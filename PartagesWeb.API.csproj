@@ -26,6 +26,10 @@
     <Compile Remove="Migrations\20190305213759_DeleteBehaviorToRestrict.Designer.cs" />
     <Compile Remove="Migrations\20190305214005_DeleteBehaviorToRestrict.cs" />
     <Compile Remove="Migrations\20190305214005_DeleteBehaviorToRestrict.Designer.cs" />
+    <Compile Remove="Migrations\20190307172046_test.cs" />
+    <Compile Remove="Migrations\20190307172046_test.Designer.cs" />
+    <Compile Remove="Migrations\20190307172328_CorrectionErreurSousTitreMenuEntity.cs" />
+    <Compile Remove="Migrations\20190307172328_CorrectionErreurSousTitreMenuEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

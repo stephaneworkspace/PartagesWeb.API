@@ -126,6 +126,12 @@ namespace PartagesWeb.API.Data
         /// <param name="sectionId">Clé du model Section int? pour trier cette section</param>
         Task<bool> SortPositionTitreMenu(int? sectionId);
         /// <summary>
+        /// Cette méthode permet d'effacer une entitée TitreMenu ainsi que rendre offline SousTitreMenu[]
+        /// </summary>
+        /// <param name="item">TitreMenu à effacer</param>
+        /// <returns></returns>
+        Task<bool> DeleteTitreMenu(TitreMenu item);
+        /// <summary>
         /// Monter un titre de menu
         /// </summary>
         /// <param name="id">Clé principale du model TitreMenu à monter</param>
@@ -175,6 +181,12 @@ namespace PartagesWeb.API.Data
         /// <param name="titreMenuId">Clé du model TitreMenu int? pour trier ce titre de menu</param>
         Task<bool> SortPositionSousTitreMenu(int? titreMenuId);
         /// <summary>
+        /// Cette méthode permet d'effacer une entitée SousTitreMenu ainsi que rendre offline Article[]
+        /// </summary>
+        /// <param name="item">SousTitreMenu à effacer</param>
+        /// <returns></returns>
+        Task<bool> DeleteSousTitreMenu(SousTitreMenu item);
+        /// <summary>
         /// Monter un sous titre de menu
         /// </summary>
         /// <param name="id">Clé principale du model SousTitreMenu à monter</param>
@@ -219,6 +231,12 @@ namespace PartagesWeb.API.Data
         /// </summary>
         /// <param name="sousTitreMenuId">Clé du model SousTitreMenu int? pour trier cet article</param>
         Task<bool> SortPositionArticle(int? sousTitreMenuId);
+        /// <summary>
+        /// Cette méthode permet d'effacer une entitée Article
+        /// </summary>
+        /// <param name="item">Article à effacer</param>
+        /// <returns></returns>
+        // Task<bool> DeleteArticle(Article item);
         /// <summary>
         /// Monter un article
         /// </summary>

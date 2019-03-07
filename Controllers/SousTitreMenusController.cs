@@ -195,7 +195,7 @@ namespace PartagesWeb.API.Controllers
 
             if (item != null)
             {
-                _repo.Delete(item);
+                await _repo.DeleteSousTitreMenu(item);
                 await _repo.SaveAll();
             }
             else
