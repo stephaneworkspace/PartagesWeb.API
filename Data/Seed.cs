@@ -62,6 +62,7 @@ namespace PartagesWeb.API.Data
         /// </remarks>///
         public async void SeedSections()
         {
+            // Section
             var sectionData = System.IO.File.ReadAllText("Data/Seed/SectionsSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var sections = JsonConvert.DeserializeObject<List<Section>>(sectionData);
             foreach (var section in sections)
@@ -77,6 +78,7 @@ namespace PartagesWeb.API.Data
                 }
                 await _context.SaveChangesAsync();
             }
+            // TitreMenu
             var titreMenuData = System.IO.File.ReadAllText("Data/Seed/TitreMenuSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var titreMenusDto = JsonConvert.DeserializeObject<List<TitreMenuForSeedDto>>(titreMenuData);
             foreach (var titreMenuDto in titreMenusDto)
@@ -98,6 +100,7 @@ namespace PartagesWeb.API.Data
                     await _context.SaveChangesAsync();
                 } 
             }
+            // SousTitreMenu
             var sousTitreMenuData = System.IO.File.ReadAllText("Data/Seed/SousTitreMenuSeedData.json", Encoding.GetEncoding("iso-8859-1"));
             var sousTitreMenusDto = JsonConvert.DeserializeObject<List<SousTitreMenuForSeedDto>>(sousTitreMenuData);
             foreach (var sousTitreMenuDto in sousTitreMenusDto)
@@ -116,6 +119,29 @@ namespace PartagesWeb.API.Data
                         Position = position
                     };
                     _context.SousTitreMenus.Add(sousTitreMenu);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            // Article
+            var articleData = System.IO.File.ReadAllText("Data/Seed/ArticleSeedData.json", Encoding.GetEncoding("iso-8859-1"));
+            var articlesDto = JsonConvert.DeserializeObject<List<ArticleForSeedDto>>(articleData);
+            foreach (var articleDto in articlesDto)
+            {
+                if (!_context.Articles.Any(x => x.Nom.ToLower() == articleDto.Nom.ToLower()))
+                {
+                    SousTitreMenu sousTitreMenu = _context.SousTitreMenus.Where(x => x.Nom == articleDto.NomSousTitreMenu).First();
+                    // Prochaine position
+                    var position = await LastPositionSousTitreMenu(sousTitreMenu.Id);
+                    // Prochaine position
+                    position++;
+                    Article article = new Article
+                    {
+                        SousTitreMenuId = sousTitreMenu.Id,
+                        Nom = articleDto.Nom,
+                        Contenu = articleDto.Contenu,
+                        Position = position
+                    };
+                    _context.Articles.Add(article);
                     await _context.SaveChangesAsync();
                 }
             }

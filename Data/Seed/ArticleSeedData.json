@@ -1,0 +1,7 @@
+[
+  {
+    "NomSousTitreMenu": "Debian",
+    "Nom": "Ajouter un utilisateur",
+    "Contenu": "Voici la commande linux pour ajouter l'utilisateur \"stephane\" :\n```bash\nuseradd -m -d /home/stephane/ -s /bin/bash stephane\n```\n• -m Pour la creation du répertoire de home\n• -d Pour indiquer le chemin du repertoire de home\n• -s Pour indiquer le shell que l'on souhaite utiliser\n\n\nUne fois que l'utilisateur est crée, voici la commande pour changer son mot de passe :\n```bash\npasswd stephane\n```"
+  }
+]
