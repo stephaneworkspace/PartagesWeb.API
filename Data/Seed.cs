@@ -2,7 +2,9 @@
 // <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
 // <author>Stéphane</author>
 //-----------------------------------------------------------------------
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PartagesWeb.API.Dtos.GestionPages;
 using PartagesWeb.API.Models;
 using System;
 using System.Collections.Generic;
@@ -76,6 +78,27 @@ namespace PartagesWeb.API.Data
                 }
                 await _context.SaveChangesAsync();
             }
+            var titreMenuData = System.IO.File.ReadAllText("Data/Seed/TitreMenuSeedData.json", Encoding.GetEncoding("iso-8859-1"));
+            var titreMenusDto = JsonConvert.DeserializeObject<List<TitreMenuForSeedDto>>(titreMenuData);
+            foreach (var titreMenuDto in titreMenusDto)
+            {
+                if (!_context.TitreMenus.Any(x => x.Nom.ToLower() == titreMenuDto.Nom.ToLower()))
+                {
+                    Section section = _context.Sections.Where(x => x.Nom == titreMenuDto.NomSection).First();
+                    // Prochaine position
+                    var position = await LastPositionTitreMenu(section.Id);
+                    // Prochaine position
+                    position++;
+                    TitreMenu titreMenu = new TitreMenu
+                    {
+                        SectionId = section.Id,
+                        Nom = titreMenuDto.Nom,
+                        Position = position
+                    };
+                    _context.TitreMenus.Add(titreMenu);
+                    await _context.SaveChangesAsync();
+                } 
+            }
         }
 
         ///<summary>
@@ -128,6 +151,23 @@ namespace PartagesWeb.API.Data
         {
             int lastPositon = _context.Sections
                 .Where(x => swHorsLigne == x.SwHorsLigne)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="sectionId">SectionId facultatif int?</param>
+        public async Task<int> LastPositionTitreMenu(int? sectionId)
+        {
+            int lastPositon;
+            lastPositon = _context.TitreMenus
+                .Where(x => sectionId == x.SectionId)
                 .OrderByDescending(x => x.Position)
                 .Select(p => p.Position)
                 .DefaultIfEmpty(0)
