@@ -1,10 +1,18 @@
 [
   {
     "NomSection": "Informatique Web",
-    "Nom": "Asp.net Core"
+    "Nom": "Linux"
   },
   {
     "NomSection": "Informatique Web",
-    "Nom": "Node.js"
+    "Nom": "Visual Studio Code"
+  },
+  {
+    "NomSection": "Informatique Web",
+    "Nom": "Visual Studio Community"
+  },
+  {
+    "NomSection": "Musique assisté par ordinateur",
+    "Nom":  "Ableton live"
   }
 ]

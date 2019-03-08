@@ -42,8 +42,7 @@ namespace PartagesWeb.API.Data
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
             foreach (var user in users)
             {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                CreatePasswordHash("password", out byte[] passwordHash, out byte[] passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
@@ -98,6 +97,27 @@ namespace PartagesWeb.API.Data
                     _context.TitreMenus.Add(titreMenu);
                     await _context.SaveChangesAsync();
                 } 
+            }
+            var sousTitreMenuData = System.IO.File.ReadAllText("Data/Seed/SousTitreMenuSeedData.json", Encoding.GetEncoding("iso-8859-1"));
+            var sousTitreMenusDto = JsonConvert.DeserializeObject<List<SousTitreMenuForSeedDto>>(sousTitreMenuData);
+            foreach (var sousTitreMenuDto in sousTitreMenusDto)
+            {
+                if (!_context.SousTitreMenus.Any(x => x.Nom.ToLower() == sousTitreMenuDto.Nom.ToLower()))
+                {
+                    TitreMenu titreMenu = _context.TitreMenus.Where(x => x.Nom == sousTitreMenuDto.NomTitreMenu).First();
+                    // Prochaine position
+                    var position = await LastPositionTitreMenu(titreMenu.Id);
+                    // Prochaine position
+                    position++;
+                    SousTitreMenu sousTitreMenu = new SousTitreMenu
+                    {
+                        TitreMenuId = titreMenu.Id,
+                        Nom = sousTitreMenuDto.Nom,
+                        Position = position
+                    };
+                    _context.SousTitreMenus.Add(sousTitreMenu);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
 
@@ -168,6 +188,23 @@ namespace PartagesWeb.API.Data
             int lastPositon;
             lastPositon = _context.TitreMenus
                 .Where(x => sectionId == x.SectionId)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="titreMenuId">TitreMenuId facultatif int?</param>
+        public async Task<int> LastPositionSousTitreMenu(int? titreMenuId)
+        {
+            int lastPositon;
+            lastPositon = _context.SousTitreMenus
+                .Where(x => titreMenuId == x.TitreMenuId)
                 .OrderByDescending(x => x.Position)
                 .Select(p => p.Position)
                 .DefaultIfEmpty(0)

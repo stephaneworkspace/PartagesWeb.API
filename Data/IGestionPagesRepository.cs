@@ -232,12 +232,6 @@ namespace PartagesWeb.API.Data
         /// <param name="sousTitreMenuId">Clé du model SousTitreMenu int? pour trier cet article</param>
         Task<bool> SortPositionArticle(int? sousTitreMenuId);
         /// <summary>
-        /// Cette méthode permet d'effacer une entitée Article
-        /// </summary>
-        /// <param name="item">Article à effacer</param>
-        /// <returns></returns>
-        // Task<bool> DeleteArticle(Article item);
-        /// <summary>
         /// Monter un article
         /// </summary>
         /// <param name="id">Clé principale du model ARticle à monter</param>
