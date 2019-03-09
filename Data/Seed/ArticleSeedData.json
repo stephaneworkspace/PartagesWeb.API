@@ -8,5 +8,20 @@
     "NomSousTitreMenu": "Debian",
     "Nom": "Installation docker + mssql",
     "Contenu": "```dash\napt-get update\napt-get install \\napt-transport-https \\nca-certificates \\ncurl \\ngnupg2 \\nsoftware-properties-common\n\ncurl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -\n```\n\nVérifier si on a la bonne clé en cherchant les 8 dernier caractères par rapport à  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88\n\n```dash\napt-key fingerprint 0EBFCD88\nadd-apt-repository \\n\"deb [arch=amd64] https://download.docker.com/linux/debian \\n$(lsb_release -cs) \\nstable\"\n\napt-get update\n\napt-get install docker-ce docker-ce-cli containerd.io\n\ndocker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=MyComplexPassword!234' -p 1433:1433 -v /root/myDB:/var/opt/mssql -d microsoft/mssql-server-linux\n```"
+  },
+  {
+    "NomSousTitreMenu": "Angular",
+    "Nom": "Installation d'angular",
+    "Contenu": "Insallation d'angular\n\n```bash\nnpm install -g @angular/cli\nng new my-app\n```\n\nLes extensions que j'utilise dans Visual Studio Code :\n• Angular 7 Snippets - TypeScript, Html, Angular Material, ngRx, RxJS & Flex Layout\n• Angular Files\n• Beautify\n• ESLint\n• Jasmine code snippets\n• Jasmine ES5 Code Snippets\n• npm\n• npm Intellisense\n• TSLint\n"
+  },
+  {
+    "NomSousTitreMenu": "Asp.net Core",
+    "Nom": "Lancer dotnet",
+    "Contenu": "Voici la commande pour lancer le dll d'une application dotnet en arrière plan\n```bash\nnohup dotnet yourapp.dll > /dev/null 2>&1 &\n```\nPour lancer sans arrière plan (avec Ctrl+C) pour interrompre\n```bash\ndotnet run yourapp.dll\n```\nPour tuer une application (en arrière plan)\n```bash\npkill -f dotnet\n```"
+  },
+  {
+    "NomSousTitreMenu": "Asp.net Core",
+    "Nom": "Installer Swagger",
+    "Contenu": "Dans le PacketManager\n```dash\ndotnet add package NSwag.AspNetCore\n```\nDans Startup.cs dans les declarations\n```dash\nUsing NGwag.AspnetCore;\n```\nDans Startup.cs dans ConfigureServices()\n```dash\nservices.AddSwaggerDocument();\n```\nDans Startup.cs dans Configure()\n```dash\napp.UseSwagger();\napp.UseSwaggerUi3();\n```\nDoc officiel:\nhttps://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-2.2&tabs=visual-studio%2Cvisual-studio-xml\n\nPour lancer Swagger:\nhttp://localhost:<port>/swagger pour voir le Swagger UI.\nhttp://localhost:<port>/swagger/v1/swagger.json pour voir le Swagger specification.\nPour lancer Swagger avec la touche Start de Visual Studio voici ma configuration de Properties/launchSettings.json\n```dash\n    \"PartagesWeb.API-Windows10\": {\n      \"commandName\": \"Project\",\n      \"launchBrowse\": true,\n      \"launchUrl\": \"swagger\",\n      \"environmentVariables\": {\n        \"ASPNETCORE_ENVIRONMENT\": \"Development\"\n      },\n      \"applicationUrl\": \"https://localhost:5001;http://localhost:5000\"\n    },\n```"
   }
 ]
