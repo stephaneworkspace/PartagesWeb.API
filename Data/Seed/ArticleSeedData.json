@@ -3,5 +3,10 @@
     "NomSousTitreMenu": "Debian",
     "Nom": "Ajouter un utilisateur",
     "Contenu": "Voici la commande linux pour ajouter l'utilisateur \"stephane\" :\n```bash\nuseradd -m -d /home/stephane/ -s /bin/bash stephane\n```\n• -m Pour la creation du répertoire de home\n• -d Pour indiquer le chemin du repertoire de home\n• -s Pour indiquer le shell que l'on souhaite utiliser\n\n\nUne fois que l'utilisateur est crée, voici la commande pour changer son mot de passe :\n```bash\npasswd stephane\n```"
+  },
+  {
+    "NomSousTitreMenu": "Debian",
+    "Nom": "Installation docker + mssql",
+    "Contenu": "```dash\napt-get update\napt-get install \\napt-transport-https \\nca-certificates \\ncurl \\ngnupg2 \\nsoftware-properties-common\n\ncurl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -\n```\n\nVérifier si on a la bonne clé en cherchant les 8 dernier caractères par rapport à  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88\n\n```dash\napt-key fingerprint 0EBFCD88\nadd-apt-repository \\n\"deb [arch=amd64] https://download.docker.com/linux/debian \\n$(lsb_release -cs) \\nstable\"\n\napt-get update\n\napt-get install docker-ce docker-ce-cli containerd.io\n\ndocker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=MyComplexPassword!234' -p 1433:1433 -v /root/myDB:/var/opt/mssql -d microsoft/mssql-server-linux\n```"
   }
 ]

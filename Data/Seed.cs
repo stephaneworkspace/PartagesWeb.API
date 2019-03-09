@@ -109,7 +109,7 @@ namespace PartagesWeb.API.Data
                 {
                     TitreMenu titreMenu = _context.TitreMenus.Where(x => x.Nom == sousTitreMenuDto.NomTitreMenu).First();
                     // Prochaine position
-                    var position = await LastPositionTitreMenu(titreMenu.Id);
+                    var position = await LastPositionSousTitreMenu(titreMenu.Id);
                     // Prochaine position
                     position++;
                     SousTitreMenu sousTitreMenu = new SousTitreMenu
@@ -131,7 +131,7 @@ namespace PartagesWeb.API.Data
                 {
                     SousTitreMenu sousTitreMenu = _context.SousTitreMenus.Where(x => x.Nom == articleDto.NomSousTitreMenu).First();
                     // Prochaine position
-                    var position = await LastPositionSousTitreMenu(sousTitreMenu.Id);
+                    var position = await LastPositionArticle(sousTitreMenu.Id);
                     // Prochaine position
                     position++;
                     Article article = new Article
@@ -231,6 +231,23 @@ namespace PartagesWeb.API.Data
             int lastPositon;
             lastPositon = _context.SousTitreMenus
                 .Where(x => titreMenuId == x.TitreMenuId)
+                .OrderByDescending(x => x.Position)
+                .Select(p => p.Position)
+                .DefaultIfEmpty(0)
+                .Max();
+            await Task.FromResult(lastPositon);
+            return lastPositon;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de détermine la dernière position
+        /// </summary>  
+        /// <param name="sousTitreMenuId">SousTitreMenuId facultatif int?</param>
+        public async Task<int> LastPositionArticle(int? sousTitreMenuId)
+        {
+            int lastPositon;
+            lastPositon = _context.Articles
+                .Where(x => sousTitreMenuId == x.SousTitreMenuId)
                 .OrderByDescending(x => x.Position)
                 .Select(p => p.Position)
                 .DefaultIfEmpty(0)
