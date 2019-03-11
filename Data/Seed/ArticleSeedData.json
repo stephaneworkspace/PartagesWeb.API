@@ -26,6 +26,11 @@
   },
   {
     "NomSousTitreMenu": "Asp.net Core",
+    "Nom": "Commandes Entity Framwork",
+    "Contenu": "Créer une nouvelle migration dans PacketManager\n```bash\n\nAdd-Migration UserToUsername\n```\nou\n```bash\ndotnet ef migrations add AddedUserEntity\n```\nRollback\n```bash\ndotnet ef migrations remove\n```\nou\n```bash\nRemove-Migrations\n```\nEnsuite la mise à jour de la base de donnée:\n```bash\ndotnet ef database update\n```"
+  },
+  {
+    "NomSousTitreMenu": "Asp.net Core",
     "Nom": "Installer Swagger",
     "Contenu": "Dans le PacketManager\n```dash\ndotnet add package NSwag.AspNetCore\n```\nDans Startup.cs dans les declarations\n```dash\nUsing NGwag.AspnetCore;\n```\nDans Startup.cs dans ConfigureServices()\n```dash\nservices.AddSwaggerDocument();\n```\nDans Startup.cs dans Configure()\n```dash\napp.UseSwagger();\napp.UseSwaggerUi3();\n```\nDoc officiel:\nhttps://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-2.2&tabs=visual-studio%2Cvisual-studio-xml\n\nPour lancer Swagger:\nhttp://localhost:<port>/swagger pour voir le Swagger UI.\nhttp://localhost:<port>/swagger/v1/swagger.json pour voir le Swagger specification.\nPour lancer Swagger avec la touche Start de Visual Studio voici ma configuration de Properties/launchSettings.json\n```dash\n    \"PartagesWeb.API-Windows10\": {\n      \"commandName\": \"Project\",\n      \"launchBrowse\": true,\n      \"launchUrl\": \"swagger\",\n      \"environmentVariables\": {\n        \"ASPNETCORE_ENVIRONMENT\": \"Development\"\n      },\n      \"applicationUrl\": \"https://localhost:5001;http://localhost:5000\"\n    },\n```"
   }
