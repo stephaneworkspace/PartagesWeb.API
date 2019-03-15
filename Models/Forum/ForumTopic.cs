@@ -23,14 +23,6 @@ namespace PartagesWeb.API.Models.Forum
         /// </summary>
         public virtual ForumCategorie ForumCategorie { get; set; }
         /// <summary>
-        /// Clé principal de l'utilisateur
-        /// </summary>
-        public int UserId { get; set; }
-        /// <summary>
-        /// Relation avec model User
-        /// </summary>
-        public virtual User User { get; set; }
-        /// <summary>
         /// Nom du topic
         /// </summary>
         public string Nom { get; set; }
