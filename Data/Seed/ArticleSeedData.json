@@ -10,6 +10,16 @@
     "Contenu": "```dash\napt-get update\napt-get install \\napt-transport-https \\nca-certificates \\ncurl \\ngnupg2 \\nsoftware-properties-common\n\ncurl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -\n```\n\nVérifier si on a la bonne clé en cherchant les 8 dernier caractères par rapport à  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88\n\n```dash\napt-key fingerprint 0EBFCD88\nadd-apt-repository \\n\"deb [arch=amd64] https://download.docker.com/linux/debian \\n$(lsb_release -cs) \\nstable\"\n\napt-get update\n\napt-get install docker-ce docker-ce-cli containerd.io\n\ndocker pull microsoft/mssql-server-linux\ndocker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=MyComplexPassword!234' -p 1433:1433 -v /root/myDB:/var/opt/mssql -d microsoft/mssql-server-linux\n```"
   },
   {
+    "NomSousTitreMenu": "Debian",
+    "Nom": "Espace libre sur HDD",
+    "Contenu": "```dash\ndf -h```"
+  },
+  {
+    "NomSousTitreMenu": "Debian",
+    "Nom": "Espace libre sur mémoire vive",
+    "Contenu": "```dash\free -m```"
+  },
+  {
     "NomSousTitreMenu": "Angular",
     "Nom": "Installation d'angular",
     "Contenu": "Insallation d'angular\n\n```bash\nnpm install -g @angular/cli\nng new my-app\n```\n\nLes extensions que j'utilise dans Visual Studio Code :\n• Angular 7 Snippets - TypeScript, Html, Angular Material, ngRx, RxJS & Flex Layout\n• Angular Files\n• Beautify\n• ESLint\n• Jasmine code snippets\n• Jasmine ES5 Code Snippets\n• npm\n• npm Intellisense\n• TSLint\n"
