@@ -8,7 +8,7 @@ namespace PartagesWeb.API.Models.Forum
     /// <summary>
     /// Topic du forum
     /// </summary>
-    public class ForumTopic
+    public class ForumSujet
     {
         /// <summary>
         /// Clé principale

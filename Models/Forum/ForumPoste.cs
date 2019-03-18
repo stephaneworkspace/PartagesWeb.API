@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PartagesWeb.API.Models.Forum
 {
-    public class ForumPost
+    public class ForumPoste
     {
         /// <summary>
         /// Clé principale

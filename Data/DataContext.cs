@@ -5,6 +5,7 @@
 using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Data.Configuration;
 using PartagesWeb.API.Models;
+using PartagesWeb.API.Models.Forum;
 
 namespace PartagesWeb.API.Data
 {
@@ -38,6 +39,15 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet la connexion au model SousTitreMenu
         /// </summary>
         public DbSet<SousTitreMenu> SousTitreMenus { get; set; }
+        /// <sumary> Cette méthode permet la connexion au model ForumCategorie
+        /// </sumary>
+        public DbSet<ForumCategorie> ForumCategories { get; set; }
+        /// <sumary> Cette méthode permet la connexion au model ForumPoste
+        /// </sumary>
+        public DbSet<ForumPoste> ForumPostes { get; set; }
+        /// <sumary> Cette méthode permet la connexion au model ForumSujet
+        /// </sumary>
+        public DbSet<ForumSujet> ForumSujets { get; set; }
         /// <summary>
         /// Cette méthode permet la connexion au model Article
         /// </summary>
