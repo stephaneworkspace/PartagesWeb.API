@@ -113,6 +113,7 @@ namespace PartagesWeb.API
             // seeder.SeedUsers();
             seeder.SeedSections();
             // seeder.SeedIcones();
+            seeder.SeedForum();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

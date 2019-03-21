@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PartagesWeb.API.Dtos.GestionPages;
 using PartagesWeb.API.Models;
+using PartagesWeb.API.Models.Forum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -162,6 +163,27 @@ namespace PartagesWeb.API.Data
                 if (!_context.Icones.Any(x => x.NomSelectBox.ToLower() == icone.NomSelectBox.ToLower()))
                 {
                     _context.Icones.Add(icone);
+                }
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        ///<summary>
+        ///Cette méthode permet d'ajouter les données seed du forum
+        ///</summary>
+        /// <remarks>
+        /// Don't work with IIS Express
+        /// </remarks>///
+        public async void SeedForum()
+        {
+            // Section
+            var itemData = System.IO.File.ReadAllText("Data/Seed/Forum/ForumCategorieData.json", Encoding.GetEncoding("iso-8859-1"));
+            var items = JsonConvert.DeserializeObject<List<ForumCategorie>>(itemData);
+            foreach (var item in items)
+            {
+                if (!_context.ForumCategories.Any(x => x.Nom.ToLower() == item.Nom.ToLower()))
+                {
+                    _context.ForumCategories.Add(item);
                 }
                 await _context.SaveChangesAsync();
             }
