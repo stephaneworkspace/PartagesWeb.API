@@ -39,7 +39,7 @@ namespace PartagesWeb.API.Models.Forum
         /// </summary>
         public virtual User User { get; set; }
         /// <summary>
-        /// Date du topic
+        /// Date du poste
         /// </summary>
         public DateTime Date { get; set; }
         /// <summary>

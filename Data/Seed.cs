@@ -207,6 +207,28 @@ namespace PartagesWeb.API.Data
                     await _context.SaveChangesAsync();
                 }
             }
+            // ForumPoste (a débrancher en prod car c'est totalement stupide le test de .Contenu
+            itemData = System.IO.File.ReadAllText("Data/Seed/Forum/ForumPosteData.json", Encoding.GetEncoding("iso-8859-1"));
+            var items3 = JsonConvert.DeserializeObject<List<ForumPosteForSeedDto>>(itemData);
+            foreach (var item in items3)
+            {
+                if (!_context.ForumPostes.Any(x => x.Contenu.ToLower() == item.Contenu.ToLower()))
+                {
+                    ForumCategorie forumCategorie = _context.ForumCategories.Where(x => x.Nom == item.NomForumCategorie).First();
+                    ForumSujet forumSujet = _context.ForumSujets.Where(x => x.Nom == item.NomForumSujet).First();
+                    User userPoste = _context.Users.Where(x => x.Username == item.NomUser).First();
+                    ForumPoste forumPoste = new ForumPoste
+                    {
+                        ForumCategorieId = forumCategorie.Id,
+                        ForumSujetId = forumSujet.Id,
+                        UserId = userPoste.Id,
+                        Date = item.Date,
+                        Contenu = item.Contenu
+                    };
+                    _context.ForumPostes.Add(forumPoste);
+                    await _context.SaveChangesAsync();
+                }
+            }
         }
 
         /// <summary>  

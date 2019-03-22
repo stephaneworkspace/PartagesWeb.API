@@ -12,25 +12,29 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages.Forum
 {
     /// <summary>
-    /// Dto pour la création de sujet dans le forum
+    /// Dto pour la création de poste dans le forum
     /// </summary>
-    public class ForumSujetForSeedDto
+    public class ForumPosteForSeedDto
     {
         /// <summary>
-        /// Nom Forum Categori
+        /// Nom Forum Categorie
         /// </summary>
         public string NomForumCategorie { get; set; }
         /// <summary>
-        /// Nom du topic unique (pour seed)
+        /// Nom Forum Sujet unique (pour seed)
         /// </summary>
-        public string Nom { get; set; }
+        public string NomForumSujet { get; set; }
         /// <summary>
-        /// Date du topic
+        /// Nom Username
+        /// </summary>
+        public string NomUser { get; set; }
+        /// <summary>
+        /// Date du poste
         /// </summary>
         public DateTime Date { get; set; }
         /// <summary>
-        /// Nombre de view
+        /// Contenu unique (pour seed)
         /// </summary>
-        public int View { get; set; }
+        public string Contenu { get; set; }
     }
 }
