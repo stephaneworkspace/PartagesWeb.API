@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Models.Forum
 {
     /// <summary>
-    /// Topic du forum
+    /// Model ForumSujet
     /// </summary>
     public class ForumSujet
     {

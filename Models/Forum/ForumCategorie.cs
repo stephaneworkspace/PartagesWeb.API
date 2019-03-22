@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace PartagesWeb.API.Models.Forum
 {
+    /// <summary>
+    /// Model ForumCategorie
+    /// </summary>
     public class ForumCategorie
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace PartagesWeb.API.Models.Forum
 {
+    /// <summary>
+    /// Model ForumPoste
+    /// </summary>
     public class ForumPoste
     {
         /// <summary>
@@ -14,11 +17,11 @@ namespace PartagesWeb.API.Models.Forum
         /// <summary>
         /// Clé principal du topic
         /// </summary>
-        public int ForumTopicId { get; set; }
+        public int ForumCategorieId { get; set; }
         /// <summary>
         /// Relation avec model toic
         /// </summary>
-        public virtual ForumCategorie ForumTopic { get; set; }
+        public virtual ForumCategorie ForumCategorie { get; set; }
         /// <summary>
         /// Clé principal de l'utilisateur
         /// </summary>
