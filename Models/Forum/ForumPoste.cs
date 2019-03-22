@@ -15,13 +15,21 @@ namespace PartagesWeb.API.Models.Forum
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Clé principal du topic
+        /// Clé principal de la catégorie
         /// </summary>
         public int ForumCategorieId { get; set; }
         /// <summary>
-        /// Relation avec model toic
+        /// Relation avec model ForumCategorie
         /// </summary>
         public virtual ForumCategorie ForumCategorie { get; set; }
+        /// <summary>
+        /// Clé principal du topic
+        /// </summary>
+        public int ForumSujetId { get; set; }
+        /// <summary>
+        /// Relation avec model ForumSujet
+        /// </summary>
+        public virtual ForumSujet ForumSujet { get; set; }
         /// <summary>
         /// Clé principal de l'utilisateur
         /// </summary>

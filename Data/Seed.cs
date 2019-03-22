@@ -5,6 +5,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PartagesWeb.API.Dtos.GestionPages;
+using PartagesWeb.API.Dtos.GestionPages.Forum;
 using PartagesWeb.API.Models;
 using PartagesWeb.API.Models.Forum;
 using System;
@@ -186,6 +187,25 @@ namespace PartagesWeb.API.Data
                     _context.ForumCategories.Add(item);
                 }
                 await _context.SaveChangesAsync();
+            }
+            // TitreMenu
+            itemData = System.IO.File.ReadAllText("Data/Seed/Forum/ForumSujetData.json", Encoding.GetEncoding("iso-8859-1"));
+            var items2 = JsonConvert.DeserializeObject<List<ForumPosteForSeedDto>>(itemData);
+            foreach (var item in items2)
+            {
+                if (!_context.ForumSujets.Any(x => x.Nom.ToLower() == item.Nom.ToLower()))
+                {
+                    ForumCategorie forumCategorie = _context.ForumCategories.Where(x => x.Nom == item.NomForumCategorie).First();
+                    ForumSujet forumSujet = new ForumSujet
+                    {
+                        ForumCategorieId = forumCategorie.Id,
+                        Nom = item.Nom,
+                        Date = item.Date,
+                        View = item.View
+                    };
+                    _context.ForumSujets.Add(forumSujet);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
 
