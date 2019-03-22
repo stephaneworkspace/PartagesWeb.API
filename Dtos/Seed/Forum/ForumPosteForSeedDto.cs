@@ -17,10 +17,6 @@ namespace PartagesWeb.API.Dtos.GestionPages.Forum
     public class ForumPosteForSeedDto
     {
         /// <summary>
-        /// Nom Forum Categorie
-        /// </summary>
-        public string NomForumCategorie { get; set; }
-        /// <summary>
         /// Nom Forum Sujet unique (pour seed)
         /// </summary>
         public string NomForumSujet { get; set; }

@@ -214,12 +214,12 @@ namespace PartagesWeb.API.Data
             {
                 if (!_context.ForumPostes.Any(x => x.Contenu.ToLower() == item.Contenu.ToLower()))
                 {
-                    ForumCategorie forumCategorie = _context.ForumCategories.Where(x => x.Nom == item.NomForumCategorie).First();
+                    // ForumCategorie forumCategorie = _context.ForumCategories.Where(x => x.Nom == item.NomForumCategorie).First();
                     ForumSujet forumSujet = _context.ForumSujets.Where(x => x.Nom == item.NomForumSujet).First();
                     User userPoste = _context.Users.Where(x => x.Username == item.NomUser).First();
                     ForumPoste forumPoste = new ForumPoste
                     {
-                        ForumCategorieId = forumCategorie.Id,
+                        // ForumCategorieId = forumCategorie.Id,
                         ForumSujetId = forumSujet.Id,
                         UserId = userPoste.Id,
                         Date = item.Date,

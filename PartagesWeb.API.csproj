@@ -30,6 +30,28 @@
     <Compile Remove="Migrations\20190307172046_test.Designer.cs" />
     <Compile Remove="Migrations\20190307172328_CorrectionErreurSousTitreMenuEntity.cs" />
     <Compile Remove="Migrations\20190307172328_CorrectionErreurSousTitreMenuEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190322130245_UpdateFormEntity.cs" />
+    <Compile Remove="Migrations\20190322130245_UpdateFormEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190322132948_UpdateFormEntity2.cs" />
+    <Compile Remove="Migrations\20190322132948_UpdateFormEntity2.Designer.cs" />
+    <Compile Remove="Migrations\20190322141229_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322141229_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322141620_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322141620_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322141847_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322141847_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322142430_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322142430_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322143729_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322143729_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322143934_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322143934_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322144241_UpdateFormEntity3.cs" />
+    <Compile Remove="Migrations\20190322144241_UpdateFormEntity3.Designer.cs" />
+    <Compile Remove="Migrations\20190322144430_UpdateFormEntity.cs" />
+    <Compile Remove="Migrations\20190322144430_UpdateFormEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190322144921_UpdateFormEntity.cs" />
+    <Compile Remove="Migrations\20190322144921_UpdateFormEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

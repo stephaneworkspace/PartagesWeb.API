@@ -11,8 +11,8 @@ using PartagesWeb.API.Data;
 namespace PartagesWeb.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190322141229_UpdateFormEntity3")]
-    partial class UpdateFormEntity3
+    [Migration("20190322145143_UpdateFormEntity")]
+    partial class UpdateFormEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,15 +66,11 @@ namespace PartagesWeb.API.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int>("ForumCategorieId");
-
                     b.Property<int>("ForumSujetId");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ForumCategorieId");
 
                     b.HasIndex("ForumSujetId");
 
@@ -206,11 +202,6 @@ namespace PartagesWeb.API.Migrations
 
             modelBuilder.Entity("PartagesWeb.API.Models.Forum.ForumPoste", b =>
                 {
-                    b.HasOne("PartagesWeb.API.Models.Forum.ForumCategorie", "ForumCategorie")
-                        .WithMany()
-                        .HasForeignKey("ForumCategorieId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("PartagesWeb.API.Models.Forum.ForumSujet", "ForumSujet")
                         .WithMany()
                         .HasForeignKey("ForumSujetId")
@@ -219,7 +210,7 @@ namespace PartagesWeb.API.Migrations
                     b.HasOne("PartagesWeb.API.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PartagesWeb.API.Models.Forum.ForumSujet", b =>

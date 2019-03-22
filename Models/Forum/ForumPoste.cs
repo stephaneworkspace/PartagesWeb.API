@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,16 +16,9 @@ namespace PartagesWeb.API.Models.Forum
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Clé principal de la catégorie
-        /// </summary>
-        public int ForumCategorieId { get; set; }
-        /// <summary>
-        /// Relation avec model ForumCategorie
-        /// </summary>
-        public virtual ForumCategorie ForumCategorie { get; set; }
-        /// <summary>
         /// Clé principal du topic
         /// </summary>
+        [Required]
         public int ForumSujetId { get; set; }
         /// <summary>
         /// Relation avec model ForumSujet
@@ -33,6 +27,7 @@ namespace PartagesWeb.API.Models.Forum
         /// <summary>
         /// Clé principal de l'utilisateur
         /// </summary>
+        [Required]
         public int UserId { get; set; }
         /// <summary>
         /// Relation avec model User
