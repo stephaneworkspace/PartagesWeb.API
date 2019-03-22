@@ -62,6 +62,23 @@ namespace PartagesWeb.API.Data
             modelBuilder.ApplyConfiguration(new TitreMenuConfiguration());
             modelBuilder.ApplyConfiguration(new SousTitreMenuConfiguration());
 
+            // A l'arrache (a faire plus en détail au futur)
+            modelBuilder.Entity<ForumSujet>()
+                .HasOne(s => s.ForumCategorie)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ForumPoste>()
+                .HasOne(s => s.ForumSujet)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // mettre un sw effacé à l'utilisateur et garder l'e-mail au cas ou il reviendrait
+            modelBuilder.Entity<ForumPoste>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
             /*
 
             modelBuilder.Entity<Section>()
