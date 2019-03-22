@@ -177,7 +177,7 @@ namespace PartagesWeb.API.Data
         /// </remarks>///
         public async void SeedForum()
         {
-            // Section
+            // ForumCategorie
             var itemData = System.IO.File.ReadAllText("Data/Seed/Forum/ForumCategorieData.json", Encoding.GetEncoding("iso-8859-1"));
             var items = JsonConvert.DeserializeObject<List<ForumCategorie>>(itemData);
             foreach (var item in items)
@@ -188,9 +188,9 @@ namespace PartagesWeb.API.Data
                 }
                 await _context.SaveChangesAsync();
             }
-            // TitreMenu
+            // ForumSujet
             itemData = System.IO.File.ReadAllText("Data/Seed/Forum/ForumSujetData.json", Encoding.GetEncoding("iso-8859-1"));
-            var items2 = JsonConvert.DeserializeObject<List<ForumPosteForSeedDto>>(itemData);
+            var items2 = JsonConvert.DeserializeObject<List<ForumSujetForSeedDto>>(itemData);
             foreach (var item in items2)
             {
                 if (!_context.ForumSujets.Any(x => x.Nom.ToLower() == item.Nom.ToLower()))

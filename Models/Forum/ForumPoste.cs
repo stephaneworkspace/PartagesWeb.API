@@ -38,10 +38,10 @@ namespace PartagesWeb.API.Models.Forum
         /// Relation avec model User
         /// </summary>
         public virtual User User { get; set; }
-        /// <sumary>
-        /// Position
-        /// </sumary>
-        public int Position { get; set; }
+        /// <summary>
+        /// Date du topic
+        /// </summary>
+        public DateTime Date { get; set; }
         /// <summary>
         /// Nom du topic
         /// </summary>

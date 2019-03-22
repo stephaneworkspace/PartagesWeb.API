@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.GestionPages.Forum
 {
     /// <summary>
-    /// Dto pour la création de poste dans le forum
+    /// Dto pour la création de sujet dans le forum
     /// </summary>
-    public class ForumPosteForSeedDto
+    public class ForumSujetForSeedDto
     {
         /// <summary>
         /// Nom Forum Categorie unique (pour seed)
