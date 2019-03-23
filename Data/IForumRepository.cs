@@ -1,0 +1,47 @@
+﻿using PartagesWeb.API.Helpers;
+using PartagesWeb.API.Helpers.Forum;
+using PartagesWeb.API.Models.Forum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace PartagesWeb.API.Data
+{
+    /// <summary>
+    /// Repository pour le forum
+    /// </summary>
+    public interface IForumRepository
+    {
+        /// <summary>  
+        /// Cette méthode permet d'ajouter une entité dans le DataContext
+        /// </summary>  
+        /// <typeparam name="T">Type d'entité</typeparam>
+        /// <param name="entity">Entitée au choix</param>
+        void Add<T>(T entity) where T : class;
+        /// <summary>
+        /// Cette méthode permet de mettre à jour l'entité dans le DataContext
+        /// </summary>
+        /// <typeparam name="T">Type d'entité</typeparam>
+        /// <param name="entity">Entitée au choix</param>
+        void Update<T>(T entity) where T : class;
+        /// <summary>  
+        /// Cette méthode permet d'effacer une entité dans le DataContext
+        /// </summary>  
+        /// <param name="entity">Entitée au choix</param>
+        void Delete<T>(T entity) where T : class;
+        /// <summary>  
+        /// Cette méthode permet de sauvegarder tout dans le DataContext
+        /// </summary> 
+        Task<bool> SaveAll();
+
+        /**
+         * ForumCategorie
+         **/
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir toutes les catégories
+        /// </summary>
+        Task<PagedList<ForumCategorie>> GetForumCategories(ForumCategorieParams forumCategorieParams);
+    }
+}
