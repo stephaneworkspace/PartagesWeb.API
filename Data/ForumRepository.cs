@@ -62,6 +62,10 @@ namespace PartagesWeb.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        /**
+         * ForumCategorie
+         **/
+
         /// <summary>
         /// Liste avec pagination des catégories du forum
         /// </summary>
@@ -72,6 +76,18 @@ namespace PartagesWeb.API.Data
             var items = _context.ForumCategories
                 .OrderBy(u => u.Nom).AsQueryable();
             return await PagedList<ForumCategorie>.CreateAsync(items, forumCategorieParams.PageNumber, forumCategorieParams.PageSize);
+        }
+
+        /// <summary>
+        /// Compter les sujets d'une catégorie du forum
+        /// </summary>
+        /// <param name="id">Clé principal Id ForumCategorie</param>
+        /// <returns></returns>
+        public async Task<int> GetCountSujet(int id)
+        {
+            var count = _context.ForumSujets.Where(x => x.ForumCategorieId == id).Count();
+            await Task.FromResult(count);
+            return count;
         }
     }
 }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PartagesWeb.API.Dtos.GestionPages.Output
+namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
     /// Dto pour l'affichage du tableau
     /// </summary>
-    public class SousTitreMenuForListDto
+    public class ForumCategorieForListDto
     {
         /// <summary>
         /// Clé principale
@@ -19,12 +19,12 @@ namespace PartagesWeb.API.Dtos.GestionPages.Output
         /// </summary>
         public string Nom { get; set; }
         /// <summary>
-        /// Position
+        /// Nombre de sujet(s)
         /// </summary>
-        public int Position { get; set; }
+        public int CountSujet { get; set; }
         /// <summary>
-        /// Article relié à cette section
+        /// Nombre de poste(s)
         /// </summary>
-        public List<ArticleForListDto> Articles { get; set; }
+        public int CountPoste { get; set; }
     }
 }

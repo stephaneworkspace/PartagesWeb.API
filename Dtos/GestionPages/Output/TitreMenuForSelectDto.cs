@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PartagesWeb.API.Dtos.GestionPages
+namespace PartagesWeb.API.Dtos.GestionPages.Output
 {
     /// <summary>
     /// Dto pour l'affichage du selectBox

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PartagesWeb.API.Dtos.GestionPages
+namespace PartagesWeb.API.Dtos.GestionPages.Input
 {
     /// <summary>
     /// Dto pour la mise à jour d'un titre de menu depuis le frontend

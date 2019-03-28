@@ -43,5 +43,11 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet d'obtenir toutes les catégories
         /// </summary>
         Task<PagedList<ForumCategorie>> GetForumCategories(ForumCategorieParams forumCategorieParams);
+        /// <summary>
+        /// Compter les sujets d'une catégorie du forum
+        /// </summary>
+        /// <param name="id">Clé principal Id ForumCategorie</param>
+        /// <returns></returns>
+        Task<int> GetCountSujet(int id);
     }
 }

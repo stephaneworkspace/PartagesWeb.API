@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
+using PartagesWeb.API.Dtos.Forum.Output;
 using PartagesWeb.API.Helpers.Forum;
+using PartagesWeb.API.Models.Forum;
 
 namespace PartagesWeb.API.Controllers.Forum
 {
@@ -22,8 +24,8 @@ namespace PartagesWeb.API.Controllers.Forum
     public class ForumCategoriesController : ControllerBase
     {
         private readonly IForumRepository _repo;
-        // private readonly IMapper _mapper;
-        // private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
 
         /// <summary>  
         /// Cette méthode est le constructeur 
@@ -31,10 +33,10 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <param name="repo">Repository Forum</param>
         /// <param name="mapper">Mapper de AutoMapper</param>
         /// <param name="config">Configuration</param>
-        public ForumCategoriesController(IForumRepository repo)//, IMapper mapper, IConfiguration config)
+        public ForumCategoriesController(IForumRepository repo, IMapper mapper, IConfiguration config)
         {
-            // _config = config;
-            // _mapper = mapper;
+            _config = config;
+            _mapper = mapper;
             _repo = repo;
         }
 
@@ -46,6 +48,18 @@ namespace PartagesWeb.API.Controllers.Forum
         public async Task<IActionResult> GetSections([FromQuery] ForumCategorieParams forumCategorieParams)
         {
             var items = await _repo.GetForumCategories(forumCategorieParams);
+            // var itemsDto = _mapper.Map<List<ForumCategorieForListDto>>(items);
+            List<ForumCategorieForListDto> newDto = new List<ForumCategorieForListDto>();
+            foreach (var unite in items)
+            {
+                ForumCategorieForListDto Dto = new ForumCategorieForListDto
+                {
+                    Id = unite.Id,
+                    Nom = unite.Nom
+                };
+                Dto.CountSujet = await _repo.GetCountSujet(unite.Id);
+                newDto.Add(Dto);
+            }
             /*
             var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
             var sousTitreMenusHorsLigne = await _repo.GetSousTitreMenuHorsLigne();
@@ -110,7 +124,7 @@ namespace PartagesWeb.API.Controllers.Forum
 
             sectionsToReturn.Add(newSection);*/
 
-            return Ok(items);
+            return Ok(newDto);
         }
     }
 }

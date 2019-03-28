@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
-using PartagesWeb.API.Dtos.GestionPages;
+using PartagesWeb.API.Dtos.GestionPages.Input;
+using PartagesWeb.API.Dtos.GestionPages.Output;
 using PartagesWeb.API.Models;
 
 namespace PartagesWeb.API.Controllers
