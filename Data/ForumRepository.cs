@@ -89,5 +89,23 @@ namespace PartagesWeb.API.Data
             await Task.FromResult(count);
             return count;
         }
+
+        /// <summary>
+        /// Compter les postes d'une catégorie du forum
+        /// </summary>
+        /// <param name="id">Clé principal Id ForumCategorie</param>
+        /// <returns></returns>
+        public async Task<int> GetCountPosteForumCategorie(int id)
+        {
+            var items = _context.ForumSujets.Where(x => x.ForumCategorieId == id);
+            var count = await Task.FromResult(0);
+            foreach (var unite in items)
+            {
+                var countTempo = _context.ForumPostes.Where(x => x.ForumSujetId == unite.Id).Count();
+                await Task.FromResult(countTempo);
+                count += countTempo;
+            }
+            return count;
+        }
     }
 }

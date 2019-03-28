@@ -58,6 +58,7 @@ namespace PartagesWeb.API.Controllers.Forum
                     Nom = unite.Nom
                 };
                 Dto.CountSujet = await _repo.GetCountSujet(unite.Id);
+                Dto.CountPoste = await _repo.GetCountPosteForumCategorie(unite.Id);
                 newDto.Add(Dto);
             }
             /*
