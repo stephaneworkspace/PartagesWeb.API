@@ -112,9 +112,9 @@ namespace PartagesWeb.API
             // Seed plus dans les param
             // Desactivé
             // seeder.SeedUsers();
-            seeder.SeedSections();
+            // seeder.SeedSections();
             // seeder.SeedIcones();
-            seeder.SeedForum();
+            // seeder.SeedForum();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

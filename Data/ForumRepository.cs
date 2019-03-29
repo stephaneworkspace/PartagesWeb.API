@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
 using PartagesWeb.API.Models.Forum;
@@ -107,5 +108,21 @@ namespace PartagesWeb.API.Data
             }
             return count;
         }
+
+        public async Task<ForumPoste> GetForumPosteTest(int id)
+        {
+            var item = await _context.ForumPostes.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
+        }
+        /*
+        /// <summary>
+        /// Obtenir le dernier poste d'une catégorie du forum
+        /// </summary>
+        /// <param name="id">Clé principale Id ForumCategorie</param>
+        /// <returns></returns>
+        public async Task<ForumPoste> GetDernierPosteForumCategorie(int id)
+        {
+            var sujets = _context.ForumSujets.Where(x => x.ForumCategorieId == id);
+        }*/
     }
 }

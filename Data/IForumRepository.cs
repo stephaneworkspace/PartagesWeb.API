@@ -46,15 +46,24 @@ namespace PartagesWeb.API.Data
         /// <summary>
         /// Compter les sujets d'une catégorie du forum
         /// </summary>
-        /// <param name="id">Clé principal Id ForumCategorie</param>
+        /// <param name="id">Clé principale Id ForumCategorie</param>
         /// <returns></returns>
         Task<int> GetCountSujet(int id);
 
         /// <summary>
         /// Compter les postes d'une catégorie du forum
         /// </summary>
-        /// <param name="id">Clé principal Id ForumCategorie</param>
+        /// <param name="id">Clé principale Id ForumCategorie</param>
         /// <returns></returns>
         Task<int> GetCountPosteForumCategorie(int id);
+
+        Task<ForumPoste> GetForumPosteTest(int id);
+        /*
+        /// <summary>
+        /// Obtenir le dernier poste d'une catégorie du forum
+        /// </summary>
+        /// <param name="id">Clé principale Id ForumCategorie</param>
+        /// <returns></returns>
+        Task<ForumPoste> GetDernierPosteForumCategorie(int id);*/
     }
 }

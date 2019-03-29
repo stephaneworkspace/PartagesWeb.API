@@ -213,7 +213,7 @@ namespace PartagesWeb.API.Migrations
             modelBuilder.Entity("PartagesWeb.API.Models.Forum.ForumSujet", b =>
                 {
                     b.HasOne("PartagesWeb.API.Models.Forum.ForumCategorie", "ForumCategorie")
-                        .WithMany()
+                        .WithMany("ForumSujets")
                         .HasForeignKey("ForumCategorieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

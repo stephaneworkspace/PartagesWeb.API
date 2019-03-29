@@ -52,6 +52,8 @@
     <Compile Remove="Migrations\20190322144430_UpdateFormEntity.Designer.cs" />
     <Compile Remove="Migrations\20190322144921_UpdateFormEntity.cs" />
     <Compile Remove="Migrations\20190322144921_UpdateFormEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190329204347_ModificationForumEntity.cs" />
+    <Compile Remove="Migrations\20190329204347_ModificationForumEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

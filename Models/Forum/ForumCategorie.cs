@@ -18,5 +18,12 @@ namespace PartagesWeb.API.Models.Forum
         /// Nom du topic
         /// </summary>
         public string Nom { get; set; }
+        /// <summary>
+        /// ForumSujet relié à cette catégorie
+        /// </summary>
+        /// <remarks>
+        /// Trouver un moyen de trier cette collection
+        /// </remarks>
+        public ICollection<ForumSujet> ForumSujets { get; set; }
     }
 }
