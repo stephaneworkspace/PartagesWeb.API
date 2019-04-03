@@ -24,6 +24,6 @@ namespace PartagesWeb.API.Models.Forum
         /// <remarks>
         /// Trouver un moyen de trier cette collection
         /// </remarks>
-        public ICollection<ForumSujet> ForumSujets { get; set; }
+        public virtual ICollection<ForumSujet> ForumSujets { get; set; }
     }
 }

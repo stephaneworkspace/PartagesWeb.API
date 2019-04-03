@@ -41,6 +41,6 @@ namespace PartagesWeb.API.Models
         /// <remarks>
         /// Trouver un moyen de trier cette collection
         /// </remarks>
-        public ICollection<SousTitreMenu> SousTitreMenus { get; set; }
+        public virtual ICollection<SousTitreMenu> SousTitreMenus { get; set; }
     }
 }

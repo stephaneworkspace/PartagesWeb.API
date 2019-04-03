@@ -54,6 +54,8 @@
     <Compile Remove="Migrations\20190322144921_UpdateFormEntity.Designer.cs" />
     <Compile Remove="Migrations\20190329204347_ModificationForumEntity.cs" />
     <Compile Remove="Migrations\20190329204347_ModificationForumEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190403134823_AjoutFKPourNePlusAvoirNullEntity.cs" />
+    <Compile Remove="Migrations\20190403134823_AjoutFKPourNePlusAvoirNullEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,6 +67,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />

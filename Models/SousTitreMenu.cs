@@ -41,6 +41,6 @@ namespace PartagesWeb.API.Models
         /// <remarks>
         /// Trouver un moyen de trier cette collection
         /// </remarks>
-        public ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }
