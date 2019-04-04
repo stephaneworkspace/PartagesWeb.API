@@ -109,6 +109,17 @@ namespace PartagesWeb.API.Data
             return count;
         }
 
+        /// <summary>
+        /// Obtenir le dernier poste d'une catégorie
+        /// </summary>
+        /// <param name="id">Id de la catégorie</param>
+        /// <returns></returns>
+        public async Task<ForumPoste> GetDernierForumPosteDeUneCategorie(int id)
+        {
+            var item = await _context.ForumPostes.Where(x => x.ForumSujet.ForumCategorieId == id).OrderByDescending(x => x.Date).FirstOrDefaultAsync();
+            return item;
+        }
+
         public async Task<ForumPoste> GetForumPosteTest(int id)
         {
             var item = await _context.ForumPostes.FirstOrDefaultAsync(x => x.Id == id);

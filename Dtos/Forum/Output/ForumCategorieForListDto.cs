@@ -26,5 +26,9 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// Nombre de poste(s)
         /// </summary>
         public int CountPoste { get; set; }
+        /// <summary>
+        /// Dernier Poste
+        /// </summary>
+        public ForumPosteForListForumCategorieDtoController DernierPoste { get; set; }
     }
 }
