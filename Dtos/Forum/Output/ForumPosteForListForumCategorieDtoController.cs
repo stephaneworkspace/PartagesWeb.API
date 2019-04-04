@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto pour l'affichage du tableau
+    /// Dto pour l'affichage à l'intégrieur de ForumCategorie
     /// </summary>
     public class ForumPosteForListForumCategorieDtoController
     {
@@ -23,9 +23,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// Relation avec model ForumSujet
         /// </summary>
-        /// <remarks>
-        /// // A FAIRE public virtual ForumSujet ForumSujet { get; set; }
-        /// </remarks>
+        public virtual ForumSujetForListForumCategorieDto ForumSujet { get; set; }
         /// <summary>
         /// Clé principal de l'utilisateur
         /// </summary>
@@ -33,9 +31,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// Relation avec model User
         /// </summary>
-        /// <remarks>
-        ///public virtual User User { get; set; }
-        /// </remarks>
+        public virtual UsetsForListForumCategorieDto User { get; set; }
         /// <summary>
         /// Date du poste
         /// </summary>
