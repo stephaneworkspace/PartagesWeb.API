@@ -135,5 +135,22 @@ namespace PartagesWeb.API.Data
         {
             var sujets = _context.ForumSujets.Where(x => x.ForumCategorieId == id);
         }*/
+
+        /**
+         * ForumPoste
+         **/
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les postes
+        /// </summary>
+        /// <param name="forumPosteParams">Pagination</param>
+        /// <param name="id">Id du sujet ForumPoste</param>
+        /// <returns></returns> 
+        public async Task<PagedList<ForumPoste>> GetForumPostes(ForumPosteParams forumPosteParams, int id)
+        {
+            var items = _context.ForumPostes
+                .OrderBy(u => u.Date).Where(x => x.ForumSujetId == id).AsQueryable();
+            return await PagedList<ForumPoste>.CreateAsync(items, forumPosteParams.PageNumber, forumPosteParams.PageSize);
+        }
     }
 }

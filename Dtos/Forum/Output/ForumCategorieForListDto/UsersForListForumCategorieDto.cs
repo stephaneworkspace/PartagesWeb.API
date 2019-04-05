@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
-    public class UsetsForListForumCategorieDto
+    public class UsersForListForumCategorieDto
     {
         public int Id;
         public string Username;

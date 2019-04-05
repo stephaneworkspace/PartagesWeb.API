@@ -42,6 +42,10 @@ namespace PartagesWeb.API.Data
         /// <summary>  
         /// Cette méthode permet d'obtenir toutes les catégories
         /// </summary>
+        /// <param name="forumCategorieParams">Param pagination</param>
+        /// <param name="id">Id du sujet ForumPoste</param>
+        /// <returns></returns> 
+        /// <remark>Obsolète ici à enlever au futur</remark>
         Task<PagedList<ForumCategorie>> GetForumCategories(ForumCategorieParams forumCategorieParams);
         /// <summary>
         /// Compter les sujets d'une catégorie du forum
@@ -72,5 +76,17 @@ namespace PartagesWeb.API.Data
         /// <param name="id">Clé principale Id ForumCategorie</param>
         /// <returns></returns>
         Task<ForumPoste> GetDernierPosteForumCategorie(int id);*/
+
+        /**
+         * ForumPoste
+         **/
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les postes
+        /// </summary>
+        /// <param name="forumPosteParams">Pagination</param>
+        /// <param name="id">Id du sujet ForumPoste</param>
+        /// <returns></returns> 
+        Task<PagedList<ForumPoste>> GetForumPostes(ForumPosteParams forumPosteParams, int id);
     }
 }

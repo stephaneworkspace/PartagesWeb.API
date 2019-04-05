@@ -16,12 +16,12 @@ using PartagesWeb.API.Models.Forum;
 namespace PartagesWeb.API.Controllers.Forum
 {
     /// <summary>
-    /// Classe Controller pour ForumCategories
+    /// Classe Controller pour ForumPoste
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [SwaggerTag("ForumCategories", Description = "Controller pour model ForumCategories")]
-    public class ForumCategoriesController : ControllerBase
+    [SwaggerTag("ForumPostes", Description = "Controller pour model ForumPostes")]
+    public class ForumPostesController : ControllerBase
     {
         private readonly IForumRepository _repo;
         private readonly IMapper _mapper;
@@ -33,29 +33,31 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <param name="repo">Repository Forum</param>
         /// <param name="mapper">Mapper de AutoMapper</param>
         /// <param name="config">Configuration</param>
-        public ForumCategoriesController(IForumRepository repo, IMapper mapper, IConfiguration config)
+        public ForumPostesController(IForumRepository repo, IMapper mapper, IConfiguration config)
         {
             _config = config;
             _mapper = mapper;
             _repo = repo;
         }
-        // #pragma warning disable 1591
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPosteTest(int id)
-        {
-            var item = await _repo.GetForumPosteTest(id);
-            return Ok(item);
-        }
 
         /// <summary>  
-        /// Cette méthode permet de retourner les catégories du forum
+        /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
-        [HttpGet]
+        [HttpGet("{id}")]
         // [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
-        public async Task<IActionResult> GetForumCategories([FromQuery] ForumCategorieParams forumCategorieParams)
+        // [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste[]), Description = "Liste des postes")]
+        public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
         {
-            var items = await _repo.GetForumCategories(forumCategorieParams);
+            var items = await _repo.GetForumPostes(forumPosteParams, id);
+            return Ok(items);
+
+
             // var itemsDto = _mapper.Map<List<ForumCategorieForListDto>>(items);
+
+
+
+            /*
+
             List<ForumCategorieForListDto> newDto = new List<ForumCategorieForListDto>();
             foreach (var unite in items)
             {
@@ -69,7 +71,7 @@ namespace PartagesWeb.API.Controllers.Forum
                 var dernierPoste = await _repo.GetDernierForumPosteDeUneCategorie(unite.Id);
                 Dto.DernierPoste = _mapper.Map<ForumPosteForListForumCategorieDtoController>(dernierPoste);
                 newDto.Add(Dto);
-            }
+            }*/
             /*
             var titreMenusHorsLigne = await _repo.GetTitreMenuHorsLigne();
             var sousTitreMenusHorsLigne = await _repo.GetSousTitreMenuHorsLigne();
@@ -134,7 +136,7 @@ namespace PartagesWeb.API.Controllers.Forum
 
             sectionsToReturn.Add(newSection);*/
 
-            return Ok(newDto);
+            // return Ok(newDto);
         }
     }
 }

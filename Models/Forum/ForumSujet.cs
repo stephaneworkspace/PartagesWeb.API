@@ -24,6 +24,8 @@ namespace PartagesWeb.API.Models.Forum
         /// <summary>
         /// Relation avec model User
         /// </summary>
+        /// <remarks>
+        /// enlever annotation à l'ocaz</remarks>
         [ForeignKey("ForumCategorieId")]
         public virtual ForumCategorie ForumCategorie { get; set; }
         /// <summary>
