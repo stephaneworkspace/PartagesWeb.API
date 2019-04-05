@@ -10,7 +10,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
     /// <summary>
     /// Dto pour l'affichage à l'intégrieur de ForumCategorie
     /// </summary>
-    public class ForumPosteForListForumCategorieDtoController
+    public class ForumPosteForListForumCategorieDto
     {
         /// <summary>
         /// Clé principale

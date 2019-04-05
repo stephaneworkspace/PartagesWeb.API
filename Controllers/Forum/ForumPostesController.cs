@@ -44,15 +44,15 @@ namespace PartagesWeb.API.Controllers.Forum
         /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
         [HttpGet("{id}")]
-        // [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
-        // [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste[]), Description = "Liste des postes")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
         public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
         {
             var items = await _repo.GetForumPostes(forumPosteParams, id);
-            return Ok(items);
+            var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
+            return Ok(itemsDto);
 
-
-            // var itemsDto = _mapper.Map<List<ForumCategorieForListDto>>(items);
+            // A ajouter nombre de view par utilisateur
+            // 
 
 
 

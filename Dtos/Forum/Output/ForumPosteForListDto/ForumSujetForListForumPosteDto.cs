@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto pour l'affichage du tableau
+    /// Dto pour l'affichage à l'intégrieur de ForumCategorie
     /// </summary>
-    public class ForumCategorieForListDto
+    public class ForumSujetForListForumPosteDto
     {
         /// <summary>
         /// Clé principale
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Nom du titre menu
+        /// Clé principal de la catégorie
+        /// </summary>
+        public int ForumCategorieId { get; set; }
+        /// <summary>
+        /// Nom du topic
         /// </summary>
         public string Nom { get; set; }
         /// <summary>
-        /// Nombre de sujet(s)
+        /// Date du topic
         /// </summary>
-        public int CountSujet { get; set; }
+        public DateTime Date { get; set; }
         /// <summary>
-        /// Nombre de poste(s)
+        /// Nombre de view
         /// </summary>
-        public int CountPoste { get; set; }
-        /// <summary>
-        /// Dernier Poste
-        /// </summary>
-        public ForumPosteForListForumCategorieDto DernierPoste { get; set; }
+        public int View { get; set; }
     }
 }
