@@ -120,6 +120,19 @@ namespace PartagesWeb.API.Data
             return item;
         }
 
+
+        /// <summary>
+        /// Compter le nombre de poste d'un sujet pour le dernier poste
+        /// </summary>
+        /// <param name="id">Id ForumSujet</param>
+        /// <returns></returns>
+        public async Task<int> GetCountDernierPoste(int id)
+        {
+            var items = _context.ForumPostes.Where(x => x.ForumSujetId == id).Count();
+            var count = await Task.FromResult(items);
+            return count;
+        }
+
         public async Task<ForumPoste> GetForumPosteTest(int id)
         {
             var item = await _context.ForumPostes.FirstOrDefaultAsync(x => x.Id == id);

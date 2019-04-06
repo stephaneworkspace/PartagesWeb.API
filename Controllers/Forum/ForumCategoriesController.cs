@@ -68,6 +68,14 @@ namespace PartagesWeb.API.Controllers.Forum
                 Dto.CountPoste = await _repo.GetCountPosteForumCategorie(unite.Id);
                 var dernierPoste = await _repo.GetDernierForumPosteDeUneCategorie(unite.Id);
                 Dto.DernierPoste = _mapper.Map<ForumPosteForListForumCategorieDto>(dernierPoste);
+                if (dernierPoste != null)
+                {
+                    Dto.CountDernierPoste = await _repo.GetCountDernierPoste(dernierPoste.ForumSujetId);
+                } else
+                {
+                    Dto.CountDernierPoste = 0;
+                }
+
                 newDto.Add(Dto);
             }
             /*

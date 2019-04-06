@@ -68,6 +68,13 @@ namespace PartagesWeb.API.Data
         /// <returns></returns>
         Task<ForumPoste> GetDernierForumPosteDeUneCategorie(int id);
 
+        /// <summary>
+        /// Compter le nombre de poste d'un sujet pour le dernier poste
+        /// </summary>
+        /// <param name="id">Id ForumSujet</param>
+        /// <returns></returns>
+        Task<int> GetCountDernierPoste(int id);
+
         Task<ForumPoste> GetForumPosteTest(int id);
         /*
         /// <summary>
