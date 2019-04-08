@@ -18,7 +18,8 @@ namespace PartagesWeb.API.Helpers.Forum
         /// Numéro de pages
         /// </summary>
         public int PageNumber { get; set; } = 1;
-        private int pageSize = 10;
+        /// <remark>ATTENTION POSTE N'EST PAS LA CATEGORIE</remark>
+        private int pageSize = 5; // Pour les postes
         /// <summary>
         /// Taille de la page
         /// </summary>
