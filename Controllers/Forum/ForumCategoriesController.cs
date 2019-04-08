@@ -71,9 +71,12 @@ namespace PartagesWeb.API.Controllers.Forum
                 if (dernierPoste != null)
                 {
                     Dto.CountDernierPoste = await _repo.GetCountDernierPoste(dernierPoste.ForumSujetId);
+                    double calc = Dto.CountDernierPoste / forumCategorieParams.PageSize;
+                    Dto.PageDernierPoste = Convert.ToInt32(Math.Ceiling(calc));
                 } else
                 {
                     Dto.CountDernierPoste = 0;
+                    Dto.PageDernierPoste = 0;
                 }
 
                 newDto.Add(Dto);

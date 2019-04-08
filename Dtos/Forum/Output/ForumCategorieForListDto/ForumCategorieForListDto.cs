@@ -34,5 +34,9 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// Numéro total de poste dans le dernier poste
         /// </summary>
         public int CountDernierPoste { get; set; }
+        /// <summary>
+        /// Page du dernier poste
+        /// </summary>
+        public int PageDernierPoste { get; set; }
     }
 }

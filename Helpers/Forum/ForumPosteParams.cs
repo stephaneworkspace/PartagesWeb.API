@@ -18,7 +18,7 @@ namespace PartagesWeb.API.Helpers.Forum
         /// Numéro de pages
         /// </summary>
         public int PageNumber { get; set; } = 1;
-        private int pageSize = 10;
+        private int pageSize = 5;
         /// <summary>
         /// Taille de la page
         /// </summary>

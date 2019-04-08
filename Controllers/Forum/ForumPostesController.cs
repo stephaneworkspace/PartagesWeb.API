@@ -43,6 +43,8 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <summary>  
         /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
+        /// <param name="forumPosteParams">Pagination</param>
+        /// <param name="id">ForumSujet Id</param>
         [HttpGet("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
         public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
