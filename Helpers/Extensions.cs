@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace PartagesWeb.API.Helpers
 {
@@ -33,8 +34,16 @@ namespace PartagesWeb.API.Helpers
         public static void AddPagination(this HttpResponse response,int currentPage, int itemsPerPage, int totalItems, int totalPages)
         {
             var paginationHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);
-            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader));
-            response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
+
+            // Ces 2 lines pour .pagination a coté de .result sinon c'est juste dans le header
+            var camelCaseFormatter = new JsonSerializerSettings();
+            camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            // Fin comment
+
+
+            response.Headers.Add("Pagination",
+                JsonConvert.SerializeObject(paginationHeader, camelCaseFormatter));
+            response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
     }
 }
