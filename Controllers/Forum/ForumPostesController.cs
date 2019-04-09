@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
 using PartagesWeb.API.Dtos.Forum.Output;
+using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
 using PartagesWeb.API.Models.Forum;
 
@@ -51,6 +52,7 @@ namespace PartagesWeb.API.Controllers.Forum
         {
             var items = await _repo.GetForumPostes(forumPosteParams, id);
             var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
+            Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
             return Ok(itemsDto);
 
             // A ajouter nombre de view par utilisateur
