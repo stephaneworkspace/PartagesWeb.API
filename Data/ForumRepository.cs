@@ -165,5 +165,17 @@ namespace PartagesWeb.API.Data
                 .OrderBy(u => u.Date).Where(x => x.ForumSujetId == id).AsQueryable();
             return await PagedList<ForumPoste>.CreateAsync(items, forumPosteParams.PageNumber, forumPosteParams.PageSize);
         }
+
+        /// <summary>
+        /// Obtenir le nombre de message d'un utilisateur
+        /// </summary>
+        /// <param name="id">Clé principale User</param>
+        /// <returns></returns>
+        public async Task<int> GetCountUser(int id)
+        {
+            var items = _context.ForumPostes.Where(x => x.UserId == id).Count();
+            var count = await Task.FromResult(items);
+            return count;
+        }
     }
 }

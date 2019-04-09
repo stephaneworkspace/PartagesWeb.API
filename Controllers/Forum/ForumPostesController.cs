@@ -53,6 +53,16 @@ namespace PartagesWeb.API.Controllers.Forum
             var items = await _repo.GetForumPostes(forumPosteParams, id);
             var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
+            // NombreDePostes MessageCount
+            var itemsDtoFinal = new List<ForumPosteForListDto>();
+            foreach (var itemDto in itemsDto)
+            {
+                itemDto.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
+                itemsDtoFinal.Add(itemDto);
+            }
+
+            // var discussions = db.Discussions.ToList();
+
             return Ok(itemsDto);
 
             // A ajouter nombre de view par utilisateur

@@ -95,5 +95,12 @@ namespace PartagesWeb.API.Data
         /// <param name="id">Id du sujet ForumPoste</param>
         /// <returns></returns> 
         Task<PagedList<ForumPoste>> GetForumPostes(ForumPosteParams forumPosteParams, int id);
+
+        /// <summary>
+        /// Obtenir le nombre de message d'un utilisateur
+        /// </summary>
+        /// <param name="id">Clé principale User</param>
+        /// <returns></returns>
+        Task<int> GetCountUser(int id);
     }
 }

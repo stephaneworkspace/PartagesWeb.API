@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,5 +35,10 @@ namespace PartagesWeb.API.Models
         /// Date de création
         /// </summary>
         public DateTime Created { get; set; }
+        /// <summary>
+        /// Nombre de messages
+        /// </summary>
+        [NotMapped]
+        public int? MessageCount { get; set; }
     }
 }

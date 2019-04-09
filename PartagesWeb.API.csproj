@@ -56,6 +56,8 @@
     <Compile Remove="Migrations\20190329204347_ModificationForumEntity.Designer.cs" />
     <Compile Remove="Migrations\20190403134823_AjoutFKPourNePlusAvoirNullEntity.cs" />
     <Compile Remove="Migrations\20190403134823_AjoutFKPourNePlusAvoirNullEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190409210037_UpdateEntity.cs" />
+    <Compile Remove="Migrations\20190409210037_UpdateEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

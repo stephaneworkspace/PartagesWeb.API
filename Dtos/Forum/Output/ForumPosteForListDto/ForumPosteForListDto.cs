@@ -31,7 +31,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// Relation avec model User
         /// </summary>
-        public virtual UsersForListForumListDto User { get; set; }
+        public virtual UsersForListForumPosteDto User { get; set; }
         /// <summary>
         /// Date du poste
         /// </summary>
