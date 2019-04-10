@@ -19,6 +19,10 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// </summary>
         public int ForumCategorieId { get; set; }
         /// <summary>
+        /// ForumCategorie
+        /// </summary>
+        public virtual ForumCategorieForListForumPosteDto ForumCategorie { get; set; }
+        /// <summary>
         /// Nom du topic
         /// </summary>
         public string Nom { get; set; }
