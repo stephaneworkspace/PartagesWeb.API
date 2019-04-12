@@ -120,6 +120,22 @@ namespace PartagesWeb.API.Data
             return item;
         }
 
+        /**
+         * ForumSujet
+         */
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les sujets
+        /// </summary>
+        /// <param name="forumSujetParams">Pagination</param>
+        /// <param name="id">Id du sujet ForumPoste</param>
+        /// <returns></returns> 
+        public async Task<PagedList<ForumSujet>> GetForumSujets(ForumSujetParams forumSujetParams, int id)
+        {
+            var items = _context.ForumSujets
+                .OrderBy(u => u.Date).Where(x => x.ForumCategorieId == id).AsQueryable();
+            return await PagedList<ForumSujet>.CreateAsync(items, forumSujetParams.PageNumber, forumSujetParams.PageSize);
+        }
 
         /// <summary>
         /// Compter le nombre de poste d'un sujet pour le dernier poste
@@ -133,21 +149,28 @@ namespace PartagesWeb.API.Data
             return count;
         }
 
-        public async Task<ForumPoste> GetForumPosteTest(int id)
+        /// <summary>
+        /// Compter les postes d'unsujet du forum
+        /// </summary>
+        /// <param name="id">Clé principal Id ForumSujet</param>
+        /// <returns></returns>
+        public async Task<int> GetCountPosteForumSujet(int id)
         {
-            var item = await _context.ForumPostes.FirstOrDefaultAsync(x => x.Id == id);
+            var items = _context.ForumPostes.Where(x => x.ForumSujetId == id);
+            var count = await Task.FromResult(0);
+            return count;
+        }
+
+        /// <summary>
+        /// Obtenir le dernier poste d'un sujet
+        /// </summary>
+        /// <param name="id">Id du sujet</param>
+        /// <returns></returns>
+        public async Task<ForumPoste> GetDernierForumPosteDeUnSujet(int id)
+        {
+            var item = await _context.ForumPostes.Where(x => x.ForumSujet.Id == id).OrderByDescending(x => x.Date).FirstOrDefaultAsync();
             return item;
         }
-        /*
-        /// <summary>
-        /// Obtenir le dernier poste d'une catégorie du forum
-        /// </summary>
-        /// <param name="id">Clé principale Id ForumCategorie</param>
-        /// <returns></returns>
-        public async Task<ForumPoste> GetDernierPosteForumCategorie(int id)
-        {
-            var sujets = _context.ForumSujets.Where(x => x.ForumCategorieId == id);
-        }*/
 
         /**
          * ForumPoste

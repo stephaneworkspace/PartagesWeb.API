@@ -17,8 +17,8 @@ namespace PartagesWeb.API.Controllers.Forum
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [SwaggerTag("ForumPostes", Description = "Controller pour model ForumPostes")]
-    public class ForumPostesController : ControllerBase
+    [SwaggerTag("ForumSujets", Description = "Controller pour model ForumSujets")]
+    public class ForumSujetsController : ControllerBase
     {
         private readonly IForumRepository _repo;
         private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <param name="repo">Repository Forum</param>
         /// <param name="mapper">Mapper de AutoMapper</param>
         /// <param name="config">Configuration</param>
-        public ForumPostesController(IForumRepository repo, IMapper mapper, IConfiguration config)
+        public ForumSujetsController(IForumRepository repo, IMapper mapper, IConfiguration config)
         {
             _config = config;
             _mapper = mapper;
@@ -40,22 +40,22 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <summary>  
         /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
-        /// <param name="forumPosteParams">Pagination</param>
-        /// <param name="id">ForumSujet Id</param>
+        /// <param name="forumSujetParams">Pagination</param>
+        /// <param name="id">ForumCategorie Id</param>
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
-        public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumSujetForListDto[]), Description = "Liste des sections")]
+        public async Task<IActionResult> GetForumSujets([FromQuery] ForumSujetParams forumSujetParams, int id)
         {
-            var items = await _repo.GetForumPostes(forumPosteParams, id);
-            var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
+            var items = await _repo.GetForumSujets(forumSujetParams, id);
+            var itemsDto = _mapper.Map<List<ForumSujetForListDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
             // NombreDePostes MessageCount
-            var itemsDtoFinal = new List<ForumPosteForListDto>();
+            /*var itemsDtoFinal = new List<ForumSujetForListDto>();
             foreach (var itemDto in itemsDto)
             {
                 itemDto.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
                 itemsDtoFinal.Add(itemDto);
-            }
+            }*/ // a faire foreach imbriqué et ForumSujetForListDto dans catégorie voir comment c^'est map les count
             return Ok(itemsDto);
         }
     }

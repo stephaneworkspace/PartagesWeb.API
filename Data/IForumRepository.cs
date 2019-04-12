@@ -68,6 +68,18 @@ namespace PartagesWeb.API.Data
         /// <returns></returns>
         Task<ForumPoste> GetDernierForumPosteDeUneCategorie(int id);
 
+        /**
+         * ForumSujet
+         */
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les sujets
+        /// </summary>
+        /// <param name="forumSujetParams">Pagination</param>
+        /// <param name="id">Id du sujet ForumPoste</param>
+        /// <returns></returns> 
+        Task<PagedList<ForumSujet>> GetForumSujets(ForumSujetParams forumSujetParams, int id);
+
         /// <summary>
         /// Compter le nombre de poste d'un sujet pour le dernier poste
         /// </summary>
@@ -75,14 +87,19 @@ namespace PartagesWeb.API.Data
         /// <returns></returns>
         Task<int> GetCountDernierPoste(int id);
 
-        Task<ForumPoste> GetForumPosteTest(int id);
-        /*
         /// <summary>
-        /// Obtenir le dernier poste d'une catégorie du forum
+        /// Compter les postes d'unsujet du forum
         /// </summary>
-        /// <param name="id">Clé principale Id ForumCategorie</param>
+        /// <param name="id">Clé principal Id ForumSujet</param>
         /// <returns></returns>
-        Task<ForumPoste> GetDernierPosteForumCategorie(int id);*/
+        Task<int> GetCountPosteForumSujet(int id);
+
+        /// <summary>
+        /// Obtenir le dernier poste d'un sujet
+        /// </summary>
+        /// <param name="id">Id du sujet</param>
+        /// <returns></returns>
+        Task<ForumPoste> GetDernierForumPosteDeUnSujet(int id);
 
         /**
          * ForumPoste

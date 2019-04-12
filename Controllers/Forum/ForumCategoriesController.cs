@@ -39,13 +39,6 @@ namespace PartagesWeb.API.Controllers.Forum
             _mapper = mapper;
             _repo = repo;
         }
-        // #pragma warning disable 1591
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetPosteTest(int id)
-        {
-            var item = await _repo.GetForumPosteTest(id);
-            return Ok(item);
-        }
 
         /// <summary>  
         /// Cette méthode permet de retourner les catégories du forum
