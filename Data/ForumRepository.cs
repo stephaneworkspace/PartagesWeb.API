@@ -154,10 +154,12 @@ namespace PartagesWeb.API.Data
         /// </summary>
         /// <param name="id">Clé principal Id ForumSujet</param>
         /// <returns></returns>
+        /// <remarks>
+        /// Doublon ??? GetCountDernierPoste/GetCountPosteForumSujet</remarks>
         public async Task<int> GetCountPosteForumSujet(int id)
         {
-            var items = _context.ForumPostes.Where(x => x.ForumSujetId == id);
-            var count = await Task.FromResult(0);
+            var items = _context.ForumPostes.Where(x => x.ForumSujetId == id).Count();
+            var count = await Task.FromResult(items);
             return count;
         }
 

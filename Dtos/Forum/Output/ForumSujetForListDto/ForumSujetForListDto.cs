@@ -37,6 +37,10 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// </summary>
         public int View { get; set; }
         /// <summary>
+        /// Nombre de view
+        /// </summary>
+        public int CountPoste { get; set; }
+        /// <summary>
         /// Nombre de sujet(s)
         /// </summary>
         // public int CountSujet { get; set; }

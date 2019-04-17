@@ -47,16 +47,26 @@ namespace PartagesWeb.API.Controllers.Forum
         public async Task<IActionResult> GetForumSujets([FromQuery] ForumSujetParams forumSujetParams, int id)
         {
             var items = await _repo.GetForumSujets(forumSujetParams, id);
-            var itemsDto = _mapper.Map<List<ForumSujetForListDto>>(items);
-            Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
-            // NombreDePostes MessageCount
-            /*var itemsDtoFinal = new List<ForumSujetForListDto>();
-            foreach (var itemDto in itemsDto)
+            List<ForumSujetForListDto> newDto = new List<ForumSujetForListDto>();
+            foreach (var unite in items)
             {
-                itemDto.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
-                itemsDtoFinal.Add(itemDto);
-            }*/ // a faire foreach imbriqué et ForumSujetForListDto dans catégorie voir comment c^'est map les count
-            return Ok(itemsDto);
+                ForumSujetForListDto Dto = new ForumSujetForListDto
+                {
+                    Id = unite.Id,
+                    Nom = unite.Nom,
+                    ForumCategorieId = unite.ForumCategorieId,
+                    ForumCategorie = _mapper.Map<ForumCategorieForListForumSujetDto>(unite.ForumCategorie),
+                    Date = unite.Date,
+                    View = unite.View
+                };
+                Dto.CountPoste = await _repo.GetCountPosteForumSujet(unite.Id);
+                newDto.Add(Dto);
+            }
+            // BACKUP avant procedure automap
+            // var itemsDto = _mapper.Map<List<ForumSujetForListDto>>(items);
+            // Traitement après procedure automap
+            Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
+            return Ok(newDto);
         }
     }
 }
