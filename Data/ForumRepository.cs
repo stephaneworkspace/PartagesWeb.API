@@ -202,5 +202,17 @@ namespace PartagesWeb.API.Data
             var count = await Task.FromResult(items);
             return count;
         }
+
+        /// <summary>
+        /// Incrementer compteur view
+        /// </summary>
+        /// <param name="id">Clé principale ForumSujet Id</param>
+        public async Task<bool> IncView(int id)
+        {
+            var item = await _context.ForumSujets.Where(x => x.Id == id).FirstOrDefaultAsync();
+            item.View++;
+            Update(item);
+            return await SaveAll();
+        }
     }
 }

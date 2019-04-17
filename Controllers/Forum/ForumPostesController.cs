@@ -44,8 +44,14 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <param name="id">ForumSujet Id</param>
         [HttpGet("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
         public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
         {
+            var boolTrue = await _repo.IncView(id);
+            if (!boolTrue)
+            {
+                return BadRequest("Impossible de mettre à jour le nombre de vue du sujet");
+            }
             var items = await _repo.GetForumPostes(forumPosteParams, id);
             var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
