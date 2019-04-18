@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
+using PartagesWeb.API.Dtos.Forum.Input;
 using PartagesWeb.API.Dtos.Forum.Output;
 using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
+using PartagesWeb.API.Models.Forum;
 
 namespace PartagesWeb.API.Controllers.Forum
 {
@@ -63,6 +65,35 @@ namespace PartagesWeb.API.Controllers.Forum
                 itemsDtoFinal.Add(itemDto);
             }
             return Ok(itemsDto);
+        }
+
+        /// <summary>
+        /// Reponse ForumPoste à la fin de ForumSujet
+        /// </summary>
+        /// <param name="Dto">Dto Input</param>
+        /// <returns></returns>
+        [HttpPut]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste[]), Description = "Poste qui a été rajouté")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de répondre à ce poste")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
+        public async Task<IActionResult> ReponseForumPoste(ForumPosteForReplyDto Dto)
+        {
+            // Trouver l'utilisateur actuel
+            var UserId = 1;
+            // Préparation du model
+            var Item = new ForumPoste
+            {
+                ForumSujetId = Dto.ForumSujetId,
+                UserId = UserId,
+                Contenu = Dto.Contenu
+            };
+
+            _repo.Add(Item);
+
+            if (await _repo.SaveAll())
+                return Ok(Item);
+
+            return BadRequest("Impossible de répondre à ce poste");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PartagesWeb.API.Helpers;
+﻿using PartagesWeb.API.Dtos.Forum.Input;
+using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
 using PartagesWeb.API.Models.Forum;
 using System;
@@ -43,7 +44,6 @@ namespace PartagesWeb.API.Data
         /// Cette méthode permet d'obtenir toutes les catégories
         /// </summary>
         /// <param name="forumCategorieParams">Param pagination</param>
-        /// <param name="id">Id du sujet ForumPoste</param>
         /// <returns></returns> 
         /// <remark>Obsolète ici à enlever au futur</remark>
         Task<PagedList<ForumCategorie>> GetForumCategories(ForumCategorieParams forumCategorieParams);
