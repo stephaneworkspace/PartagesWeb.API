@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
@@ -72,6 +74,11 @@ namespace PartagesWeb.API.Controllers.Forum
         /// </summary>
         /// <param name="Dto">Dto Input</param>
         /// <returns></returns>
+        /// <remarks>à faire tuto - 
+        /// http://jasonwatmore.com/post/2019/01/08/aspnet-core-22-role-based-authorization-tutorial-with-example-api 
+        /// la reponse a été trouvé ici
+        /// https://stackoverflow.com/questions/30701006/how-to-get-the-current-logged-in-user-id-in-asp-net-core</remarks>
+        [Authorize]
         [HttpPut]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste[]), Description = "Poste qui a été rajouté")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de répondre à ce poste")]
@@ -79,12 +86,13 @@ namespace PartagesWeb.API.Controllers.Forum
         public async Task<IActionResult> ReponseForumPoste(ForumPosteForReplyDto Dto)
         {
             // Trouver l'utilisateur actuel
-            var UserId = 1;
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
             // Préparation du model
             var Item = new ForumPoste
             {
                 ForumSujetId = Dto.ForumSujetId,
-                UserId = UserId,
+                UserId = userId,
                 Contenu = Dto.Contenu
             };
 
