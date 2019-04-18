@@ -101,6 +101,12 @@ namespace PartagesWeb.API.Data
         /// <returns></returns>
         Task<ForumPoste> GetDernierForumPosteDeUnSujet(int id);
 
+        /// <summary>
+        /// Incrementer compteur view
+        /// </summary>
+        /// <param name="id">Id sujet</param>
+        Task<bool> IncView(int id);
+
         /**
          * ForumPoste
          **/
@@ -119,10 +125,5 @@ namespace PartagesWeb.API.Data
         /// <param name="id">Clé principale User</param>
         /// <returns></returns>
         Task<int> GetCountUser(int id);
-
-        /// <summary>
-        /// Incrementer compteur view
-        /// </summary>
-        Task<bool> IncView(int id);
     }
 }
