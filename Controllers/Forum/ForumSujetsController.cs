@@ -38,12 +38,12 @@ namespace PartagesWeb.API.Controllers.Forum
         }
 
         /// <summary>  
-        /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
+        /// Cette méthode permet de retourner la liste des sujets
         /// </summary> 
         /// <param name="forumSujetParams">Pagination</param>
         /// <param name="id">ForumCategorie Id</param>
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumSujetForListDto[]), Description = "Liste des sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumSujetForListDto[]), Description = "Liste des sujets")]
         public async Task<IActionResult> GetForumSujets([FromQuery] ForumSujetParams forumSujetParams, int id)
         {
             var items = await _repo.GetForumSujets(forumSujetParams, id);
@@ -68,5 +68,20 @@ namespace PartagesWeb.API.Controllers.Forum
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
             return Ok(newDto);
         }
+
+        /// <summary>  
+        /// Cette méthode permet de retourner un sujet bien précis
+        /// </summary> 
+        /// <param name="id">Clé principale ForumSujet</param>
+        [HttpGet("ForumSujetId/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumSujetForSelectDto), Description = "Sujet à atteindre")]
+        public async Task<IActionResult> GetForumSujet(int id)
+        {
+            var item = await _repo.GetForumSujet(id);
+            ForumSujetForSelectDto newDto = new ForumSujetForSelectDto();
+            var itemDto = _mapper.Map<ForumSujetForSelectDto>(item);
+            return Ok(itemDto);
+        }
+
     }
 }

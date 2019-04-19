@@ -137,6 +137,17 @@ namespace PartagesWeb.API.Data
             return await PagedList<ForumSujet>.CreateAsync(items, forumSujetParams.PageNumber, forumSujetParams.PageSize);
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un sujet
+        /// </summary>
+        /// <param name="id">Id du sujet</param>
+        /// <returns></returns> 
+        public async Task<ForumSujet> GetForumSujet(int id)
+        {
+            var item = await _context.ForumSujets.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return item;
+        }
+
         /// <summary>
         /// Compter le nombre de poste d'un sujet pour le dernier poste
         /// </summary>

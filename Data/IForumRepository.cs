@@ -80,6 +80,13 @@ namespace PartagesWeb.API.Data
         /// <returns></returns> 
         Task<PagedList<ForumSujet>> GetForumSujets(ForumSujetParams forumSujetParams, int id);
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un sujet
+        /// </summary>
+        /// <param name="id">Id du sujet</param>
+        /// <returns></returns> 
+        Task<ForumSujet> GetForumSujet(int id);
+
         /// <summary>
         /// Compter le nombre de poste d'un sujet pour le dernier poste
         /// </summary>

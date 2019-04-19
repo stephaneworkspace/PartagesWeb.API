@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto pour la liste des sujets
+    /// Dto pour sélection (exemple : reponse à un sujet)
     /// </summary>
-    public class ForumSujetForListDto
+    public class ForumSujetForSelectDto
     {
         /// <summary>
         /// Clé principale
@@ -23,7 +23,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// Relation
         /// </summary>
-        public virtual ForumCategorieForListForumSujetDto ForumCategorie { get; set; }
+        public virtual ForumCategorieForSelectForumSujetDto ForumCategorie { get; set; }
         /// <summary>
         /// Nom du topic
         /// </summary>
@@ -39,26 +39,5 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// Nombre de view
         /// </summary>
-        public int CountPoste { get; set; }
-        /// <summary>
-        /// Nombre de sujet(s)
-        /// </summary>
-        // public int CountSujet { get; set; }
-        /// <summary>
-        /// Nombre de poste(s)
-        /// </summary>
-        // public int CountPoste { get; set; }
-        /// <summary>
-        /// Dernier Poste
-        /// </summary>
-        // public ForumPosteForListForumCategorieDto DernierPoste { get; set; }
-        /// <summary>
-        /// Numéro total de poste dans le dernier poste
-        /// </summary>
-        // public int CountDernierPoste { get; set; }
-        /// <summary>
-        /// Page du dernier poste
-        /// </summary>
-        // public int PageDernierPoste { get; set; }
     }
 }
