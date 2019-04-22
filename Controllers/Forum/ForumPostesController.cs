@@ -105,5 +105,19 @@ namespace PartagesWeb.API.Controllers.Forum
 
             return BadRequest("Impossible de répondre à ce poste");
         }
+
+        /// <summary>  
+        /// Cette méthode permet de retourner un poste bien précis
+        /// </summary> 
+        /// <param name="id">Clé principale ForumPoste</param>
+        [HttpGet("ForumPosteId/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForSelectDto), Description = "Poste à atteindre")]
+        public async Task<IActionResult> GetForumSujet(int id)
+        {
+            var item = await _repo.GetForumPoste(id);
+            ForumPosteForSelectDto newDto = new ForumPosteForSelectDto();
+            var itemDto = _mapper.Map<ForumPosteForSelectDto>(item);
+            return Ok(itemDto);
+        }
     }
 }

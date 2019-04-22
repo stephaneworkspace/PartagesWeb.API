@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto
+    /// Dto pour citation par exemple dans une reponse pour avoir le poste et le sujet
     /// </summary>
-    public class ForumSujetForListForumPosteDto
+    public class ForumSujetForSelectForumPosteDto
     {
         /// <summary>
         /// Clé principale
@@ -21,7 +21,7 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// <summary>
         /// ForumCategorie
         /// </summary>
-        public virtual ForumCategorieForListForumPosteDto ForumCategorie { get; set; }
+        public virtual ForumCategorieForSelectForumPosteDto ForumCategorie { get; set; }
         /// <summary>
         /// Nom du topic
         /// </summary>

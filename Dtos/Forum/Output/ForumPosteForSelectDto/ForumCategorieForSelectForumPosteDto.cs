@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto pour l'affichage du tableau
+    /// Dto pour citation par exemple dans une reponse pour avoir le poste et le sujet
     /// </summary>
-    public class ForumCategorieForSelectForumPosteDto
+    public class ForumCategorieForListForumPosteDto
     {
         /// <summary>
         /// Clé principale

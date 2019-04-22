@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.Forum.Output
 {
     /// <summary>
-    /// Dto
+    /// Dto pour citation par exemple dans une reponse pour avoir le poste et le sujet
     /// </summary>
-    public class UsersForListForumSujetDto
+    public class UsersForListForumPosteDto
     {
         /// <summary>
         /// Clé principale
@@ -18,5 +18,13 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// Nom d'utilisateur
         /// </summary>
         public string Username;
+        /// <summary>
+        /// Date de création pour l'utilisateur
+        /// </summary>
+        public DateTime Created { get; set; }
+        /// <summary>
+        /// Nombre de message
+        /// </summary>
+        public int? MessageCount;
     }
 }

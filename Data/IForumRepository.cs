@@ -126,6 +126,13 @@ namespace PartagesWeb.API.Data
         /// <returns></returns> 
         Task<PagedList<ForumPoste>> GetForumPostes(ForumPosteParams forumPosteParams, int id);
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un poste
+        /// </summary>
+        /// <param name="id">Id du poste</param>
+        /// <returns></returns> 
+        Task<ForumPoste> GetForumPoste(int id);
+
         /// <summary>
         /// Obtenir le nombre de message d'un utilisateur
         /// </summary>

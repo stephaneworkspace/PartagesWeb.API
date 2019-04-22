@@ -214,6 +214,17 @@ namespace PartagesWeb.API.Data
             return await PagedList<ForumPoste>.CreateAsync(items, forumPosteParams.PageNumber, forumPosteParams.PageSize);
         }
 
+        /// <summary>  
+        /// Cette méthode permet d'obtenir un poste
+        /// </summary>
+        /// <param name="id">Id du poste</param>
+        /// <returns></returns> 
+        public async Task<ForumPoste> GetForumPoste(int id)
+        {
+            var item = await _context.ForumPostes.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return item;
+        }
+
         /// <summary>
         /// Obtenir le nombre de message d'un utilisateur
         /// </summary>
