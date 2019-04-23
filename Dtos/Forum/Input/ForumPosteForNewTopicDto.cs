@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace PartagesWeb.API.Dtos.Forum.Input
         /// <summary>
         /// Clé principal du topic
         /// </summary>
-        public int ForumSujetId { get; set; }
+        // public int ForumSujetId { get; set; }
         /// <summary>
         /// Clé principal de l'utilisateur
         /// </summary>
@@ -40,10 +41,14 @@ namespace PartagesWeb.API.Dtos.Forum.Input
         /// <summary>
         /// Nom du sujet pour créer le record ForumSujet / ForumSujetId
         /// </summary>
+        [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
+        [DisplayName("Nom du sujet")]
         public string NomSujet { get; set; }
         /// <summary>
         /// Id de la catégorie en relation avec ForumSujet
         /// </summary>
+        [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
+        [DisplayName("Catégorie du sujet")]
         public int ForumCategorieId { get; set; }
     }
 }

@@ -81,7 +81,7 @@ namespace PartagesWeb.API.Controllers.Forum
         /// https://stackoverflow.com/questions/30701006/how-to-get-the-current-logged-in-user-id-in-asp-net-core</remarks>
         [Authorize]
         [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste[]), Description = "Poste qui a été rajouté")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Poste qui a été rajouté")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de répondre à ce poste")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
         public async Task<IActionResult> ReponseForumPoste(ForumPosteForReplyDto Dto)

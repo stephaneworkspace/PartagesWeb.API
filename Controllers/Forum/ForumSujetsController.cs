@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 using PartagesWeb.API.Data;
+using PartagesWeb.API.Dtos.Forum.Input;
 using PartagesWeb.API.Dtos.Forum.Output;
 using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
+using PartagesWeb.API.Models.Forum;
 
 namespace PartagesWeb.API.Controllers.Forum
 {
@@ -81,6 +86,55 @@ namespace PartagesWeb.API.Controllers.Forum
             ForumSujetForSelectDto newDto = new ForumSujetForSelectDto();
             var itemDto = _mapper.Map<ForumSujetForSelectDto>(item);
             return Ok(itemDto);
+        }
+
+        /// <summary>
+        /// Reponse ForumPoste à la fin de ForumSujet
+        /// </summary>
+        /// <param name="Dto">Dto Input</param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Poste qui a été rajouté")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de créer le sujet")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom du sujet » est obligatoire.")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Catégorie du sujet » est obligatoire.")]
+        public async Task<IActionResult> ReponseForumPoste(ForumPosteForNewTopicDto Dto)
+        {
+            // Préparation du record ForumSujet
+            var ItemForumSujet = new ForumSujet
+            {
+                Date = DateTime.Now,
+                ForumCategorieId = Dto.ForumCategorieId,
+                Nom = Dto.NomSujet,
+                View = 0
+            };
+
+            _repo.Add(ItemForumSujet);
+
+            if (await _repo.SaveAll()) {
+                return BadRequest("Impossible de créer le sujet");
+            }
+
+            // Trouver l'utilisateur actuel
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            // Préparation du model
+            var Item = new ForumPoste
+            {
+                ForumSujetId = ItemForumSujet.Id,
+                UserId = userId,
+                Date = DateTime.Now,
+                Contenu = Dto.Contenu
+            };
+
+            _repo.Add(Item);
+
+            if (await _repo.SaveAll())
+                return Ok(Item);
+
+            return BadRequest("Impossible de créer le sujet");
         }
 
     }
