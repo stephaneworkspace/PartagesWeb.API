@@ -47,6 +47,14 @@ namespace PartagesWeb.API.Data
         /// <returns></returns> 
         /// <remark>Obsolète ici à enlever au futur</remark>
         Task<PagedList<ForumCategorie>> GetForumCategories(ForumCategorieParams forumCategorieParams);
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir une catégorie
+        /// </summary>
+        /// <param name="id">ForumCategorieId</param>
+        /// <returns></returns> 
+        Task<ForumCategorie> GetForumCategorie(int id);
+        
         /// <summary>
         /// Compter les sujets d'une catégorie du forum
         /// </summary>

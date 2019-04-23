@@ -44,7 +44,7 @@ namespace PartagesWeb.API.Controllers.Forum
         /// Cette méthode permet de retourner les catégories du forum
         /// </summary> 
         [HttpGet]
-        // [SwaggerResponse(HttpStatusCode.OK, typeof(SectionForListDto[]), Description = "Liste des sections")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumCategorieForListDto[]), Description = "Liste des catégories")]
         public async Task<IActionResult> GetForumCategories([FromQuery] ForumCategorieParams forumCategorieParams)
         {
             var items = await _repo.GetForumCategories(forumCategorieParams);
@@ -66,7 +66,8 @@ namespace PartagesWeb.API.Controllers.Forum
                     Dto.CountDernierPoste = await _repo.GetCountDernierPoste(dernierPoste.ForumSujetId);
                     double calc = Dto.CountDernierPoste / forumCategorieParams.PageSize;
                     Dto.PageDernierPoste = Convert.ToInt32(Math.Ceiling(calc)) + 1;
-                } else
+                }
+                else
                 {
                     Dto.CountDernierPoste = 0;
                     Dto.PageDernierPoste = 0;
@@ -139,6 +140,18 @@ namespace PartagesWeb.API.Controllers.Forum
             sectionsToReturn.Add(newSection);*/
 
             return Ok(newDto);
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de retourner une catégorie du forum
+        /// </summary> 
+        [HttpGet("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumCategorieForSingleSelectDto[]), Description = "Liste des catégories")]
+        public async Task<IActionResult> GetForumCategorie(int id)
+        {
+            var item = await _repo.GetForumCategorie(id);
+            var itemDto = _mapper.Map<ForumCategorieForSingleSelectDto>(item);
+            return Ok(itemDto);
         }
     }
 }

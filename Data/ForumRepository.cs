@@ -79,6 +79,18 @@ namespace PartagesWeb.API.Data
             return await PagedList<ForumCategorie>.CreateAsync(items, forumCategorieParams.PageNumber, forumCategorieParams.PageSize);
         }
 
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir une catégorie
+        /// </summary>
+        /// <param name="id">ForumCategorieId</param>
+        /// <returns></returns> 
+        public async Task<ForumCategorie> GetForumCategorie(int id)
+        {
+            var items = await _context.ForumCategories.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return items;
+        }
+
         /// <summary>
         /// Compter les sujets d'une catégorie du forum
         /// </summary>

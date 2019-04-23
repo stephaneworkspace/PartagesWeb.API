@@ -17,18 +17,6 @@ namespace PartagesWeb.API.Dtos.Forum.Input
          */
 
         /// <summary>
-        /// Clé principal du topic
-        /// </summary>
-        // public int ForumSujetId { get; set; }
-        /// <summary>
-        /// Clé principal de l'utilisateur
-        /// </summary>
-        public int UserId { get; set; }
-        /// <summary>
-        /// Date du poste
-        /// </summary>
-        public DateTime Date { get; set; }
-        /// <summary>
         /// Nom du topic
         /// </summary>
         [Required(ErrorMessage = "Le champ « {0} » est obligatoire.")]
