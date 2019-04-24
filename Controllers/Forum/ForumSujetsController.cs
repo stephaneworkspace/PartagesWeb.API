@@ -95,7 +95,7 @@ namespace PartagesWeb.API.Controllers.Forum
         /// <returns></returns>
         [Authorize]
         [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Poste qui a été rajouté")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Poste + Sujet qui est été rajouté")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de créer le sujet")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom du sujet » est obligatoire.")]
@@ -113,7 +113,7 @@ namespace PartagesWeb.API.Controllers.Forum
 
             _repo.Add(ItemForumSujet);
 
-            if (await _repo.SaveAll()) {
+            if (! await _repo.SaveAll()) {
                 return BadRequest("Impossible de créer le sujet");
             }
 
