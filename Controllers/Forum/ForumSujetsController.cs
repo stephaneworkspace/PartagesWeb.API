@@ -100,7 +100,7 @@ namespace PartagesWeb.API.Controllers.Forum
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Nom du sujet » est obligatoire.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Catégorie du sujet » est obligatoire.")]
-        public async Task<IActionResult> ReponseForumPoste(ForumPosteForNewTopicDto Dto)
+        public async Task<IActionResult> NouveauSujetEtPoste(ForumPosteForNewTopicDto Dto)
         {
             // Préparation du record ForumSujet
             var ItemForumSujet = new ForumSujet
@@ -137,5 +137,31 @@ namespace PartagesWeb.API.Controllers.Forum
             return BadRequest("Impossible de créer le sujet");
         }
 
+        /// <summary>
+        /// Effacer un sujet
+        /// Delete en cascade entre ForumSujet et ForumPoste
+        /// </summary>
+        /// <param name="id">ForumSujetId</param>
+        /// <returns></returns>
+        /// <remarks>magouille pour effacer des erreurs, la fonction n'est pas utilisé
+        /// j'implementrai cette fonction plus tard depuis le panel administrateur quand j'aurrai programé les droits et autorisation 
+        /// entre user simple et admin</remarks>
+        [Authorize]
+        [HttpDelete]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Ok")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'effacer le sujet")]
+        public async Task<IActionResult> EffacerSujetMagouille(int id)
+        {
+            var item = await _repo.GetForumSujet(id);
+
+            if (item != null)
+            { 
+                _repo.Delete(item);
+                if (await _repo.SaveAll())
+                    return Ok();
+            }
+
+            return BadRequest("Impossible d'effacer le sujet");
+        }
     }
 }
