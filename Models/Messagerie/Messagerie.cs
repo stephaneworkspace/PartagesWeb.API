@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PartagesWeb.API.Models.Forum
+namespace PartagesWeb.API.Models.Messagerie
 {
     /// <summary>
     /// Model ForumPrivateMessage
     /// </summary>
-    public class ForumPrivateMessage
+    public class Messagerie
     {
         /// <summary>
         /// Clé principale
@@ -33,5 +33,9 @@ namespace PartagesWeb.API.Models.Forum
         /// Nom du topic
         /// </summary>
         public string Contenu { get; set; }
+        /// <summary>
+        /// Switch si message lu
+        /// </summary>
+        public int SwLu { get; set; }
     }
 }

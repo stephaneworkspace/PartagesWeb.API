@@ -66,6 +66,7 @@ namespace PartagesWeb.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGestionPagesRepository, GestionPagesRepository>();
             services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IMessagerieRepository, MessagerieRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

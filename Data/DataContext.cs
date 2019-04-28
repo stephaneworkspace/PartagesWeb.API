@@ -50,7 +50,7 @@ namespace PartagesWeb.API.Data
         public DbSet<ForumSujet> ForumSujets { get; set; }
         /// <sumary> Cette méthode permet la connexion au model ForumPrivateMessage
         /// </sumary>
-        public DbSet<ForumSujet> ForumPrivateMessage { get; set; }
+        public DbSet<Messagerie> Messageries { get; set; }
         /// <summary>
         /// Cette méthode permet la connexion au model Article
         /// </summary>
