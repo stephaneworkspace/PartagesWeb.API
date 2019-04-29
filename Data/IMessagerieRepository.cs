@@ -1,4 +1,5 @@
-﻿using PartagesWeb.API.Models.Messagerie;
+﻿using PartagesWeb.API.Dtos.Forum.Input;
+using PartagesWeb.API.Models.Messagerie;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,12 @@ namespace PartagesWeb.API.Data
         /**
          * Messagerie
          **/
+
+        /// <sumary>
+        /// Cette méthode permet d'envoyer un message privé
+        /// </sumary>
+        /// <param name="dto">Dto pour l'envoi du message</param>
+        // Task<bool> SendMessage(MessagerieForNewMessageDto dto);
 
         /// <summary>  
         /// Cette méthode permet d'obtenir une catégorie

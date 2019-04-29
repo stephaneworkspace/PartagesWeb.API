@@ -17,14 +17,21 @@ namespace PartagesWeb.API.Models.Messagerie
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Clé principal de l'utilisateur
+        /// Clé principal de l'utilisateur qui reçoit le message
         /// </summary>
+        /// <remarks>
+        /// Par defaut il y a un delete cascade
+        /// </remarks>
         [Required]
         public int UserId { get; set; }
         /// <summary>
         /// Relation avec model User
         /// </summary>
         public virtual User User { get; set; }
+        /// <summary>
+        /// Clé de l'utilisateur qui envoie le message
+        /// </summary>
+        public int? SendByUserId {get; set; }
         /// <summary>
         /// Date du poste
         /// </summary>
