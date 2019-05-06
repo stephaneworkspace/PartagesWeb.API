@@ -47,6 +47,10 @@ namespace PartagesWeb.API.Controllers.Forum
         /// </summary> 
         /// <param name="forumPosteParams">Pagination</param>
         /// <param name="id">ForumSujet Id</param>
+        /// <remarks>
+        /// ForumPosteForListDto => Pour Automap
+        /// ForumPosteForListDtoWithVirtual => Avec champ suppl pas dans la DB en SQL
+        /// </remarks>
         [HttpGet("{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
@@ -61,13 +65,29 @@ namespace PartagesWeb.API.Controllers.Forum
             var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
             // NombreDePostes MessageCount
-            var itemsDtoFinal = new List<ForumPosteForListDto>();
+            var itemsDtoFinal = new List<ForumPosteForListDtoWithVirtual>();
             foreach (var itemDto in itemsDto)
             {
-                itemDto.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
-                itemsDtoFinal.Add(itemDto);
+                var itemDtoWithVirtual = new ForumPosteForListDtoWithVirtual();
+                itemDtoWithVirtual.Id = itemDto.Id;
+                itemDtoWithVirtual.ForumSujet = itemDto.ForumSujet;
+                itemDtoWithVirtual.ForumSujetId = itemDto.ForumSujetId;
+                itemDtoWithVirtual.User = itemDto.User;
+                itemDtoWithVirtual.UserId = itemDto.UserId;
+                itemDtoWithVirtual.Contenu = itemDto.Contenu;
+                itemDtoWithVirtual.Date = itemDto.Date;
+                if (int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == itemDto.UserId)
+                {
+                    itemDtoWithVirtual.SwCurrentUser = true;
+                }
+                else
+                {
+                    itemDtoWithVirtual.SwCurrentUser = false;
+                }
+                itemDtoWithVirtual.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
+                itemsDtoFinal.Add(itemDtoWithVirtual);
             }
-            return Ok(itemsDto);
+            return Ok(itemsDtoFinal);
         }
 
         /// <summary>

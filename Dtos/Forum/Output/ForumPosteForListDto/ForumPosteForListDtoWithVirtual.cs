@@ -10,7 +10,10 @@ namespace PartagesWeb.API.Dtos.Forum.Output
     /// <summary>
     /// Dto pour les postes du forum
     /// </summary>
-    public class ForumPosteForListDto
+    /// <remarks>
+    /// Avec le champ SwCurrentUser en plus
+    /// </remarks>
+    public class ForumPosteForListDtoWithVirtual
     {
         /// <summary>
         /// Clé principale
@@ -40,5 +43,10 @@ namespace PartagesWeb.API.Dtos.Forum.Output
         /// Nom du topic
         /// </summary>
         public string Contenu { get; set; }
+        /// <summary>
+        /// Utilisateur en cours identifié
+        /// </summary>
+        /// <remarks>C'est un champ DTO virtuel</remarks>
+        public bool? SwCurrentUser { get; set; }
     }
 }
