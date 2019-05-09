@@ -105,5 +105,19 @@ namespace PartagesWeb.API.Data
             return await PagedList<Messagerie>.CreateAsync(items, messagerieParams.PageNumber, messagerieParams.PageSize);
         }
 
+        /// <summary>
+        /// Compter les messages non lu
+        /// </summary>
+        /// <param name="userId">Utilisateur [Authorize]</param>/// 
+        /// <returns></returns>
+        /// <remarks>
+        /// 9 mai: Amélioration dans le futur redux pour lire les messages hors connexion ???
+        /// </remarks>
+        public async Task<int> GetCountMessagesNonLu(int userId)
+        {
+            var count = _context.Messageries.Where(x => x.UserId == userId).Where(y => y.SwLu == false).Count();
+            await Task.FromResult(count);
+            return count;
+        }
     }
 }

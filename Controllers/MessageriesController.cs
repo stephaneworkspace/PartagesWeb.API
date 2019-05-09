@@ -45,12 +45,28 @@ namespace PartagesWeb.API.Controllers
         }
 
         /// <summary>  
+        /// Cette méthode permet de compter les messages non lu
+        /// </summary> 
+        /// <returns></returns>
+        [Authorize]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Comptage effectué")]
+        public async Task<IActionResult> GetCountNonLu()
+        {
+            // Trouver l'utilisateur actuel
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            // Count
+            var count = await _repo.GetCountMessagesNonLu(userId);
+            return Ok(count);
+        }
+
+        /// <summary>  
         /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
         /// <param name="messagerieParams">Pagination</param>
         /// <remarks>
         /// 8 mai : a tester avec le frontend, je suis pas sur pour la partie "Reponse."
         /// </remarks>
+        /// <returns></returns> 
         [Authorize]
         [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDto[]), Description = "Liste des messages")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]

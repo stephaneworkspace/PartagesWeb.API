@@ -45,15 +45,12 @@ namespace PartagesWeb.API.Data
         /// <param name="id">MessagerieId</param>
         /// <returns></returns> 
         Task<bool> SwLu(int id);
-
         /// <summary>  
         /// Cette méthode permet de lire un message
         /// </summary>
         /// <param name="id">MessagerieId</param>
         /// <returns></returns> 
         Task<Messagerie> GetMessagerie(int id);
-
-
         /// <summary>  
         /// Cette méthode permet d'obtenir tous les messages
         /// </summary>
@@ -62,15 +59,14 @@ namespace PartagesWeb.API.Data
         /// <returns></returns> 
         /// <remarks>L'utilisateur est identifié par le token</remarks>
         Task<PagedList<Messagerie>> GetMessageries(MessagerieParams messagerieParams, int userId);
-
         /// <summary>
         /// Compter les messages non lu
         /// </summary>
+        /// <param name="userId">Utilisateur [Authorize]</param>
         /// <returns></returns>
-        /// <remarks>L'utilisateur est identifié par le token
-        /// Fin avril 2019: Amélioration dans le futur redux pour lire les messages hors connexion ???
-        /// 8 mai: à coder
+        /// <remarks>
+        /// 9 mai: Amélioration dans le futur redux pour lire les messages hors connexion ???
         /// </remarks>
-        // Task<int> GetCountMessages(int id);
+        Task<int> GetCountMessagesNonLu(int userId);
     }
 }
