@@ -1,5 +1,6 @@
 ﻿using PartagesWeb.API.Dtos.Forum.Input;
 using PartagesWeb.API.Helpers;
+using PartagesWeb.API.Models;
 using PartagesWeb.API.Models.Messagerie;
 using System;
 using System.Collections.Generic;
@@ -68,5 +69,11 @@ namespace PartagesWeb.API.Data
         /// 9 mai: Amélioration dans le futur redux pour lire les messages hors connexion ???
         /// </remarks>
         Task<int> GetCountMessagesNonLu(int userId);
+        ///<summary>
+        ///Lit l'UserId SendByUserId?
+        ///</summary>
+        /// <param name="sendByUserId">SendByUserId int?</param>
+        /// <returns></returns>
+        Task<User> GetSendByUser(int sendByUserId);
     }
 }

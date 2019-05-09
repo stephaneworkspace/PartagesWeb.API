@@ -119,5 +119,16 @@ namespace PartagesWeb.API.Data
             await Task.FromResult(count);
             return count;
         }
+
+        ///<summary>
+        ///Lit l'UserId SendByUserId?
+        ///</summary>
+        /// <param name="sendByUserId">SendByUserId int?</param>
+        /// <returns></returns>
+        public async Task<User> GetSendByUser(int sendByUserId)
+        {
+            var user = await _context.Users.Where(x => x.Id == sendByUserId).FirstOrDefaultAsync();
+            return user;
+        }
     }
 }

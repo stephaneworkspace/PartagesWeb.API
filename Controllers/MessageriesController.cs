@@ -14,6 +14,7 @@ using PartagesWeb.API.Dtos.Forum.Output;
 using PartagesWeb.API.Dtos.Messagerie.Output;
 using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
+using PartagesWeb.API.Models;
 using PartagesWeb.API.Models.Forum;
 using PartagesWeb.API.Models.Messagerie;
 
@@ -68,7 +69,7 @@ namespace PartagesWeb.API.Controllers
         /// </remarks>
         /// <returns></returns> 
         [Authorize]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDto[]), Description = "Liste des messages")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDtoWithVirtual[]), Description = "Liste des messages")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
         public async Task<IActionResult> GetMessageries([FromQuery] MessagerieParams messagerieParams)
         {
@@ -78,7 +79,25 @@ namespace PartagesWeb.API.Controllers
             var items = await _repo.GetMessageries(messagerieParams, userId);
             var itemsDto = _mapper.Map<List<MessagerieForReadDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
-            return Ok(itemsDto);
+            // Dto Virtual
+            var itemsDtoFinal = new List<MessagerieForReadDtoWithVirtual>();
+            foreach (var itemDto in itemsDto)
+            {
+                var sendByUser = new UsersForReadMessagerieDto();
+                if (itemDto.SendByUserId > 0)
+                {
+                    var itemUser = await _repo.GetSendByUser(itemDto.SendByUserId ?? default(int));
+                    sendByUser = _mapper.Map<UsersForReadMessagerieDto>(itemUser);
+                }
+                var itemDtoWithVirtual = new MessagerieForReadDtoWithVirtual();
+                itemDtoWithVirtual.Id = itemDto.Id;
+                itemDtoWithVirtual.SendByUserId = itemDto.SendByUserId;
+                itemDtoWithVirtual.SendByUser = sendByUser;
+                itemDtoWithVirtual.Date = itemDto.Date;
+                itemDtoWithVirtual.Contenu = itemDto.Contenu;
+                itemsDtoFinal.Add(itemDtoWithVirtual);
+            }
+            return Ok(itemsDtoFinal);
         }
 
         /// <summary>
