@@ -1,4 +1,5 @@
 ﻿using PartagesWeb.API.Dtos.Forum.Input;
+using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Models.Messagerie;
 using System;
 using System.Collections.Generic;
@@ -38,27 +39,29 @@ namespace PartagesWeb.API.Data
          * Messagerie
          **/
 
-        /// <sumary>
-        /// Cette méthode permet d'envoyer un message privé
-        /// </sumary>
-        /// <param name="dto">Dto pour l'envoi du message</param>
-        // Task<bool> SendMessage(MessagerieForNewMessageDto dto);
-
         /// <summary>  
-        /// Cette méthode permet d'obtenir une catégorie
+        /// Cette méthode permet de switché la variable de lecture d'un message
         /// </summary>
         /// <param name="id">MessagerieId</param>
         /// <returns></returns> 
-        /// <remarks>Il y a une écriture a faire c'est switcher le message</remarks>
-        // Task<Messagerie> GetMessage(int id);
+        Task<bool> SwLu(int id);
+
+        /// <summary>  
+        /// Cette méthode permet de lire un message
+        /// </summary>
+        /// <param name="id">MessagerieId</param>
+        /// <returns></returns> 
+        Task<Messagerie> GetMessagerie(int id);
+
 
         /// <summary>  
         /// Cette méthode permet d'obtenir tous les messages
         /// </summary>
         /// <param name="messagerieParams">Pagination</param>
+        /// <param name="userId">Utilisateur [Authorize]</param>
         /// <returns></returns> 
         /// <remarks>L'utilisateur est identifié par le token</remarks>
-        // Task<PagedList<Messagerie>> GetMessagess(MessagerieParams messagerieParams);
+        Task<PagedList<Messagerie>> GetMessageries(MessagerieParams messagerieParams, int userId);
 
         /// <summary>
         /// Compter les messages non lu
@@ -66,6 +69,7 @@ namespace PartagesWeb.API.Data
         /// <returns></returns>
         /// <remarks>L'utilisateur est identifié par le token
         /// Fin avril 2019: Amélioration dans le futur redux pour lire les messages hors connexion ???
+        /// 8 mai: à coder
         /// </remarks>
         // Task<int> GetCountMessages(int id);
     }

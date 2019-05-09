@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Models.Messagerie
 {
     /// <summary>
-    /// Model ForumPrivateMessage
+    /// Model Messagerie
     /// </summary>
     public class Messagerie
     {

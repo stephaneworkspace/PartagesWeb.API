@@ -11,6 +11,7 @@ using NSwag.Annotations;
 using PartagesWeb.API.Data;
 using PartagesWeb.API.Dtos.Forum.Input;
 using PartagesWeb.API.Dtos.Forum.Output;
+using PartagesWeb.API.Dtos.Messagerie.Output;
 using PartagesWeb.API.Helpers;
 using PartagesWeb.API.Helpers.Forum;
 using PartagesWeb.API.Models.Forum;
@@ -42,57 +43,28 @@ namespace PartagesWeb.API.Controllers
             _mapper = mapper;
             _repo = repo;
         }
-        /*
 
         /// <summary>  
         /// Cette méthode permet de retourner les postes du forum à un sujet bien précis
         /// </summary> 
-        /// <param name="forumPosteParams">Pagination</param>
-        /// <param name="id">ForumSujet Id</param>
+        /// <param name="messagerieParams">Pagination</param>
         /// <remarks>
-        /// ForumPosteForListDto => Pour Automap
-        /// ForumPosteForListDtoWithVirtual => Avec champ suppl pas dans la DB en SQL
+        /// 8 mai : a tester avec le frontend, je suis pas sur pour la partie "Reponse."
         /// </remarks>
-        [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForListDto[]), Description = "Liste des sections")]
+        [Authorize]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDto[]), Description = "Liste des messages")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
-        public async Task<IActionResult> GetForumPostes([FromQuery] ForumPosteParams forumPosteParams, int id)
+        public async Task<IActionResult> GetMessageries([FromQuery] MessagerieParams messagerieParams)
         {
-            var boolTrue = await _repo.IncView(id);
-            if (!boolTrue)
-            {
-                return BadRequest("Impossible de mettre à jour le nombre de vue du sujet");
-            }
-            var items = await _repo.GetForumPostes(forumPosteParams, id);
-            var itemsDto = _mapper.Map<List<ForumPosteForListDto>>(items);
+            // Trouver l'utilisateur actuel
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            // Messages
+            var items = await _repo.GetMessageries(messagerieParams, userId);
+            var itemsDto = _mapper.Map<List<MessagerieForReadDto>>(items);
             Response.AddPagination(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
-            // NombreDePostes MessageCount
-            var itemsDtoFinal = new List<ForumPosteForListDtoWithVirtual>();
-            foreach (var itemDto in itemsDto)
-            {
-                var itemDtoWithVirtual = new ForumPosteForListDtoWithVirtual();
-                itemDtoWithVirtual.Id = itemDto.Id;
-                itemDtoWithVirtual.ForumSujet = itemDto.ForumSujet;
-                itemDtoWithVirtual.ForumSujetId = itemDto.ForumSujetId;
-                itemDtoWithVirtual.User = itemDto.User;
-                itemDtoWithVirtual.UserId = itemDto.UserId;
-                itemDtoWithVirtual.Contenu = itemDto.Contenu;
-                itemDtoWithVirtual.Date = itemDto.Date;
-                if (int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == itemDto.UserId)
-                {
-                    itemDtoWithVirtual.SwCurrentUser = true;
-                }
-                else
-                {
-                    itemDtoWithVirtual.SwCurrentUser = false;
-                }
-                itemDtoWithVirtual.User.MessageCount = await _repo.GetCountUser(itemDto.UserId);
-                itemsDtoFinal.Add(itemDtoWithVirtual);
-            }
-            return Ok(itemsDtoFinal);
+            return Ok(itemsDto);
         }
 
-        */
         /// <summary>
         /// Envoi d'un message privé
         /// </summary>
@@ -122,20 +94,34 @@ namespace PartagesWeb.API.Controllers
                 return Ok(Item);
             return BadRequest("Impossible d'envoyer le message");
         }
-        /*
 
         /// <summary>  
-        /// Cette méthode permet de retourner un poste bien précis
+        /// Cette méthode permet d'ouvrir un message bien précis
         /// </summary> 
-        /// <param name="id">Clé principale ForumPoste</param>
-        [HttpGet("ForumPosteId/{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPosteForSelectDto), Description = "Poste à atteindre")]
-        public async Task<IActionResult> GetForumSujet(int id)
+        /// <param name="id">Clé principale Messagerie</param>
+        [Authorize]
+        [HttpGet("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDto), Description = "Message desormais lu")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le message en message lu")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Accès refusé")]
+        public async Task<IActionResult> GetMessagerie(int id)
         {
-            var item = await _repo.GetForumPoste(id);
-            ForumPosteForSelectDto newDto = new ForumPosteForSelectDto();
-            var itemDto = _mapper.Map<ForumPosteForSelectDto>(item);
-            return Ok(itemDto);
-        }*/
+            var boolTrue = await _repo.SwLu(id);
+            if (!boolTrue)
+            {
+                return BadRequest("Impossible de mettre à jour le message en message lu");
+            }
+            var item = await _repo.GetMessagerie(id);
+            if (item.UserId == int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                MessagerieForReadDto newDto = new MessagerieForReadDto();
+                var itemDto = _mapper.Map<MessagerieForReadDto>(item);
+                return Ok(itemDto);
+            }
+            else
+            {
+                return BadRequest("Accès refusé");
+            }
+        }
     }
 }

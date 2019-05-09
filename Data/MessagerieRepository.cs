@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Helpers;
+using PartagesWeb.API.Models;
+using PartagesWeb.API.Models.Messagerie;
 
 namespace PartagesWeb.API.Data
 {
@@ -60,5 +63,47 @@ namespace PartagesWeb.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        /**
+         * Messagerie
+         */
+
+        /// <summary>  
+        /// Cette méthode permet de lire un message
+        /// </summary>
+        /// <param name="id">MessagerieId</param>
+        /// <returns></returns> 
+        public async Task<Messagerie> GetMessagerie(int id)
+        {
+            var item = await _context.Messageries.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return item;
+        }
+
+        /// <summary>  
+        /// Cette méthode permet de switché la variable de lecture d'un message
+        /// </summary>
+        /// <param name="id">MessagerieId</param>
+        /// <returns></returns> 
+        public async Task<bool> SwLu(int id)
+        {
+            var item = await _context.Messageries.Where(x => x.Id == id).FirstOrDefaultAsync();
+            item.SwLu = true;
+            Update(item);
+            return await SaveAll();
+        }
+
+        /// <summary>  
+        /// Cette méthode permet d'obtenir tous les messages
+        /// </summary>
+        /// <param name="messagerieParams">Pagination</param>
+        /// <param name="userId">Utilisateur [Authorize]</param>
+        /// <returns></returns> 
+        public async Task<PagedList<Messagerie>> GetMessageries(MessagerieParams messagerieParams, int userId)
+        {
+            var items = _context.Messageries
+                .OrderBy(u => u.Date).Where(x => x.UserId == userId).AsQueryable();
+            return await PagedList<Messagerie>.CreateAsync(items, messagerieParams.PageNumber, messagerieParams.PageSize);
+        }
+
     }
 }
