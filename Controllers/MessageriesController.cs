@@ -93,55 +93,36 @@ namespace PartagesWeb.API.Controllers
         }
 
         */
+        /// <summary>
+        /// Envoi d'un message privé
+        /// </summary>
+        /// <param name="Dto">Dto Input</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Message délivré")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible d'envoyer le message")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Utilisateur » est obligatoire.")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
         public async Task<IActionResult> EnvoiMessagerie(MessagerieForNewMessageDto Dto)
         {
             // Trouver l'utilisateur actuel
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             // Préparation du model
-            var Item = new Messagerie();
-            // Item.SendByUserId
-            return Ok(Item);
-        }
-        /*
-
-        /// <summary>
-        /// Reponse ForumPoste à la fin de ForumSujet
-        /// </summary>
-        /// <param name="Dto">Dto Input</param>
-        /// <returns></returns>
-        /// <remarks>à faire tuto - 
-        /// http://jasonwatmore.com/post/2019/01/08/aspnet-core-22-role-based-authorization-tutorial-with-example-api 
-        /// la reponse a été trouvé ici
-        /// https://stackoverflow.com/questions/30701006/how-to-get-the-current-logged-in-user-id-in-asp-net-core</remarks>
-        [Authorize]
-        [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Poste qui a été rajouté")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de répondre à ce poste")]
-        [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "error.errors.Nom[0] == Le champ « Contenu » est obligatoire.")]
-        public async Task<IActionResult> ReponseForumPoste(ForumPosteForReplyDto Dto)
-        {
-            // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            // Préparation du model
-            var Item = new ForumPoste
+            var Item = new Messagerie
             {
-                ForumSujetId = Dto.ForumSujetId,
-                UserId = userId,
+                UserId = Dto.UserId,
+                SendByUserId = userId,
                 Date = DateTime.Now,
-                Contenu = Dto.Contenu
+                Contenu = Dto.Contenu,
+                SwLu = false
             };
-
             _repo.Add(Item);
-
             if (await _repo.SaveAll())
                 return Ok(Item);
-
-            return BadRequest("Impossible de répondre à ce poste");
+            return BadRequest("Impossible d'envoyer le message");
         }
+        /*
 
         /// <summary>  
         /// Cette méthode permet de retourner un poste bien précis

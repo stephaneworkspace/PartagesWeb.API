@@ -43,6 +43,6 @@ namespace PartagesWeb.API.Models.Messagerie
         /// <summary>
         /// Switch si message lu
         /// </summary>
-        public int SwLu { get; set; }
+        public Boolean SwLu { get; set; }
     }
 }
