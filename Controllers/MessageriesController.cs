@@ -136,7 +136,7 @@ namespace PartagesWeb.API.Controllers
         /// <param name="id">Clé principale Messagerie</param>
         [Authorize]
         [HttpGet("{id}")]
-        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDto), Description = "Message desormais lu")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDtoWithVirtual), Description = "Message desormais lu")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le message en message lu")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Accès refusé")]
         public async Task<IActionResult> GetMessagerie(int id)
@@ -151,7 +151,23 @@ namespace PartagesWeb.API.Controllers
             {
                 MessagerieForReadDto newDto = new MessagerieForReadDto();
                 var itemDto = _mapper.Map<MessagerieForReadDto>(item);
-                return Ok(itemDto);
+                // Dto Virtual
+                var itemDtoFinal = new List<MessagerieForReadDtoWithVirtual>();
+                // User
+                var sendByUser = new UsersForReadMessagerieDto();
+                if (itemDto.SendByUserId > 0)
+                {
+                    var itemUser = await _repo.GetSendByUser(itemDto.SendByUserId ?? default(int));
+                    sendByUser = _mapper.Map<UsersForReadMessagerieDto>(itemUser);
+                }
+                var itemDtoWithVirtual = new MessagerieForReadDtoWithVirtual();
+                itemDtoWithVirtual.Id = itemDto.Id;
+                itemDtoWithVirtual.SendByUserId = itemDto.SendByUserId;
+                itemDtoWithVirtual.SendByUser = sendByUser;
+                itemDtoWithVirtual.Date = itemDto.Date;
+                itemDtoWithVirtual.Contenu = itemDto.Contenu;
+                itemDtoFinal.Add(itemDtoWithVirtual);
+                return Ok(itemDtoFinal);
             }
             else
             {
