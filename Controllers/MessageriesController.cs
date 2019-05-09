@@ -95,6 +95,7 @@ namespace PartagesWeb.API.Controllers
                 itemDtoWithVirtual.SendByUser = sendByUser;
                 itemDtoWithVirtual.Date = itemDto.Date;
                 itemDtoWithVirtual.Contenu = itemDto.Contenu;
+                itemDtoWithVirtual.SwLu = itemDto.SwLu;
                 itemsDtoFinal.Add(itemDtoWithVirtual);
             }
             return Ok(itemsDtoFinal);
@@ -166,6 +167,7 @@ namespace PartagesWeb.API.Controllers
                 itemDtoWithVirtual.SendByUser = sendByUser;
                 itemDtoWithVirtual.Date = itemDto.Date;
                 itemDtoWithVirtual.Contenu = itemDto.Contenu;
+                itemDtoWithVirtual.SwLu = itemDto.SwLu;
                 itemDtoFinal.Add(itemDtoWithVirtual);
                 return Ok(itemDtoFinal);
             }

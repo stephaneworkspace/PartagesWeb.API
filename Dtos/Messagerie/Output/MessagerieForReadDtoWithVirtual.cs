@@ -9,7 +9,7 @@ using PartagesWeb.API.Models;
 namespace PartagesWeb.API.Dtos.Messagerie.Output
 {
     /// <summary>
-    /// Dto pour l'affichage de l'article à éditer
+    /// Dto
     /// </summary>
     public class MessagerieForReadDtoWithVirtual
     {
@@ -33,5 +33,9 @@ namespace PartagesWeb.API.Dtos.Messagerie.Output
         /// Contenu du message
         /// </summary>
         public string Contenu { get; set; }
+        /// <summary>
+        /// Message lu
+        /// </summary>
+        public bool SwLu { get; set; }
     }
 }

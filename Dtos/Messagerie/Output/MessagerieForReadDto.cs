@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace PartagesWeb.API.Dtos.Messagerie.Output
 {
     /// <summary>
-    /// Dto pour l'affichage de l'article à éditer
+    /// Dto
     /// </summary>
     public class MessagerieForReadDto
     {
@@ -26,5 +26,9 @@ namespace PartagesWeb.API.Dtos.Messagerie.Output
         /// Contenu du message
         /// </summary>
         public string Contenu { get; set; }
+        /// <summary>
+        /// Message lu
+        /// </summary>
+        public bool SwLu { get; set; }
     }
 }
