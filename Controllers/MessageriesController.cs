@@ -50,14 +50,17 @@ namespace PartagesWeb.API.Controllers
         /// </summary> 
         /// <returns></returns>
         [Authorize]
-        [HttpGet("Count/{id}")]
+        [HttpGet("Count")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Comptage effectué")]
         public async Task<IActionResult> GetCountNonLu()
         {
             // Trouver l'utilisateur actuel
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            // Count
-            var count = await _repo.GetCountMessagesNonLu(userId);
+            var count = 0;
+            if (userId > 0)
+            {
+                count = await _repo.GetCountMessagesNonLu(userId);
+            }
             return Ok(count);
         }
 
@@ -70,7 +73,7 @@ namespace PartagesWeb.API.Controllers
         /// </remarks>
         /// <returns></returns> 
         [Authorize]
-        [HttpGet()]
+        [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDtoWithVirtual[]), Description = "Liste des messages")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
         public async Task<IActionResult> GetMessageries([FromQuery] MessagerieParams messagerieParams)

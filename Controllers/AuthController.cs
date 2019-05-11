@@ -2,6 +2,8 @@
 // <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
 // <author>Stéphane</author>
 //-----------------------------------------------------------------------
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -114,6 +116,18 @@ namespace PartagesWeb.API.Controllers
             {
                 token = tokenHandler.WriteToken(token)
             });
+        }
+
+        /// <summary>
+        /// Permet de vérifier la deconnexion du token (pour vider Claim de asp.net)
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost("logout")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(void), Description = "Echec de logout (ne devrait jamais sortir)")]
+        public IActionResult Logout()
+        {
+            return Ok();
         }
     }
 }
