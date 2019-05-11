@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
@@ -28,6 +29,7 @@ namespace PartagesWeb.API.Controllers.Forum
         private readonly IForumRepository _repo;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>  
         /// Cette méthode est le constructeur 
@@ -76,7 +78,8 @@ namespace PartagesWeb.API.Controllers.Forum
                 itemDtoWithVirtual.UserId = itemDto.UserId;
                 itemDtoWithVirtual.Contenu = itemDto.Contenu;
                 itemDtoWithVirtual.Date = itemDto.Date;
-                if (int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == itemDto.UserId)
+                var UserIdEnCours = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                if (UserIdEnCours == itemDto.UserId)
                 {
                     itemDtoWithVirtual.SwCurrentUser = true;
                 }
@@ -107,7 +110,7 @@ namespace PartagesWeb.API.Controllers.Forum
         public async Task<IActionResult> ReponseForumPoste(ForumPosteForReplyDto Dto)
         {
             // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             // Préparation du model
             var Item = new ForumPoste

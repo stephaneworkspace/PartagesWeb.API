@@ -50,11 +50,12 @@ namespace PartagesWeb.API.Controllers
         /// </summary> 
         /// <returns></returns>
         [Authorize]
+        [HttpGet("Count/{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(ForumPoste), Description = "Comptage effectué")]
         public async Task<IActionResult> GetCountNonLu()
         {
             // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             // Count
             var count = await _repo.GetCountMessagesNonLu(userId);
             return Ok(count);
@@ -69,12 +70,13 @@ namespace PartagesWeb.API.Controllers
         /// </remarks>
         /// <returns></returns> 
         [Authorize]
+        [HttpGet()]
         [SwaggerResponse(HttpStatusCode.OK, typeof(MessagerieForReadDtoWithVirtual[]), Description = "Liste des messages")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(void), Description = "Impossible de mettre à jour le nombre de vue du sujet")]
         public async Task<IActionResult> GetMessageries([FromQuery] MessagerieParams messagerieParams)
         {
             // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             // Messages
             var items = await _repo.GetMessageries(messagerieParams, userId);
             var itemsDto = _mapper.Map<List<MessagerieForReadDto>>(items);
@@ -115,7 +117,7 @@ namespace PartagesWeb.API.Controllers
         public async Task<IActionResult> EnvoiMessagerie(MessagerieForNewMessageDto Dto)
         {
             // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             // Préparation du model
             var Item = new Messagerie
             {
@@ -148,7 +150,7 @@ namespace PartagesWeb.API.Controllers
                 return BadRequest("Impossible de mettre à jour le message en message lu");
             }
             var item = await _repo.GetMessagerie(id);
-            if (item.UserId == int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (item.UserId == int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value))
             {
                 MessagerieForReadDto newDto = new MessagerieForReadDto();
                 var itemDto = _mapper.Map<MessagerieForReadDto>(item);

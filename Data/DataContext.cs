@@ -2,6 +2,7 @@
 // <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
 // <author>Stéphane</author>
 //-----------------------------------------------------------------------
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PartagesWeb.API.Data.Configuration;
 using PartagesWeb.API.Models;
@@ -15,6 +16,7 @@ namespace PartagesWeb.API.Data
     /// </summary>
     public class DataContext : DbContext
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         /// <summary>  
         /// Cette méthode permet la connexion DbContext
         /// </summary>  

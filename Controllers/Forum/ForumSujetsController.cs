@@ -118,7 +118,7 @@ namespace PartagesWeb.API.Controllers.Forum
             }
 
             // Trouver l'utilisateur actuel
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             // Préparation du model
             var Item = new ForumPoste
