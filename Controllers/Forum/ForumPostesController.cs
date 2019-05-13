@@ -78,7 +78,11 @@ namespace PartagesWeb.API.Controllers.Forum
                 itemDtoWithVirtual.UserId = itemDto.UserId;
                 itemDtoWithVirtual.Contenu = itemDto.Contenu;
                 itemDtoWithVirtual.Date = itemDto.Date;
-                var UserIdEnCours = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                var UserIdEnCours = 0;
+                if (User.Identity.IsAuthenticated)
+                {
+                    UserIdEnCours = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                }
                 if (UserIdEnCours == itemDto.UserId)
                 {
                     itemDtoWithVirtual.SwCurrentUser = true;

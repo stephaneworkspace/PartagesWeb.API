@@ -2,6 +2,7 @@
 // <license>https://github.com/stephaneworkspace/PartagesWeb.API/blob/master/LICENSE.md</license>
 // <author>Stéphane</author>
 //-----------------------------------------------------------------------
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,17 +32,23 @@ namespace PartagesWeb.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+        private readonly IMessagerieRepository _repoMessagerie;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
         /// <summary>  
         /// Cette méthode est le constructeur 
         /// </summary> 
         /// <param name="repo"> Repository Auth</param>
+        /// <param name="repoMessagerie">Messagerie de l'utilisateur</param>
         /// <param name="config"> Configuration</param>
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        /// <param name="mapper">Automapp</param>
+        public AuthController(IAuthRepository repo, IMessagerieRepository repoMessagerie, IConfiguration config, IMapper mapper)
         {
             _config = config;
             _repo = repo;
+            _repoMessagerie = repoMessagerie;
+            _mapper = mapper;
         }
 
         /// <summary>  
@@ -112,9 +119,15 @@ namespace PartagesWeb.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var user = _mapper.Map<UserForWorkDto>(userFromRepo);
+
+            // Messagerie non lu
+            var messagesNonLu = await _repoMessagerie.GetCountMessagesNonLu(userFromRepo.Id);
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user,
+                messagesNonLu
             });
         }
 
